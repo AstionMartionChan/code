@@ -21,7 +21,7 @@ public class HttpClientDownloadHandlerImpl implements DownloadHandler {
     @Override
     public Page download(String url) throws IOException {
         Page result = new Page();
-        result.setTitle(HttpClientUtil.sendGet(url));
+        result.setContext(HttpClientUtil.sendGet(url));
         return result;
     }
 }
