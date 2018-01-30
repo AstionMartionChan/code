@@ -15,8 +15,8 @@ public class HtmlCleanerProccessHandlerImpl implements ProccessHandler {
 
     @Override
     public Page proccess(Page page) throws XPatherException {
-        String content = ProccessUtil.proccessTextContent(page.getContext(), "//*[@id=\"maincontent\"]/h1");
-        page.setTitle(content);
+        String title = ProccessUtil.proccessTextContent(page.getContext(), "//*[@id=\"maincontent\"]/h1");
+        page.addParams("title", title);
 
         return page;
     }

@@ -37,6 +37,7 @@
     <orderEntry type="library" name="Maven: org.jdom:jdom2:2.0.5" level="project" />
     <orderEntry type="library" name="Maven: net.sf.saxon:saxon-xpath:8.7" level="project" />
     <orderEntry type="library" name="Maven: net.sf.saxon:saxon:8.7" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.41" level="project" />
   </component>
 </module>
 
