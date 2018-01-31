@@ -7,9 +7,11 @@ import com.itcast.handler.impl.HttpClientDownloadHandlerImpl;
 import com.itcast.po.Spider;
 import com.itcast.utils.HttpClientUtil;
 import com.itcast.utils.ProccessUtil;
+import org.dom4j.DocumentException;
 import org.htmlcleaner.XPatherException;
 import org.junit.Test;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 /**
@@ -19,7 +21,7 @@ public class SpiderTest {
 
 
     @Test
-    public void spiderTest() throws IOException, XPatherException {
+    public void spiderTest() throws IOException, XPatherException, DocumentException {
         Spider spider = new Spider();
 
         spider.setDownloadHandler(new HttpClientDownloadHandlerImpl());
@@ -31,7 +33,7 @@ public class SpiderTest {
 
 
     @Test
-    public void getContentTest() throws IOException, XPatherException {
+    public void getContentTest() throws IOException, XPatherException, DocumentException {
         String content = HttpClientUtil.sendGet("https://item.jd.com/5089253.html");
         String title = ProccessUtil.proccessTextContent(content, "//div[@class='sku-name']");
         System.out.println(title);
@@ -49,6 +51,6 @@ public class SpiderTest {
 
 //        ProccessUtil.proccessTextContentMore(content, "//div[@class='Ptable-item']/h3");
 
-        ProccessUtil.proccessTextContentMore(content, "//div[@class='Ptable-item']/dl/dd[not(@class)]");
+        ProccessUtil.proccessTextContentMore(content, "//div[@class='Ptable-item']/dl/*[not(@class)]");
     }
 }
