@@ -49,8 +49,6 @@ public class SpiderTest {
         System.out.println(price);
 
 
-//        ProccessUtil.proccessTextContentMore(content, "//div[@class='Ptable-item']/h3");
-
         ProccessUtil.proccessTextContentMore(content, "//div[@class='Ptable-item']/dl/*[not(@class)]");
     }
 }
