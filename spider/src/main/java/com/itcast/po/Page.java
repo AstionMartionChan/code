@@ -9,7 +9,6 @@ public class Page {
 
     private String context;
 
-    private String title;
 
     private Map<String, Object> params;
 
@@ -19,14 +18,6 @@ public class Page {
 
     public Map<String, Object> getParams() {
         return params;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getContext() {

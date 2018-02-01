@@ -2,6 +2,8 @@ package com.itcast.po;
 
 import com.itcast.handler.DownloadHandler;
 import com.itcast.handler.ProccessHandler;
+import com.itcast.handler.impl.HtmlCleanerProccessHandlerImpl;
+import com.itcast.handler.impl.HttpClientDownloadHandlerImpl;
 import org.dom4j.DocumentException;
 import org.htmlcleaner.XPatherException;
 
@@ -13,9 +15,9 @@ import java.io.IOException;
  */
 public class Spider {
 
-    private DownloadHandler downloadHandler;
+    private DownloadHandler downloadHandler = new HttpClientDownloadHandlerImpl();
 
-    private ProccessHandler proccessHandler;
+    private ProccessHandler proccessHandler = new HtmlCleanerProccessHandlerImpl();
 
 
     public void storm() {
@@ -25,7 +27,6 @@ public class Spider {
     public void start(String url) throws IOException, XPatherException, DocumentException {
         Page page = downloadHandler.download(url);
         page = proccessHandler.proccess(page);
-        System.out.print(page.getTitle());
     }
 
     public void setDownloadHandler(DownloadHandler downloadHandler) {
