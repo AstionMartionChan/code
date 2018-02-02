@@ -1,5 +1,6 @@
 package com.itcast.po;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -7,10 +8,14 @@ import java.util.Map;
  */
 public class Page {
 
+    // 网址
+    private String url;
+
+    // 页面document元素
     private String context;
 
-
-    private Map<String, Object> params;
+    // 解析之后的参数
+    private Map<String, Object> params = new HashMap<>();
 
     public void addParams(String key, Object value) {
         this.params.put(key, value);

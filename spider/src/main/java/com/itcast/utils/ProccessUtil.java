@@ -68,7 +68,9 @@ public class ProccessUtil {
                 List list = (ArrayList) obj;
                 if (list.get(0) instanceof DefaultElement){
                     List<DefaultElement> elementList = (ArrayList<DefaultElement>) list;
-                    String temp = null;
+                    result.put("elementList", elementList);
+                    return result;
+                    /*String temp = null;
                     for (int x = 0; x < elementList.size(); x++){
                         if (isOdd(x)){ //偶数
                             result.put(elementList.get(x).getText(), "");
@@ -76,10 +78,12 @@ public class ProccessUtil {
                         } else {      //奇数
                             result.put(temp, elementList.get(x).getText());
                         }
-                    }
+                    }*/
                 } else if (list.get(0) instanceof DefaultAttribute){
                     List<DefaultAttribute> attributeList = (ArrayList<DefaultAttribute>) list;
-                    String temp = null;
+                    result.put("attributeList", attributeList);
+                    return result;
+                    /*String temp = null;
                     for (int x = 0; x < attributeList.size(); x++){
                         if (isOdd(x)){ //偶数
                             result.put(attributeList.get(x).getText(), "");
@@ -87,7 +91,7 @@ public class ProccessUtil {
                         } else {      //奇数
                             result.put(temp, attributeList.get(x).getText());
                         }
-                    }
+                    }*/
                 }
             } else if (obj instanceof DefaultElement){
                 result.put("elementText", ((DefaultElement) obj).getText());
