@@ -20,20 +20,12 @@ public class MySqlUtil {
     static {
         try {
             Properties prop = new Properties();
-            String url = null;
-            String username = null;
-            String password = null;
-
             InputStream resourceAsStream = MySqlUtil.class.getResourceAsStream("/systemConfig.properties");
 
-            try {
-                prop.load(resourceAsStream);
-                url = prop.getProperty("jdbc.url").trim();
-                username = prop.getProperty("jdbc.username").trim();
-                password = prop.getProperty("jdbc.password").trim();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            prop.load(resourceAsStream);
+            String url = prop.getProperty("jdbc.url").trim();
+            String username = prop.getProperty("jdbc.username").trim();
+            String password = prop.getProperty("jdbc.password").trim();
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(url, username, password);
         } catch (Exception e) {

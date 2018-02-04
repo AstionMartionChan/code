@@ -22,6 +22,8 @@ public class HttpClientDownloadHandlerImpl implements DownloadHandler {
     public Page download(String url) throws IOException {
         Page result = new Page();
         result.setContext(HttpClientUtil.sendGet(url));
+        result.setUrl(url);
+        System.out.println("------下载： " + url);
         return result;
     }
 }

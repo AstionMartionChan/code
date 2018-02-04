@@ -2,15 +2,19 @@ package com.itcast.po;
 
 import com.itcast.handler.DownloadHandler;
 import com.itcast.handler.ProccessHandler;
+import com.itcast.handler.QueueHandler;
 import com.itcast.handler.StormHandler;
-import com.itcast.handler.impl.HtmlCleanerProccessHandlerImpl;
-import com.itcast.handler.impl.HttpClientDownloadHandlerImpl;
-import com.itcast.handler.impl.MysqlStormHandlerImpl;
+import com.itcast.handler.impl.*;
+import com.itcast.utils.RedisUtil;
 import org.dom4j.DocumentException;
 import org.htmlcleaner.XPatherException;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Leo_Chan on 2018/1/25.
@@ -24,17 +28,34 @@ public class Spider {
 
     private StormHandler stormHandler = new MysqlStormHandlerImpl();
 
-    public void start(String url) throws IOException, XPatherException, DocumentException, SQLException {
-        Page page = downloadHandler.download(url);
-        // 解析页面 -> list -> nextPage
+    private QueueHandler queueHandler = new RedisQueueHandlerImpl();
 
-        // 如果nextPage 不为空 继续解析
+    public void start(String url) throws IOException, XPatherException, DocumentException, SQLException, InterruptedException {
 
-        // 如果list 不为空 存队列
+        while (url != null){
+            Page page = downloadHandler.download(url);
+            // 解析页面 -> list -> nextPage
+            Map<String, Object> result = proccessHandler.proccessList(page.getContext());
+            url = result.get("nextPageUrl") != null ? result.get("nextPageUrl").toString() : null;
+            List<String> detailUrls = result.get("skuUrlList") != null
+                    ? (ArrayList<String>) result.get("skuUrlList")
+                    : null;
 
+            if (detailUrls != null){
+                for (String detailUrl : detailUrls){
+                    System.out.println("存入队列" + detailUrl);
+                    queueHandler.add(detailUrl);
+                }
+            }
 
-        page = proccessHandler.proccessDetail(page);
-        stormHandler.saveDB(page);
+        }
+
+       while (RedisUtil.llen("jdDetaillUrl") != 0){
+           Page detailData = downloadHandler.download(queueHandler.poll());
+           Page data = proccessHandler.proccessDetail(detailData);
+           stormHandler.saveDB(data);
+       }
+
     }
 
     public void setDownloadHandler(DownloadHandler downloadHandler) {

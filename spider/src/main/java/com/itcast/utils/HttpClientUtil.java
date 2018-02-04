@@ -15,15 +15,22 @@ public class HttpClientUtil {
 
 
     public static String sendGet(String url) throws IOException {
-        HttpGet request = new HttpGet(url);
-        DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
-        HttpResponse response = defaultHttpClient.execute(request);
 
-        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
-            return EntityUtils.toString(response.getEntity(), "utf-8");
-        } else {
-            return null;
+        try {
+            HttpGet request = new HttpGet(url);
+            DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
+            HttpResponse response = defaultHttpClient.execute(request);
+
+            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+                return EntityUtils.toString(response.getEntity(), "utf-8");
+            } else {
+                return "";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
         }
+
     }
 
 

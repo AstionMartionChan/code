@@ -31,7 +31,7 @@ public class SpiderTest {
 
 
     @Test
-    public void spiderTest() throws IOException, XPatherException, DocumentException, SQLException {
+    public void spiderTest() throws IOException, XPatherException, DocumentException, SQLException, InterruptedException {
         Spider spider = new Spider();
         spider.start("https://item.jd.com/5089253.html");
 
@@ -39,7 +39,7 @@ public class SpiderTest {
 
 
     @Test
-    public void getContentTest() throws IOException, XPatherException, DocumentException {
+    public void getContentTest() throws IOException, XPatherException, DocumentException, SQLException, InterruptedException {
         // 标题
 //        String content = HttpClientUtil.sendGet("https://list.jd.com/list.html?cat=9987,653,655");
 //        write(content);
@@ -48,10 +48,14 @@ public class SpiderTest {
 
 //        System.out.println(title.get("elementText").toString());
 
-        String content = HttpClientUtil.sendGet("https://list.jd.com/list.html?cat=9987,653,655");
-        ProccessHandler proccessHandler = new HtmlCleanerProccessHandlerImpl();
-        Map<String, Object> map = proccessHandler.proccessList(content);
+//        String content = HttpClientUtil.sendGet("https://list.jd.com/list.html?cat=9987,653,655&sort=sort_rank_asc&trans=1&page=168&JL=6_0_0#J_main");
+//        ProccessHandler proccessHandler = new HtmlCleanerProccessHandlerImpl();
+//        Map<String, Object> map = proccessHandler.proccessList(content);
 
+//        String s = HttpClientUtil.sendGet("https://list.jd.comjavascript:;");
+
+        Spider spider = new Spider();
+        spider.start("https://list.jd.com/list.html?cat=9987,653,655");
 
         return;
     }

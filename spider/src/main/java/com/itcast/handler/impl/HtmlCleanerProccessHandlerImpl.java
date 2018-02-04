@@ -8,6 +8,7 @@ import com.itcast.utils.HttpClientUtil;
 import com.itcast.utils.ProccessUtil;
 import org.dom4j.DocumentException;
 import org.dom4j.tree.DefaultAttribute;
+import org.dom4j.tree.DefaultElement;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.TagNode;
 import org.htmlcleaner.XPatherException;
@@ -37,15 +38,21 @@ public class HtmlCleanerProccessHandlerImpl implements ProccessHandler {
         Map<String, Object> nextPageUrl = ProccessUtil.proccessElement(content, "//*[@id=\"J_topPage\"]/a[2]/@href");
 
         // 封装商品详情url
-        List<DefaultAttribute> attributeList = (List<DefaultAttribute>) skuUrlList.get("attributeList");
-        List<String> resultSkuUrlList = new ArrayList<>(attributeList.size());
+        List<String> resultSkuUrlList = null;
+        if (skuUrlList.size() > 0){
+            List<DefaultAttribute> attributeList = (List<DefaultAttribute>) skuUrlList.get("attributeList");
+            resultSkuUrlList = new ArrayList<>(attributeList.size());
 
-        for (DefaultAttribute defaultAttribute : attributeList){
-            resultSkuUrlList.add(defaultAttribute.getText());
+            for (DefaultAttribute defaultAttribute : attributeList){
+                resultSkuUrlList.add("https:" + defaultAttribute.getText());
+            }
         }
 
+
         // 封装下一页url
-        String resultNextPageUrl = "https://list.jd.com" + nextPageUrl.get("elementAttribute").toString();
+        String resultNextPageUrl = nextPageUrl.size() > 0
+                ? "https://list.jd.com" + nextPageUrl.get("elementAttribute").toString()
+                : null;
         result.put("skuUrlList", resultSkuUrlList);
         result.put("nextPageUrl", resultNextPageUrl);
 
@@ -62,19 +69,33 @@ public class HtmlCleanerProccessHandlerImpl implements ProccessHandler {
         Map<String, Object> imgUrl = ProccessUtil.proccessElement(content, "//div[@id='spec-n1']/img[1]/@data-origin");
 
         // 价格
-        String json = HttpClientUtil.sendGet("https://p.3.cn/prices/mgets?skuIds=J_5089253");
+        String url = page.getUrl().replace("https://item.jd.com/", "").replace(".html", "");
+        String json = HttpClientUtil.sendGet("https://p.3.cn/prices/mgets?skuIds=J_" + url);
         json = json.replace("\n", "");
         JSONArray jsonArray = JSONObject.parseArray(json);
         String price = jsonArray.getJSONObject(0).get("op").toString();
 
         // 参数
         Map<String, Object> map = ProccessUtil.proccessElement(content, "//div[@class='Ptable-item']/dl/*[not(@class)]");
+        List<DefaultElement> elementList = map.get("elementList") != null ? (ArrayList<DefaultElement>) map.get("elementList") : null;
+        Map<String, Object> params = new HashMap<>();
+        if (elementList.size() != 0){
+            String temp = null;
+            for (int x = 0; x < elementList.size(); x++){
+                if (isOdd(x)){ //偶数
+                    params.put(elementList.get(x).getText(), "");
+                    temp = elementList.get(x).getText();
+                } else {      //奇数
+                    params.put(temp, elementList.get(x).getText());
+                }
+            }
+        }
 
         // 封装参数
         page.addParams("title", trim(title.get("elementText").toString()));
         page.addParams("imgUrl", imgUrl.get("elementAttribute").toString());
         page.addParams("price", price);
-        page.addParams("commodityParams", JSONObject.toJSONString(map));
+        page.addParams("commodityParams", JSONObject.toJSONString(params));
 
         return page;
     }
@@ -89,5 +110,12 @@ public class HtmlCleanerProccessHandlerImpl implements ProccessHandler {
             textContent = textContent.substring(0, textContent.length() - 1).trim();
         }
         return textContent;
+    }
+
+    private static boolean isOdd(int a){
+        if((a & 1) != 1){   //是奇数
+            return true;
+        }
+        return false;
     }
 }

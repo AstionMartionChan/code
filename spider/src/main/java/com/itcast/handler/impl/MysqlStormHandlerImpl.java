@@ -15,6 +15,7 @@ public class MysqlStormHandlerImpl implements StormHandler {
 
     @Override
     public void saveDB(Page page) throws SQLException {
+        System.out.println("正在存入数据");
         MySqlUtil.insert(page.getParams());
     }
 }

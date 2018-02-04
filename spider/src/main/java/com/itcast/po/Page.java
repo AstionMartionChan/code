@@ -32,4 +32,12 @@ public class Page {
     public void setContext(String context) {
         this.context = context;
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }
