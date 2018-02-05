@@ -45,6 +45,16 @@ public class MySqlUtil {
         preparedStatement.setString(4, params.get("commodityParams").toString());
         preparedStatement.execute();
         preparedStatement.close();
-        connection.close();
+    }
+
+
+    public static void close() {
+        if (connection != null){
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

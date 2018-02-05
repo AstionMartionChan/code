@@ -54,8 +54,11 @@ public class SpiderTest {
 
 //        String s = HttpClientUtil.sendGet("https://list.jd.comjavascript:;");
 
+//        Spider spider = new Spider();
+//        spider.start("https://list.jd.com/list.html?cat=9987,653,655");
+
         Spider spider = new Spider();
-        spider.start("https://list.jd.com/list.html?cat=9987,653,655");
+        spider.spider();
 
         return;
     }

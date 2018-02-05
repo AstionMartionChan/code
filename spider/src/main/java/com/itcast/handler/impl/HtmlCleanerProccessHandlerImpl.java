@@ -70,14 +70,15 @@ public class HtmlCleanerProccessHandlerImpl implements ProccessHandler {
 
         // 价格
         String url = page.getUrl().replace("https://item.jd.com/", "").replace(".html", "");
-        String json = HttpClientUtil.sendGet("https://p.3.cn/prices/mgets?skuIds=J_" + url);
-        json = json.replace("\n", "");
+//        String json = HttpClientUtil.sendGet("https://p.3.cn/prices/mgets?skuIds=J_" + url);
+        String json = HttpClientUtil.sendGet("https://p.3.cn/prices/mgets?callback=jQuery5516057&type=1&area=1_72_4137_0&pdtk=&pduid=1821570292&pdpin=&pin=null&pdbp=0&skuIds=J_" + url + "&ext=11000000&source=item-pc");
+        json = json.replace("\n", "").replace("jQuery5516057(", "").replace(");", "");
         JSONArray jsonArray = JSONObject.parseArray(json);
-        String price = jsonArray.getJSONObject(0).get("op").toString();
+        String price = jsonArray.size() != 0 ? jsonArray.getJSONObject(0).get("op").toString() : "";
 
         // 参数
         Map<String, Object> map = ProccessUtil.proccessElement(content, "//div[@class='Ptable-item']/dl/*[not(@class)]");
-        List<DefaultElement> elementList = map.get("elementList") != null ? (ArrayList<DefaultElement>) map.get("elementList") : null;
+        List<DefaultElement> elementList = map.get("elementList") != null ? (ArrayList<DefaultElement>) map.get("elementList") : new ArrayList<DefaultElement>();
         Map<String, Object> params = new HashMap<>();
         if (elementList.size() != 0){
             String temp = null;
@@ -92,8 +93,8 @@ public class HtmlCleanerProccessHandlerImpl implements ProccessHandler {
         }
 
         // 封装参数
-        page.addParams("title", trim(title.get("elementText").toString()));
-        page.addParams("imgUrl", imgUrl.get("elementAttribute").toString());
+        page.addParams("title", trim(title.get("elementText") != null ? title.get("elementText").toString() : ""));
+        page.addParams("imgUrl", imgUrl.get("elementAttribute") != null ? imgUrl.get("elementAttribute").toString() : "");
         page.addParams("price", price);
         page.addParams("commodityParams", JSONObject.toJSONString(params));
 

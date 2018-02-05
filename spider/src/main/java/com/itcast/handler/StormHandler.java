@@ -10,4 +10,6 @@ import java.sql.SQLException;
 public interface StormHandler {
 
     void saveDB(Page page) throws SQLException;
+
+
 }

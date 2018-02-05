@@ -5,6 +5,7 @@ import com.itcast.handler.ProccessHandler;
 import com.itcast.handler.QueueHandler;
 import com.itcast.handler.StormHandler;
 import com.itcast.handler.impl.*;
+import com.itcast.utils.MySqlUtil;
 import com.itcast.utils.RedisUtil;
 import org.dom4j.DocumentException;
 import org.htmlcleaner.XPatherException;
@@ -56,6 +57,23 @@ public class Spider {
            stormHandler.saveDB(data);
        }
 
+
+        MySqlUtil.close();
+    }
+
+    public void spider() {
+        while (RedisUtil.llen("jdDetaillUrl") != 0){
+            try {
+                Page detailData = downloadHandler.download(queueHandler.poll());
+                Page data = proccessHandler.proccessDetail(detailData);
+                stormHandler.saveDB(data);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        MySqlUtil.close();
     }
 
     public void setDownloadHandler(DownloadHandler downloadHandler) {
