@@ -8,6 +8,10 @@ import com.itcast.handler.impl.HttpClientDownloadHandlerImpl;
 import com.itcast.po.Spider;
 import com.itcast.utils.HttpClientUtil;
 import com.itcast.utils.ProccessUtil;
+import org.apache.curator.RetryPolicy;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.CuratorFrameworkFactory;
+import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.dom4j.DocumentException;
 import org.htmlcleaner.XPatherException;
 import org.junit.Test;
@@ -28,6 +32,21 @@ import java.util.Set;
  * Created by Leo_Chan on 2018/1/25.
  */
 public class SpiderTest {
+
+    @Test
+    public void zookeeperTest(){
+        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
+
+        String zookeeperConnectionString = "47.98.46.234:2181";
+        CuratorFramework client = CuratorFrameworkFactory.newClient(zookeeperConnectionString,5000, 3000, retryPolicy);
+        client.start();
+        try {
+            client.create().forPath("/cfy");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     @Test
@@ -54,11 +73,11 @@ public class SpiderTest {
 
 //        String s = HttpClientUtil.sendGet("https://list.jd.comjavascript:;");
 
-//        Spider spider = new Spider();
-//        spider.start("https://list.jd.com/list.html?cat=9987,653,655");
-
         Spider spider = new Spider();
-        spider.spider();
+        spider.start("https://list.jd.com/list.html?cat=9987,653,655");
+
+//        Spider spider = new Spider();
+//        spider.spider();
 
         return;
     }
