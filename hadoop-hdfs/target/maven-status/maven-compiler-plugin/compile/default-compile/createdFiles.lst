@@ -1,0 +1,8 @@
+com/hadoop/hdfs/rpc/Biz.class
+com/hadoop/hdfs/hdfs/HdfsConnectionDemo.class
+com/hadoop/hdfs/mapreduce/HelloCountAppReduce.class
+com/hadoop/hdfs/rpc/MyServer.class
+com/hadoop/hdfs/mapreduce/HelloCountAppMap.class
+com/hadoop/hdfs/mapreduce/HelloCountApp.class
+com/hadoop/hdfs/rpc/MyClient.class
+com/hadoop/hdfs/rpc/Bizable.class
