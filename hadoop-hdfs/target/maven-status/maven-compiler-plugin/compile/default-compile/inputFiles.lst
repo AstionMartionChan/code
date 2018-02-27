@@ -6,6 +6,7 @@ D:\Git-repository\hadoop-hdfs\src\main\java\com\hadoop\hdfs\mapreduce\TratticSta
 D:\Git-repository\hadoop-hdfs\src\main\java\com\hadoop\hdfs\rpc\MyClient.java
 D:\Git-repository\hadoop-hdfs\src\main\java\com\hadoop\hdfs\mapreduce\HelloCountApp.java
 D:\Git-repository\hadoop-hdfs\src\main\java\com\hadoop\hdfs\sequencefile\SequenceFileWriter.java
+D:\Git-repository\hadoop-hdfs\src\main\java\com\hadoop\hdfs\dataskew\DataskewWordCountApp.java
 D:\Git-repository\hadoop-hdfs\src\main\java\com\hadoop\hdfs\grouping\GroupingApp.java
 D:\Git-repository\hadoop-hdfs\src\main\java\com\hadoop\hdfs\combiner\CombinerWordCountApp.java
 D:\Git-repository\hadoop-hdfs\src\main\java\com\hadoop\hdfs\mapreduce\HelloCountAppReduce.java
