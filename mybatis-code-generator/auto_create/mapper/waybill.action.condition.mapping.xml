@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rltx.waybill.dao.IWaybillActionConditionDao">
+
+
+    <!-- Start Auto Common -->
+
+    <select id="selectById" parameterType="long"  resultType="com.rltx.waybill.po.WaybillActionConditionEntity">
+        SELECT
+            id                 AS id,
+            waybill_code       AS waybillCode,
+            action_code        AS actionCode,
+            condition_type     AS conditionType,
+            compare_field      AS compareField,
+            compare_value      AS compareValue,
+            compare_result     AS compareResult,
+            logic_relation     AS logicRelation,
+            description        AS description,
+            remark             AS remark,
+            disabled           AS disabled,
+            deleted            AS deleted,
+            module_code        AS moduleCode,
+            creator_user_code  AS creatorUserCode,
+            creator_username   AS creatorUsername,
+            create_time        AS createTime,
+            update_user_code   AS updateUserCode,
+            update_username    AS updateUsername,
+            update_time        AS updateTime,
+            ip                 AS ip,
+            operator_longitude AS operatorLongitude,
+            operator_latitude  AS operatorLatitude,
+            owner_user_code    AS ownerUserCode,
+            owner_org_code     AS ownerOrgCode,
+            owner_org_name     AS ownerOrgName,
+            synchronous_id     AS synchronousId
+        FROM
+            waybill_action_condition
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="select" parameterType="com.rltx.waybill.po.WaybillActionConditionEntity"  resultType="com.rltx.waybill.po.WaybillActionConditionEntity">
+        SELECT
+            id                 AS id,
+            waybill_code       AS waybillCode,
+            action_code        AS actionCode,
+            condition_type     AS conditionType,
+            compare_field      AS compareField,
+            compare_value      AS compareValue,
+            compare_result     AS compareResult,
+            logic_relation     AS logicRelation,
+            description        AS description,
+            remark             AS remark,
+            disabled           AS disabled,
+            deleted            AS deleted,
+            module_code        AS moduleCode,
+            creator_user_code  AS creatorUserCode,
+            creator_username   AS creatorUsername,
+            create_time        AS createTime,
+            update_user_code   AS updateUserCode,
+            update_username    AS updateUsername,
+            update_time        AS updateTime,
+            ip                 AS ip,
+            operator_longitude AS operatorLongitude,
+            operator_latitude  AS operatorLatitude,
+            owner_user_code    AS ownerUserCode,
+            owner_org_code     AS ownerOrgCode,
+            owner_org_name     AS ownerOrgName,
+            synchronous_id     AS synchronousId
+        FROM
+            waybill_action_condition
+        <where>
+        <if test="id != null ">
+            AND id = #{id}
+        </if>
+
+        <if test="waybillCode != null and waybillCode != ''">
+            AND waybill_code = #{waybillCode}
+        </if>
+
+        <if test="actionCode != null and actionCode != ''">
+            AND action_code = #{actionCode}
+        </if>
+
+        <if test="conditionType != null ">
+            AND condition_type = #{conditionType}
+        </if>
+
+        <if test="compareField != null and compareField != ''">
+            AND compare_field = #{compareField}
+        </if>
+
+        <if test="compareValue != null and compareValue != ''">
+            AND compare_value = #{compareValue}
+        </if>
+
+        <if test="compareResult != null ">
+            AND compare_result = #{compareResult}
+        </if>
+
+        <if test="logicRelation != null ">
+            AND logic_relation = #{logicRelation}
+        </if>
+
+        <if test="description != null and description != ''">
+            AND description = #{description}
+        </if>
+
+        <if test="remark != null and remark != ''">
+            AND remark = #{remark}
+        </if>
+
+        <if test="disabled != null ">
+            AND disabled = #{disabled}
+        </if>
+
+        <if test="deleted != null ">
+            AND deleted = #{deleted}
+        </if>
+
+        <if test="moduleCode != null and moduleCode != ''">
+            AND module_code = #{moduleCode}
+        </if>
+
+        <if test="creatorUserCode != null and creatorUserCode != ''">
+            AND creator_user_code = #{creatorUserCode}
+        </if>
+
+        <if test="creatorUsername != null and creatorUsername != ''">
+            AND creator_username = #{creatorUsername}
+        </if>
+
+        <if test="createTime != null ">
+            AND create_time = #{createTime}
+        </if>
+
+        <if test="updateUserCode != null and updateUserCode != ''">
+            AND update_user_code = #{updateUserCode}
+        </if>
+
+        <if test="updateUsername != null and updateUsername != ''">
+            AND update_username = #{updateUsername}
+        </if>
+
+        <if test="updateTime != null ">
+            AND update_time = #{updateTime}
+        </if>
+
+        <if test="ip != null and ip != ''">
+            AND ip = #{ip}
+        </if>
+
+        <if test="operatorLongitude != null ">
+            AND operator_longitude = #{operatorLongitude}
+        </if>
+
+        <if test="operatorLatitude != null ">
+            AND operator_latitude = #{operatorLatitude}
+        </if>
+
+        <if test="ownerUserCode != null and ownerUserCode != ''">
+            AND owner_user_code = #{ownerUserCode}
+        </if>
+
+        <if test="ownerOrgCode != null and ownerOrgCode != ''">
+            AND owner_org_code = #{ownerOrgCode}
+        </if>
+
+        <if test="ownerOrgName != null and ownerOrgName != ''">
+            AND owner_org_name = #{ownerOrgName}
+        </if>
+
+        <if test="synchronousId != null and synchronousId != ''">
+            AND synchronous_id = #{synchronousId}
+        </if>
+
+        </where>
+    </select>
+
+
+    <insert id="insert" parameterType="com.rltx.waybill.po.WaybillActionConditionEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO waybill_action_condition (
+            waybill_code,
+            action_code,
+            condition_type,
+            compare_field,
+            compare_value,
+            compare_result,
+            logic_relation,
+            description,
+            remark,
+            disabled,
+            deleted,
+            module_code,
+            creator_user_code,
+            creator_username,
+            create_time,
+            update_user_code,
+            update_username,
+            update_time,
+            ip,
+            operator_longitude,
+            operator_latitude,
+            owner_user_code,
+            owner_org_code,
+            owner_org_name,
+            synchronous_id
+        )
+        VALUES (
+            #{waybillCode},
+            #{actionCode},
+            #{conditionType},
+            #{compareField},
+            #{compareValue},
+            #{compareResult},
+            #{logicRelation},
+            #{description},
+            #{remark},
+            #{disabled},
+            #{deleted},
+            #{moduleCode},
+            #{creatorUserCode},
+            #{creatorUsername},
+            #{createTime},
+            #{updateUserCode},
+            #{updateUsername},
+            #{updateTime},
+            #{ip},
+            #{operatorLongitude},
+            #{operatorLatitude},
+            #{ownerUserCode},
+            #{ownerOrgCode},
+            #{ownerOrgName},
+            #{synchronousId}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.rltx.waybill.po.WaybillActionConditionEntity">
+        UPDATE waybill_action_condition
+        <set>
+
+        <if test="waybillCode != null and waybillCode != ''">
+            waybill_code = #{waybillCode},
+        </if>
+
+        <if test="actionCode != null and actionCode != ''">
+            action_code = #{actionCode},
+        </if>
+
+        <if test="conditionType != null ">
+            condition_type = #{conditionType},
+        </if>
+
+        <if test="compareField != null and compareField != ''">
+            compare_field = #{compareField},
+        </if>
+
+        <if test="compareValue != null and compareValue != ''">
+            compare_value = #{compareValue},
+        </if>
+
+        <if test="compareResult != null ">
+            compare_result = #{compareResult},
+        </if>
+
+        <if test="logicRelation != null ">
+            logic_relation = #{logicRelation},
+        </if>
+
+        <if test="description != null and description != ''">
+            description = #{description},
+        </if>
+
+        <if test="remark != null and remark != ''">
+            remark = #{remark},
+        </if>
+
+        <if test="disabled != null ">
+            disabled = #{disabled},
+        </if>
+
+        <if test="deleted != null ">
+            deleted = #{deleted},
+        </if>
+
+        <if test="moduleCode != null and moduleCode != ''">
+            module_code = #{moduleCode},
+        </if>
+
+        <if test="creatorUserCode != null and creatorUserCode != ''">
+            creator_user_code = #{creatorUserCode},
+        </if>
+
+        <if test="creatorUsername != null and creatorUsername != ''">
+            creator_username = #{creatorUsername},
+        </if>
+
+        <if test="createTime != null ">
+            create_time = #{createTime},
+        </if>
+
+        <if test="updateUserCode != null and updateUserCode != ''">
+            update_user_code = #{updateUserCode},
+        </if>
+
+        <if test="updateUsername != null and updateUsername != ''">
+            update_username = #{updateUsername},
+        </if>
+
+        <if test="updateTime != null ">
+            update_time = #{updateTime},
+        </if>
+
+        <if test="ip != null and ip != ''">
+            ip = #{ip},
+        </if>
+
+        <if test="operatorLongitude != null ">
+            operator_longitude = #{operatorLongitude},
+        </if>
+
+        <if test="operatorLatitude != null ">
+            operator_latitude = #{operatorLatitude},
+        </if>
+
+        <if test="ownerUserCode != null and ownerUserCode != ''">
+            owner_user_code = #{ownerUserCode},
+        </if>
+
+        <if test="ownerOrgCode != null and ownerOrgCode != ''">
+            owner_org_code = #{ownerOrgCode},
+        </if>
+
+        <if test="ownerOrgName != null and ownerOrgName != ''">
+            owner_org_name = #{ownerOrgName},
+        </if>
+
+        <if test="synchronousId != null and synchronousId != ''">
+            synchronous_id = #{synchronousId},
+        </if>
+
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
+    <!-- End Auto Common  -->
+
+</mapper>
+
+

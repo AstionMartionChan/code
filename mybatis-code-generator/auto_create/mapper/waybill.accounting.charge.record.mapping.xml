@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rltx.waybill.dao.IWaybillAccountingChargeRecordDao">
+
+
+    <!-- Start Auto Common -->
+
+    <select id="selectById" parameterType="long"  resultType="com.rltx.waybill.po.WaybillAccountingChargeRecordEntity">
+        SELECT
+            id                           AS id,
+            code                         AS code,
+            waybill_code                 AS waybillCode,
+            action_code                  AS actionCode,
+            action_record_code           AS actionRecordCode,
+            charge_to_truck_code         AS chargeToTruckCode,
+            charge_item_code             AS chargeItemCode,
+            charge_item_name             AS chargeItemName,
+            charge_item_number           AS chargeItemNumber,
+            charge_item_number_unit_code AS chargeItemNumberUnitCode,
+            charge_item_number_unit_name AS chargeItemNumberUnitName,
+            charge_item_price            AS chargeItemPrice,
+            charge_item_price_unit_code  AS chargeItemPriceUnitCode,
+            charge_item_price_unit_name  AS chargeItemPriceUnitName,
+            charge_amounts               AS chargeAmounts,
+            charge_amounts_unit_code     AS chargeAmountsUnitCode,
+            charge_amounts_unit_name     AS chargeAmountsUnitName,
+            custom_data                  AS customData,
+            attachment_list              AS attachmentList,
+            usage_desc                   AS usageDesc,
+            description                  AS description,
+            remark                       AS remark,
+            disabled                     AS disabled,
+            deleted                      AS deleted,
+            module_code                  AS moduleCode,
+            creator_user_code            AS creatorUserCode,
+            creator_username             AS creatorUsername,
+            create_time                  AS createTime,
+            update_user_code             AS updateUserCode,
+            update_username              AS updateUsername,
+            update_time                  AS updateTime,
+            ip                           AS ip,
+            operator_longitude           AS operatorLongitude,
+            operator_latitude            AS operatorLatitude,
+            owner_user_code              AS ownerUserCode,
+            owner_org_code               AS ownerOrgCode,
+            owner_org_name               AS ownerOrgName,
+            synchronous_id               AS synchronousId
+        FROM
+            waybill_accounting_charge_record
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="select" parameterType="com.rltx.waybill.po.WaybillAccountingChargeRecordEntity"  resultType="com.rltx.waybill.po.WaybillAccountingChargeRecordEntity">
+        SELECT
+            id                           AS id,
+            code                         AS code,
+            waybill_code                 AS waybillCode,
+            action_code                  AS actionCode,
+            action_record_code           AS actionRecordCode,
+            charge_to_truck_code         AS chargeToTruckCode,
+            charge_item_code             AS chargeItemCode,
+            charge_item_name             AS chargeItemName,
+            charge_item_number           AS chargeItemNumber,
+            charge_item_number_unit_code AS chargeItemNumberUnitCode,
+            charge_item_number_unit_name AS chargeItemNumberUnitName,
+            charge_item_price            AS chargeItemPrice,
+            charge_item_price_unit_code  AS chargeItemPriceUnitCode,
+            charge_item_price_unit_name  AS chargeItemPriceUnitName,
+            charge_amounts               AS chargeAmounts,
+            charge_amounts_unit_code     AS chargeAmountsUnitCode,
+            charge_amounts_unit_name     AS chargeAmountsUnitName,
+            custom_data                  AS customData,
+            attachment_list              AS attachmentList,
+            usage_desc                   AS usageDesc,
+            description                  AS description,
+            remark                       AS remark,
+            disabled                     AS disabled,
+            deleted                      AS deleted,
+            module_code                  AS moduleCode,
+            creator_user_code            AS creatorUserCode,
+            creator_username             AS creatorUsername,
+            create_time                  AS createTime,
+            update_user_code             AS updateUserCode,
+            update_username              AS updateUsername,
+            update_time                  AS updateTime,
+            ip                           AS ip,
+            operator_longitude           AS operatorLongitude,
+            operator_latitude            AS operatorLatitude,
+            owner_user_code              AS ownerUserCode,
+            owner_org_code               AS ownerOrgCode,
+            owner_org_name               AS ownerOrgName,
+            synchronous_id               AS synchronousId
+        FROM
+            waybill_accounting_charge_record
+        <where>
+        <if test="id != null ">
+            AND id = #{id}
+        </if>
+
+        <if test="code != null and code != ''">
+            AND code = #{code}
+        </if>
+
+        <if test="waybillCode != null and waybillCode != ''">
+            AND waybill_code = #{waybillCode}
+        </if>
+
+        <if test="actionCode != null and actionCode != ''">
+            AND action_code = #{actionCode}
+        </if>
+
+        <if test="actionRecordCode != null and actionRecordCode != ''">
+            AND action_record_code = #{actionRecordCode}
+        </if>
+
+        <if test="chargeToTruckCode != null and chargeToTruckCode != ''">
+            AND charge_to_truck_code = #{chargeToTruckCode}
+        </if>
+
+        <if test="chargeItemCode != null and chargeItemCode != ''">
+            AND charge_item_code = #{chargeItemCode}
+        </if>
+
+        <if test="chargeItemName != null and chargeItemName != ''">
+            AND charge_item_name = #{chargeItemName}
+        </if>
+
+        <if test="chargeItemNumber != null ">
+            AND charge_item_number = #{chargeItemNumber}
+        </if>
+
+        <if test="chargeItemNumberUnitCode != null and chargeItemNumberUnitCode != ''">
+            AND charge_item_number_unit_code = #{chargeItemNumberUnitCode}
+        </if>
+
+        <if test="chargeItemNumberUnitName != null and chargeItemNumberUnitName != ''">
+            AND charge_item_number_unit_name = #{chargeItemNumberUnitName}
+        </if>
+
+        <if test="chargeItemPrice != null ">
+            AND charge_item_price = #{chargeItemPrice}
+        </if>
+
+        <if test="chargeItemPriceUnitCode != null and chargeItemPriceUnitCode != ''">
+            AND charge_item_price_unit_code = #{chargeItemPriceUnitCode}
+        </if>
+
+        <if test="chargeItemPriceUnitName != null and chargeItemPriceUnitName != ''">
+            AND charge_item_price_unit_name = #{chargeItemPriceUnitName}
+        </if>
+
+        <if test="chargeAmounts != null ">
+            AND charge_amounts = #{chargeAmounts}
+        </if>
+
+        <if test="chargeAmountsUnitCode != null and chargeAmountsUnitCode != ''">
+            AND charge_amounts_unit_code = #{chargeAmountsUnitCode}
+        </if>
+
+        <if test="chargeAmountsUnitName != null and chargeAmountsUnitName != ''">
+            AND charge_amounts_unit_name = #{chargeAmountsUnitName}
+        </if>
+
+        <if test="customData != null and customData != ''">
+            AND custom_data = #{customData}
+        </if>
+
+        <if test="attachmentList != null and attachmentList != ''">
+            AND attachment_list = #{attachmentList}
+        </if>
+
+        <if test="usageDesc != null and usageDesc != ''">
+            AND usage_desc = #{usageDesc}
+        </if>
+
+        <if test="description != null and description != ''">
+            AND description = #{description}
+        </if>
+
+        <if test="remark != null and remark != ''">
+            AND remark = #{remark}
+        </if>
+
+        <if test="disabled != null ">
+            AND disabled = #{disabled}
+        </if>
+
+        <if test="deleted != null ">
+            AND deleted = #{deleted}
+        </if>
+
+        <if test="moduleCode != null and moduleCode != ''">
+            AND module_code = #{moduleCode}
+        </if>
+
+        <if test="creatorUserCode != null and creatorUserCode != ''">
+            AND creator_user_code = #{creatorUserCode}
+        </if>
+
+        <if test="creatorUsername != null and creatorUsername != ''">
+            AND creator_username = #{creatorUsername}
+        </if>
+
+        <if test="createTime != null ">
+            AND create_time = #{createTime}
+        </if>
+
+        <if test="updateUserCode != null and updateUserCode != ''">
+            AND update_user_code = #{updateUserCode}
+        </if>
+
+        <if test="updateUsername != null and updateUsername != ''">
+            AND update_username = #{updateUsername}
+        </if>
+
+        <if test="updateTime != null ">
+            AND update_time = #{updateTime}
+        </if>
+
+        <if test="ip != null and ip != ''">
+            AND ip = #{ip}
+        </if>
+
+        <if test="operatorLongitude != null ">
+            AND operator_longitude = #{operatorLongitude}
+        </if>
+
+        <if test="operatorLatitude != null ">
+            AND operator_latitude = #{operatorLatitude}
+        </if>
+
+        <if test="ownerUserCode != null and ownerUserCode != ''">
+            AND owner_user_code = #{ownerUserCode}
+        </if>
+
+        <if test="ownerOrgCode != null and ownerOrgCode != ''">
+            AND owner_org_code = #{ownerOrgCode}
+        </if>
+
+        <if test="ownerOrgName != null and ownerOrgName != ''">
+            AND owner_org_name = #{ownerOrgName}
+        </if>
+
+        <if test="synchronousId != null and synchronousId != ''">
+            AND synchronous_id = #{synchronousId}
+        </if>
+
+        </where>
+    </select>
+
+
+    <insert id="insert" parameterType="com.rltx.waybill.po.WaybillAccountingChargeRecordEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO waybill_accounting_charge_record (
+            code,
+            waybill_code,
+            action_code,
+            action_record_code,
+            charge_to_truck_code,
+            charge_item_code,
+            charge_item_name,
+            charge_item_number,
+            charge_item_number_unit_code,
+            charge_item_number_unit_name,
+            charge_item_price,
+            charge_item_price_unit_code,
+            charge_item_price_unit_name,
+            charge_amounts,
+            charge_amounts_unit_code,
+            charge_amounts_unit_name,
+            custom_data,
+            attachment_list,
+            usage_desc,
+            description,
+            remark,
+            disabled,
+            deleted,
+            module_code,
+            creator_user_code,
+            creator_username,
+            create_time,
+            update_user_code,
+            update_username,
+            update_time,
+            ip,
+            operator_longitude,
+            operator_latitude,
+            owner_user_code,
+            owner_org_code,
+            owner_org_name,
+            synchronous_id
+        )
+        VALUES (
+            #{code},
+            #{waybillCode},
+            #{actionCode},
+            #{actionRecordCode},
+            #{chargeToTruckCode},
+            #{chargeItemCode},
+            #{chargeItemName},
+            #{chargeItemNumber},
+            #{chargeItemNumberUnitCode},
+            #{chargeItemNumberUnitName},
+            #{chargeItemPrice},
+            #{chargeItemPriceUnitCode},
+            #{chargeItemPriceUnitName},
+            #{chargeAmounts},
+            #{chargeAmountsUnitCode},
+            #{chargeAmountsUnitName},
+            #{customData},
+            #{attachmentList},
+            #{usageDesc},
+            #{description},
+            #{remark},
+            #{disabled},
+            #{deleted},
+            #{moduleCode},
+            #{creatorUserCode},
+            #{creatorUsername},
+            #{createTime},
+            #{updateUserCode},
+            #{updateUsername},
+            #{updateTime},
+            #{ip},
+            #{operatorLongitude},
+            #{operatorLatitude},
+            #{ownerUserCode},
+            #{ownerOrgCode},
+            #{ownerOrgName},
+            #{synchronousId}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.rltx.waybill.po.WaybillAccountingChargeRecordEntity">
+        UPDATE waybill_accounting_charge_record
+        <set>
+
+        <if test="code != null and code != ''">
+            code = #{code},
+        </if>
+
+        <if test="waybillCode != null and waybillCode != ''">
+            waybill_code = #{waybillCode},
+        </if>
+
+        <if test="actionCode != null and actionCode != ''">
+            action_code = #{actionCode},
+        </if>
+
+        <if test="actionRecordCode != null and actionRecordCode != ''">
+            action_record_code = #{actionRecordCode},
+        </if>
+
+        <if test="chargeToTruckCode != null and chargeToTruckCode != ''">
+            charge_to_truck_code = #{chargeToTruckCode},
+        </if>
+
+        <if test="chargeItemCode != null and chargeItemCode != ''">
+            charge_item_code = #{chargeItemCode},
+        </if>
+
+        <if test="chargeItemName != null and chargeItemName != ''">
+            charge_item_name = #{chargeItemName},
+        </if>
+
+        <if test="chargeItemNumber != null ">
+            charge_item_number = #{chargeItemNumber},
+        </if>
+
+        <if test="chargeItemNumberUnitCode != null and chargeItemNumberUnitCode != ''">
+            charge_item_number_unit_code = #{chargeItemNumberUnitCode},
+        </if>
+
+        <if test="chargeItemNumberUnitName != null and chargeItemNumberUnitName != ''">
+            charge_item_number_unit_name = #{chargeItemNumberUnitName},
+        </if>
+
+        <if test="chargeItemPrice != null ">
+            charge_item_price = #{chargeItemPrice},
+        </if>
+
+        <if test="chargeItemPriceUnitCode != null and chargeItemPriceUnitCode != ''">
+            charge_item_price_unit_code = #{chargeItemPriceUnitCode},
+        </if>
+
+        <if test="chargeItemPriceUnitName != null and chargeItemPriceUnitName != ''">
+            charge_item_price_unit_name = #{chargeItemPriceUnitName},
+        </if>
+
+        <if test="chargeAmounts != null ">
+            charge_amounts = #{chargeAmounts},
+        </if>
+
+        <if test="chargeAmountsUnitCode != null and chargeAmountsUnitCode != ''">
+            charge_amounts_unit_code = #{chargeAmountsUnitCode},
+        </if>
+
+        <if test="chargeAmountsUnitName != null and chargeAmountsUnitName != ''">
+            charge_amounts_unit_name = #{chargeAmountsUnitName},
+        </if>
+
+        <if test="customData != null and customData != ''">
+            custom_data = #{customData},
+        </if>
+
+        <if test="attachmentList != null and attachmentList != ''">
+            attachment_list = #{attachmentList},
+        </if>
+
+        <if test="usageDesc != null and usageDesc != ''">
+            usage_desc = #{usageDesc},
+        </if>
+
+        <if test="description != null and description != ''">
+            description = #{description},
+        </if>
+
+        <if test="remark != null and remark != ''">
+            remark = #{remark},
+        </if>
+
+        <if test="disabled != null ">
+            disabled = #{disabled},
+        </if>
+
+        <if test="deleted != null ">
+            deleted = #{deleted},
+        </if>
+
+        <if test="moduleCode != null and moduleCode != ''">
+            module_code = #{moduleCode},
+        </if>
+
+        <if test="creatorUserCode != null and creatorUserCode != ''">
+            creator_user_code = #{creatorUserCode},
+        </if>
+
+        <if test="creatorUsername != null and creatorUsername != ''">
+            creator_username = #{creatorUsername},
+        </if>
+
+        <if test="createTime != null ">
+            create_time = #{createTime},
+        </if>
+
+        <if test="updateUserCode != null and updateUserCode != ''">
+            update_user_code = #{updateUserCode},
+        </if>
+
+        <if test="updateUsername != null and updateUsername != ''">
+            update_username = #{updateUsername},
+        </if>
+
+        <if test="updateTime != null ">
+            update_time = #{updateTime},
+        </if>
+
+        <if test="ip != null and ip != ''">
+            ip = #{ip},
+        </if>
+
+        <if test="operatorLongitude != null ">
+            operator_longitude = #{operatorLongitude},
+        </if>
+
+        <if test="operatorLatitude != null ">
+            operator_latitude = #{operatorLatitude},
+        </if>
+
+        <if test="ownerUserCode != null and ownerUserCode != ''">
+            owner_user_code = #{ownerUserCode},
+        </if>
+
+        <if test="ownerOrgCode != null and ownerOrgCode != ''">
+            owner_org_code = #{ownerOrgCode},
+        </if>
+
+        <if test="ownerOrgName != null and ownerOrgName != ''">
+            owner_org_name = #{ownerOrgName},
+        </if>
+
+        <if test="synchronousId != null and synchronousId != ''">
+            synchronous_id = #{synchronousId},
+        </if>
+
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
+    <!-- End Auto Common  -->
+
+</mapper>
+
+

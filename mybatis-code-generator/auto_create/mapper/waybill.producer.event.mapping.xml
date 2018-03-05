@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rltx.waybill.dao.IWaybillProducerEventDao">
+
+
+    <!-- Start Auto Common -->
+
+    <select id="selectById" parameterType="long"  resultType="com.rltx.waybill.po.WaybillProducerEventEntity">
+        SELECT
+            id          AS id,
+            event_code  AS eventCode,
+            topic       AS topic,
+            message     AS message,
+            status      AS status,
+            process_id  AS processId,
+            create_time AS createTime,
+            update_time AS updateTime
+        FROM
+            waybill_producer_event
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="select" parameterType="com.rltx.waybill.po.WaybillProducerEventEntity"  resultType="com.rltx.waybill.po.WaybillProducerEventEntity">
+        SELECT
+            id          AS id,
+            event_code  AS eventCode,
+            topic       AS topic,
+            message     AS message,
+            status      AS status,
+            process_id  AS processId,
+            create_time AS createTime,
+            update_time AS updateTime
+        FROM
+            waybill_producer_event
+        <where>
+        <if test="id != null ">
+            AND id = #{id}
+        </if>
+
+        <if test="eventCode != null and eventCode != ''">
+            AND event_code = #{eventCode}
+        </if>
+
+        <if test="topic != null and topic != ''">
+            AND topic = #{topic}
+        </if>
+
+        <if test="message != null and message != ''">
+            AND message = #{message}
+        </if>
+
+        <if test="status != null and status != ''">
+            AND status = #{status}
+        </if>
+
+        <if test="processId != null and processId != ''">
+            AND process_id = #{processId}
+        </if>
+
+        <if test="createTime != null ">
+            AND create_time = #{createTime}
+        </if>
+
+        <if test="updateTime != null ">
+            AND update_time = #{updateTime}
+        </if>
+
+        </where>
+    </select>
+
+
+    <insert id="insert" parameterType="com.rltx.waybill.po.WaybillProducerEventEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO waybill_producer_event (
+            event_code,
+            topic,
+            message,
+            status,
+            process_id,
+            create_time,
+            update_time
+        )
+        VALUES (
+            #{eventCode},
+            #{topic},
+            #{message},
+            #{status},
+            #{processId},
+            #{createTime},
+            #{updateTime}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.rltx.waybill.po.WaybillProducerEventEntity">
+        UPDATE waybill_producer_event
+        <set>
+
+        <if test="eventCode != null and eventCode != ''">
+            event_code = #{eventCode},
+        </if>
+
+        <if test="topic != null and topic != ''">
+            topic = #{topic},
+        </if>
+
+        <if test="message != null and message != ''">
+            message = #{message},
+        </if>
+
+        <if test="status != null and status != ''">
+            status = #{status},
+        </if>
+
+        <if test="processId != null and processId != ''">
+            process_id = #{processId},
+        </if>
+
+        <if test="createTime != null ">
+            create_time = #{createTime},
+        </if>
+
+        <if test="updateTime != null ">
+            update_time = #{updateTime},
+        </if>
+
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
+    <!-- End Auto Common  -->
+
+</mapper>
+
+

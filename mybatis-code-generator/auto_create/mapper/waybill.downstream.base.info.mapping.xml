@@ -1,0 +1,1887 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rltx.waybill.dao.IWaybillDownstreamBaseInfoDao">
+
+
+    <!-- Start Auto Common -->
+
+    <select id="selectById" parameterType="long"  resultType="com.rltx.waybill.po.WaybillDownstreamBaseInfoEntity">
+        SELECT
+            id                                AS id,
+            waybill_code                      AS waybillCode,
+            ori_system_no                     AS oriSystemNo,
+            waybill_no                        AS waybillNo,
+            root_logistics_code               AS rootLogisticsCode,
+            logistics_code                    AS logisticsCode,
+            lte_route_code                    AS lteRouteCode,
+            lte_route_name                    AS lteRouteName,
+            standard_distance                 AS standardDistance,
+            standard_time                     AS standardTime,
+            standard_time_unit_code           AS standardTimeUnitCode,
+            driver_confirmed                  AS driverConfirmed,
+            business_type_code                AS businessTypeCode,
+            cargo_type_classification_code    AS cargoTypeClassificationCode,
+            biz_owner_user_code               AS bizOwnerUserCode,
+            shipper_org_code                  AS shipperOrgCode,
+            shipper_org_name                  AS shipperOrgName,
+            shipper_user_code                 AS shipperUserCode,
+            shipper_user_full_name            AS shipperUserFullName,
+            shipper_user_phone                AS shipperUserPhone,
+            shipper_addr_province_code        AS shipperAddrProvinceCode,
+            shipper_addr_city_code            AS shipperAddrCityCode,
+            shipper_addr_county_code          AS shipperAddrCountyCode,
+            shipper_addr                      AS shipperAddr,
+            shipper_actual_user_full_name     AS shipperActualUserFullName,
+            shipper_actual_user_certify_no    AS shipperActualUserCertifyNo,
+            consignment_time                  AS consignmentTime,
+            loading_date                      AS loadingDate,
+            unloading_date                    AS unloadingDate,
+            consignee_org_code                AS consigneeOrgCode,
+            consignee_org_name                AS consigneeOrgName,
+            consignee_user_code               AS consigneeUserCode,
+            consignee_user_full_name          AS consigneeUserFullName,
+            consignee_user_phone              AS consigneeUserPhone,
+            consignee_addr_province_code      AS consigneeAddrProvinceCode,
+            consignee_addr_city_code          AS consigneeAddrCityCode,
+            consignee_addr_county_code        AS consigneeAddrCountyCode,
+            consignee_addr                    AS consigneeAddr,
+            consignee_actual_user_full_name   AS consigneeActualUserFullName,
+            receipts_type                     AS receiptsType,
+            receipts_type_name                AS receiptsTypeName,
+            receipts_target                   AS receiptsTarget,
+            receipts_target_bank_account_name AS receiptsTargetBankAccountName,
+            receipts_target_bank_account_no   AS receiptsTargetBankAccountNo,
+            receipts_target_bank_name         AS receiptsTargetBankName,
+            receipts_target_bank_branch       AS receiptsTargetBankBranch,
+            unified_social_credit_identifier  AS unifiedSocialCreditIdentifier,
+            truck_broker_license              AS truckBrokerLicense,
+            truck_owner_license               AS truckOwnerLicense,
+            truck_license                     AS truckLicense,
+            truck_model_code                  AS truckModelCode,
+            truck_model_name                  AS truckModelName,
+            vehicle_classification_code       AS vehicleClassificationCode,
+            truck_owner                       AS truckOwner,
+            truck_code                        AS truckCode,
+            truck_license_no                  AS truckLicenseNo,
+            license_plate_type_code           AS licensePlateTypeCode,
+            trailer_truck_code                AS trailerTruckCode,
+            trailer_truck_license_no          AS trailerTruckLicenseNo,
+            driving_license_no                AS drivingLicenseNo,
+            truck_length                      AS truckLength,
+            truck_power_type                  AS truckPowerType,
+            reg_tonnage                       AS regTonnage,
+            reg_tonnage_unit_code             AS regTonnageUnitCode,
+            reg_tonnage_unit_name             AS regTonnageUnitName,
+            truck_org_name                    AS truckOrgName,
+            driver_code                       AS driverCode,
+            driver_full_name                  AS driverFullName,
+            driver_phone                      AS driverPhone,
+            driver_license_no                 AS driverLicenseNo,
+            vice_driver_code                  AS viceDriverCode,
+            vice_driver_name                  AS viceDriverName,
+            vice_driver_phone                 AS viceDriverPhone,
+            seller_org_code                   AS sellerOrgCode,
+            seller_org_name                   AS sellerOrgName,
+            customer_org_code                 AS customerOrgCode,
+            customer_org_name                 AS customerOrgName,
+            lte_rates_code                    AS lteRatesCode,
+            meterage_type                     AS meterageType,
+            unit_price                        AS unitPrice,
+            calculated_fee                    AS calculatedFee,
+            currency_unit_code                AS currencyUnitCode,
+            currency_unit_name                AS currencyUnitName,
+            confirmed_fee                     AS confirmedFee,
+            total_monetary_amount             AS totalMonetaryAmount,
+            expect_settle_volume              AS expectSettleVolume,
+            goodsItem_gross_weight            AS goodsItemGrossWeight,
+            goods_volume                      AS goodsVolume,
+            goods_amount                      AS goodsAmount,
+            trade_method                      AS tradeMethod,
+            carrier_org_code                  AS carrierOrgCode,
+            carrier_org_name                  AS carrierOrgName,
+            carrier_user_code                 AS carrierUserCode,
+            carrier_user_full_name            AS carrierUserFullName,
+            pay_method                        AS payMethod,
+            pay_method_name                   AS payMethodName,
+            standard_goods_loss               AS standardGoodsLoss,
+            freight_loss_method               AS freightLossMethod,
+            goods_loss_unit_code              AS goodsLossUnitCode,
+            goods_loss_unit_name              AS goodsLossUnitName,
+            goods_loss_remark                 AS goodsLossRemark,
+            measure_unit_code                 AS measureUnitCode,
+            measure_unit_name                 AS measureUnitName,
+            calculated_fee_unit_code          AS calculatedFeeUnitCode,
+            calculated_fee_unit_name          AS calculatedFeeUnitName,
+            waybill_status                    AS waybillStatus,
+            actual_loading_time               AS actualLoadingTime,
+            actual_unloading_time             AS actualUnloadingTime,
+            report_notes                      AS reportNotes,
+            report_status                     AS reportStatus,
+            report_user_code                  AS reportUserCode,
+            report_user_full_name             AS reportUserFullName,
+            report_time                       AS reportTime,
+            current_action_code               AS currentActionCode,
+            current_action_name               AS currentActionName,
+            confirmed_driving_fee             AS confirmedDrivingFee,
+            confirmed_driving_fee_unit_code   AS confirmedDrivingFeeUnitCode,
+            confirmed_total_fee               AS confirmedTotalFee,
+            confirmed_total_fee_unit_code     AS confirmedTotalFeeUnitCode,
+            confirmed_settle_volume           AS confirmedSettleVolume,
+            confirmed_loss_deduction          AS confirmedLossDeduction,
+            bill_status                       AS billStatus,
+            bill_user_code                    AS billUserCode,
+            bill_user_full_name               AS billUserFullName,
+            bill_org_code                     AS billOrgCode,
+            bill_org_name                     AS billOrgName,
+            payee_user_code                   AS payeeUserCode,
+            payee_user_full_name              AS payeeUserFullName,
+            payee_bank_name                   AS payeeBankName,
+            payee_bank_branch_name            AS payeeBankBranchName,
+            payee_bank_account_name           AS payeeBankAccountName,
+            payee_bank_account_no             AS payeeBankAccountNo,
+            billing_finish_time               AS billingFinishTime,
+            to_account_date                   AS toAccountDate,
+            custom_data                       AS customData,
+            waybill_tag                       AS waybillTag,
+            description                       AS description,
+            remark                            AS remark,
+            disabled                          AS disabled,
+            deleted                           AS deleted,
+            module_code                       AS moduleCode,
+            creator_user_code                 AS creatorUserCode,
+            creator_username                  AS creatorUsername,
+            create_time                       AS createTime,
+            update_user_code                  AS updateUserCode,
+            update_username                   AS updateUsername,
+            update_time                       AS updateTime,
+            ip                                AS ip,
+            operator_longitude                AS operatorLongitude,
+            operator_latitude                 AS operatorLatitude,
+            owner_user_code                   AS ownerUserCode,
+            owner_org_code                    AS ownerOrgCode,
+            owner_org_name                    AS ownerOrgName,
+            synchronous_id                    AS synchronousId
+        FROM
+            waybill_downstream_base_info
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="select" parameterType="com.rltx.waybill.po.WaybillDownstreamBaseInfoEntity"  resultType="com.rltx.waybill.po.WaybillDownstreamBaseInfoEntity">
+        SELECT
+            id                                AS id,
+            waybill_code                      AS waybillCode,
+            ori_system_no                     AS oriSystemNo,
+            waybill_no                        AS waybillNo,
+            root_logistics_code               AS rootLogisticsCode,
+            logistics_code                    AS logisticsCode,
+            lte_route_code                    AS lteRouteCode,
+            lte_route_name                    AS lteRouteName,
+            standard_distance                 AS standardDistance,
+            standard_time                     AS standardTime,
+            standard_time_unit_code           AS standardTimeUnitCode,
+            driver_confirmed                  AS driverConfirmed,
+            business_type_code                AS businessTypeCode,
+            cargo_type_classification_code    AS cargoTypeClassificationCode,
+            biz_owner_user_code               AS bizOwnerUserCode,
+            shipper_org_code                  AS shipperOrgCode,
+            shipper_org_name                  AS shipperOrgName,
+            shipper_user_code                 AS shipperUserCode,
+            shipper_user_full_name            AS shipperUserFullName,
+            shipper_user_phone                AS shipperUserPhone,
+            shipper_addr_province_code        AS shipperAddrProvinceCode,
+            shipper_addr_city_code            AS shipperAddrCityCode,
+            shipper_addr_county_code          AS shipperAddrCountyCode,
+            shipper_addr                      AS shipperAddr,
+            shipper_actual_user_full_name     AS shipperActualUserFullName,
+            shipper_actual_user_certify_no    AS shipperActualUserCertifyNo,
+            consignment_time                  AS consignmentTime,
+            loading_date                      AS loadingDate,
+            unloading_date                    AS unloadingDate,
+            consignee_org_code                AS consigneeOrgCode,
+            consignee_org_name                AS consigneeOrgName,
+            consignee_user_code               AS consigneeUserCode,
+            consignee_user_full_name          AS consigneeUserFullName,
+            consignee_user_phone              AS consigneeUserPhone,
+            consignee_addr_province_code      AS consigneeAddrProvinceCode,
+            consignee_addr_city_code          AS consigneeAddrCityCode,
+            consignee_addr_county_code        AS consigneeAddrCountyCode,
+            consignee_addr                    AS consigneeAddr,
+            consignee_actual_user_full_name   AS consigneeActualUserFullName,
+            receipts_type                     AS receiptsType,
+            receipts_type_name                AS receiptsTypeName,
+            receipts_target                   AS receiptsTarget,
+            receipts_target_bank_account_name AS receiptsTargetBankAccountName,
+            receipts_target_bank_account_no   AS receiptsTargetBankAccountNo,
+            receipts_target_bank_name         AS receiptsTargetBankName,
+            receipts_target_bank_branch       AS receiptsTargetBankBranch,
+            unified_social_credit_identifier  AS unifiedSocialCreditIdentifier,
+            truck_broker_license              AS truckBrokerLicense,
+            truck_owner_license               AS truckOwnerLicense,
+            truck_license                     AS truckLicense,
+            truck_model_code                  AS truckModelCode,
+            truck_model_name                  AS truckModelName,
+            vehicle_classification_code       AS vehicleClassificationCode,
+            truck_owner                       AS truckOwner,
+            truck_code                        AS truckCode,
+            truck_license_no                  AS truckLicenseNo,
+            license_plate_type_code           AS licensePlateTypeCode,
+            trailer_truck_code                AS trailerTruckCode,
+            trailer_truck_license_no          AS trailerTruckLicenseNo,
+            driving_license_no                AS drivingLicenseNo,
+            truck_length                      AS truckLength,
+            truck_power_type                  AS truckPowerType,
+            reg_tonnage                       AS regTonnage,
+            reg_tonnage_unit_code             AS regTonnageUnitCode,
+            reg_tonnage_unit_name             AS regTonnageUnitName,
+            truck_org_name                    AS truckOrgName,
+            driver_code                       AS driverCode,
+            driver_full_name                  AS driverFullName,
+            driver_phone                      AS driverPhone,
+            driver_license_no                 AS driverLicenseNo,
+            vice_driver_code                  AS viceDriverCode,
+            vice_driver_name                  AS viceDriverName,
+            vice_driver_phone                 AS viceDriverPhone,
+            seller_org_code                   AS sellerOrgCode,
+            seller_org_name                   AS sellerOrgName,
+            customer_org_code                 AS customerOrgCode,
+            customer_org_name                 AS customerOrgName,
+            lte_rates_code                    AS lteRatesCode,
+            meterage_type                     AS meterageType,
+            unit_price                        AS unitPrice,
+            calculated_fee                    AS calculatedFee,
+            currency_unit_code                AS currencyUnitCode,
+            currency_unit_name                AS currencyUnitName,
+            confirmed_fee                     AS confirmedFee,
+            total_monetary_amount             AS totalMonetaryAmount,
+            expect_settle_volume              AS expectSettleVolume,
+            goodsItem_gross_weight            AS goodsItemGrossWeight,
+            goods_volume                      AS goodsVolume,
+            goods_amount                      AS goodsAmount,
+            trade_method                      AS tradeMethod,
+            carrier_org_code                  AS carrierOrgCode,
+            carrier_org_name                  AS carrierOrgName,
+            carrier_user_code                 AS carrierUserCode,
+            carrier_user_full_name            AS carrierUserFullName,
+            pay_method                        AS payMethod,
+            pay_method_name                   AS payMethodName,
+            standard_goods_loss               AS standardGoodsLoss,
+            freight_loss_method               AS freightLossMethod,
+            goods_loss_unit_code              AS goodsLossUnitCode,
+            goods_loss_unit_name              AS goodsLossUnitName,
+            goods_loss_remark                 AS goodsLossRemark,
+            measure_unit_code                 AS measureUnitCode,
+            measure_unit_name                 AS measureUnitName,
+            calculated_fee_unit_code          AS calculatedFeeUnitCode,
+            calculated_fee_unit_name          AS calculatedFeeUnitName,
+            waybill_status                    AS waybillStatus,
+            actual_loading_time               AS actualLoadingTime,
+            actual_unloading_time             AS actualUnloadingTime,
+            report_notes                      AS reportNotes,
+            report_status                     AS reportStatus,
+            report_user_code                  AS reportUserCode,
+            report_user_full_name             AS reportUserFullName,
+            report_time                       AS reportTime,
+            current_action_code               AS currentActionCode,
+            current_action_name               AS currentActionName,
+            confirmed_driving_fee             AS confirmedDrivingFee,
+            confirmed_driving_fee_unit_code   AS confirmedDrivingFeeUnitCode,
+            confirmed_total_fee               AS confirmedTotalFee,
+            confirmed_total_fee_unit_code     AS confirmedTotalFeeUnitCode,
+            confirmed_settle_volume           AS confirmedSettleVolume,
+            confirmed_loss_deduction          AS confirmedLossDeduction,
+            bill_status                       AS billStatus,
+            bill_user_code                    AS billUserCode,
+            bill_user_full_name               AS billUserFullName,
+            bill_org_code                     AS billOrgCode,
+            bill_org_name                     AS billOrgName,
+            payee_user_code                   AS payeeUserCode,
+            payee_user_full_name              AS payeeUserFullName,
+            payee_bank_name                   AS payeeBankName,
+            payee_bank_branch_name            AS payeeBankBranchName,
+            payee_bank_account_name           AS payeeBankAccountName,
+            payee_bank_account_no             AS payeeBankAccountNo,
+            billing_finish_time               AS billingFinishTime,
+            to_account_date                   AS toAccountDate,
+            custom_data                       AS customData,
+            waybill_tag                       AS waybillTag,
+            description                       AS description,
+            remark                            AS remark,
+            disabled                          AS disabled,
+            deleted                           AS deleted,
+            module_code                       AS moduleCode,
+            creator_user_code                 AS creatorUserCode,
+            creator_username                  AS creatorUsername,
+            create_time                       AS createTime,
+            update_user_code                  AS updateUserCode,
+            update_username                   AS updateUsername,
+            update_time                       AS updateTime,
+            ip                                AS ip,
+            operator_longitude                AS operatorLongitude,
+            operator_latitude                 AS operatorLatitude,
+            owner_user_code                   AS ownerUserCode,
+            owner_org_code                    AS ownerOrgCode,
+            owner_org_name                    AS ownerOrgName,
+            synchronous_id                    AS synchronousId
+        FROM
+            waybill_downstream_base_info
+        <where>
+        <if test="id != null ">
+            AND id = #{id}
+        </if>
+
+        <if test="waybillCode != null and waybillCode != ''">
+            AND waybill_code = #{waybillCode}
+        </if>
+
+        <if test="oriSystemNo != null and oriSystemNo != ''">
+            AND ori_system_no = #{oriSystemNo}
+        </if>
+
+        <if test="waybillNo != null and waybillNo != ''">
+            AND waybill_no = #{waybillNo}
+        </if>
+
+        <if test="rootLogisticsCode != null and rootLogisticsCode != ''">
+            AND root_logistics_code = #{rootLogisticsCode}
+        </if>
+
+        <if test="logisticsCode != null and logisticsCode != ''">
+            AND logistics_code = #{logisticsCode}
+        </if>
+
+        <if test="lteRouteCode != null and lteRouteCode != ''">
+            AND lte_route_code = #{lteRouteCode}
+        </if>
+
+        <if test="lteRouteName != null and lteRouteName != ''">
+            AND lte_route_name = #{lteRouteName}
+        </if>
+
+        <if test="standardDistance != null ">
+            AND standard_distance = #{standardDistance}
+        </if>
+
+        <if test="standardTime != null ">
+            AND standard_time = #{standardTime}
+        </if>
+
+        <if test="standardTimeUnitCode != null and standardTimeUnitCode != ''">
+            AND standard_time_unit_code = #{standardTimeUnitCode}
+        </if>
+
+        <if test="driverConfirmed != null ">
+            AND driver_confirmed = #{driverConfirmed}
+        </if>
+
+        <if test="businessTypeCode != null and businessTypeCode != ''">
+            AND business_type_code = #{businessTypeCode}
+        </if>
+
+        <if test="cargoTypeClassificationCode != null and cargoTypeClassificationCode != ''">
+            AND cargo_type_classification_code = #{cargoTypeClassificationCode}
+        </if>
+
+        <if test="bizOwnerUserCode != null and bizOwnerUserCode != ''">
+            AND biz_owner_user_code = #{bizOwnerUserCode}
+        </if>
+
+        <if test="shipperOrgCode != null and shipperOrgCode != ''">
+            AND shipper_org_code = #{shipperOrgCode}
+        </if>
+
+        <if test="shipperOrgName != null and shipperOrgName != ''">
+            AND shipper_org_name = #{shipperOrgName}
+        </if>
+
+        <if test="shipperUserCode != null and shipperUserCode != ''">
+            AND shipper_user_code = #{shipperUserCode}
+        </if>
+
+        <if test="shipperUserFullName != null and shipperUserFullName != ''">
+            AND shipper_user_full_name = #{shipperUserFullName}
+        </if>
+
+        <if test="shipperUserPhone != null and shipperUserPhone != ''">
+            AND shipper_user_phone = #{shipperUserPhone}
+        </if>
+
+        <if test="shipperAddrProvinceCode != null and shipperAddrProvinceCode != ''">
+            AND shipper_addr_province_code = #{shipperAddrProvinceCode}
+        </if>
+
+        <if test="shipperAddrCityCode != null and shipperAddrCityCode != ''">
+            AND shipper_addr_city_code = #{shipperAddrCityCode}
+        </if>
+
+        <if test="shipperAddrCountyCode != null and shipperAddrCountyCode != ''">
+            AND shipper_addr_county_code = #{shipperAddrCountyCode}
+        </if>
+
+        <if test="shipperAddr != null and shipperAddr != ''">
+            AND shipper_addr = #{shipperAddr}
+        </if>
+
+        <if test="shipperActualUserFullName != null and shipperActualUserFullName != ''">
+            AND shipper_actual_user_full_name = #{shipperActualUserFullName}
+        </if>
+
+        <if test="shipperActualUserCertifyNo != null and shipperActualUserCertifyNo != ''">
+            AND shipper_actual_user_certify_no = #{shipperActualUserCertifyNo}
+        </if>
+
+        <if test="consignmentTime != null ">
+            AND consignment_time = #{consignmentTime}
+        </if>
+
+        <if test="loadingDate != null ">
+            AND loading_date = #{loadingDate}
+        </if>
+
+        <if test="unloadingDate != null ">
+            AND unloading_date = #{unloadingDate}
+        </if>
+
+        <if test="consigneeOrgCode != null and consigneeOrgCode != ''">
+            AND consignee_org_code = #{consigneeOrgCode}
+        </if>
+
+        <if test="consigneeOrgName != null and consigneeOrgName != ''">
+            AND consignee_org_name = #{consigneeOrgName}
+        </if>
+
+        <if test="consigneeUserCode != null and consigneeUserCode != ''">
+            AND consignee_user_code = #{consigneeUserCode}
+        </if>
+
+        <if test="consigneeUserFullName != null and consigneeUserFullName != ''">
+            AND consignee_user_full_name = #{consigneeUserFullName}
+        </if>
+
+        <if test="consigneeUserPhone != null and consigneeUserPhone != ''">
+            AND consignee_user_phone = #{consigneeUserPhone}
+        </if>
+
+        <if test="consigneeAddrProvinceCode != null and consigneeAddrProvinceCode != ''">
+            AND consignee_addr_province_code = #{consigneeAddrProvinceCode}
+        </if>
+
+        <if test="consigneeAddrCityCode != null and consigneeAddrCityCode != ''">
+            AND consignee_addr_city_code = #{consigneeAddrCityCode}
+        </if>
+
+        <if test="consigneeAddrCountyCode != null and consigneeAddrCountyCode != ''">
+            AND consignee_addr_county_code = #{consigneeAddrCountyCode}
+        </if>
+
+        <if test="consigneeAddr != null and consigneeAddr != ''">
+            AND consignee_addr = #{consigneeAddr}
+        </if>
+
+        <if test="consigneeActualUserFullName != null and consigneeActualUserFullName != ''">
+            AND consignee_actual_user_full_name = #{consigneeActualUserFullName}
+        </if>
+
+        <if test="receiptsType != null ">
+            AND receipts_type = #{receiptsType}
+        </if>
+
+        <if test="receiptsTypeName != null and receiptsTypeName != ''">
+            AND receipts_type_name = #{receiptsTypeName}
+        </if>
+
+        <if test="receiptsTarget != null and receiptsTarget != ''">
+            AND receipts_target = #{receiptsTarget}
+        </if>
+
+        <if test="receiptsTargetBankAccountName != null and receiptsTargetBankAccountName != ''">
+            AND receipts_target_bank_account_name = #{receiptsTargetBankAccountName}
+        </if>
+
+        <if test="receiptsTargetBankAccountNo != null and receiptsTargetBankAccountNo != ''">
+            AND receipts_target_bank_account_no = #{receiptsTargetBankAccountNo}
+        </if>
+
+        <if test="receiptsTargetBankName != null and receiptsTargetBankName != ''">
+            AND receipts_target_bank_name = #{receiptsTargetBankName}
+        </if>
+
+        <if test="receiptsTargetBankBranch != null and receiptsTargetBankBranch != ''">
+            AND receipts_target_bank_branch = #{receiptsTargetBankBranch}
+        </if>
+
+        <if test="unifiedSocialCreditIdentifier != null and unifiedSocialCreditIdentifier != ''">
+            AND unified_social_credit_identifier = #{unifiedSocialCreditIdentifier}
+        </if>
+
+        <if test="truckBrokerLicense != null and truckBrokerLicense != ''">
+            AND truck_broker_license = #{truckBrokerLicense}
+        </if>
+
+        <if test="truckOwnerLicense != null and truckOwnerLicense != ''">
+            AND truck_owner_license = #{truckOwnerLicense}
+        </if>
+
+        <if test="truckLicense != null and truckLicense != ''">
+            AND truck_license = #{truckLicense}
+        </if>
+
+        <if test="truckModelCode != null and truckModelCode != ''">
+            AND truck_model_code = #{truckModelCode}
+        </if>
+
+        <if test="truckModelName != null and truckModelName != ''">
+            AND truck_model_name = #{truckModelName}
+        </if>
+
+        <if test="vehicleClassificationCode != null and vehicleClassificationCode != ''">
+            AND vehicle_classification_code = #{vehicleClassificationCode}
+        </if>
+
+        <if test="truckOwner != null and truckOwner != ''">
+            AND truck_owner = #{truckOwner}
+        </if>
+
+        <if test="truckCode != null and truckCode != ''">
+            AND truck_code = #{truckCode}
+        </if>
+
+        <if test="truckLicenseNo != null and truckLicenseNo != ''">
+            AND truck_license_no = #{truckLicenseNo}
+        </if>
+
+        <if test="licensePlateTypeCode != null and licensePlateTypeCode != ''">
+            AND license_plate_type_code = #{licensePlateTypeCode}
+        </if>
+
+        <if test="trailerTruckCode != null and trailerTruckCode != ''">
+            AND trailer_truck_code = #{trailerTruckCode}
+        </if>
+
+        <if test="trailerTruckLicenseNo != null and trailerTruckLicenseNo != ''">
+            AND trailer_truck_license_no = #{trailerTruckLicenseNo}
+        </if>
+
+        <if test="drivingLicenseNo != null and drivingLicenseNo != ''">
+            AND driving_license_no = #{drivingLicenseNo}
+        </if>
+
+        <if test="truckLength != null ">
+            AND truck_length = #{truckLength}
+        </if>
+
+        <if test="truckPowerType != null ">
+            AND truck_power_type = #{truckPowerType}
+        </if>
+
+        <if test="regTonnage != null ">
+            AND reg_tonnage = #{regTonnage}
+        </if>
+
+        <if test="regTonnageUnitCode != null and regTonnageUnitCode != ''">
+            AND reg_tonnage_unit_code = #{regTonnageUnitCode}
+        </if>
+
+        <if test="regTonnageUnitName != null and regTonnageUnitName != ''">
+            AND reg_tonnage_unit_name = #{regTonnageUnitName}
+        </if>
+
+        <if test="truckOrgName != null and truckOrgName != ''">
+            AND truck_org_name = #{truckOrgName}
+        </if>
+
+        <if test="driverCode != null and driverCode != ''">
+            AND driver_code = #{driverCode}
+        </if>
+
+        <if test="driverFullName != null and driverFullName != ''">
+            AND driver_full_name = #{driverFullName}
+        </if>
+
+        <if test="driverPhone != null and driverPhone != ''">
+            AND driver_phone = #{driverPhone}
+        </if>
+
+        <if test="driverLicenseNo != null and driverLicenseNo != ''">
+            AND driver_license_no = #{driverLicenseNo}
+        </if>
+
+        <if test="viceDriverCode != null and viceDriverCode != ''">
+            AND vice_driver_code = #{viceDriverCode}
+        </if>
+
+        <if test="viceDriverName != null and viceDriverName != ''">
+            AND vice_driver_name = #{viceDriverName}
+        </if>
+
+        <if test="viceDriverPhone != null and viceDriverPhone != ''">
+            AND vice_driver_phone = #{viceDriverPhone}
+        </if>
+
+        <if test="sellerOrgCode != null and sellerOrgCode != ''">
+            AND seller_org_code = #{sellerOrgCode}
+        </if>
+
+        <if test="sellerOrgName != null and sellerOrgName != ''">
+            AND seller_org_name = #{sellerOrgName}
+        </if>
+
+        <if test="customerOrgCode != null and customerOrgCode != ''">
+            AND customer_org_code = #{customerOrgCode}
+        </if>
+
+        <if test="customerOrgName != null and customerOrgName != ''">
+            AND customer_org_name = #{customerOrgName}
+        </if>
+
+        <if test="lteRatesCode != null and lteRatesCode != ''">
+            AND lte_rates_code = #{lteRatesCode}
+        </if>
+
+        <if test="meterageType != null ">
+            AND meterage_type = #{meterageType}
+        </if>
+
+        <if test="unitPrice != null ">
+            AND unit_price = #{unitPrice}
+        </if>
+
+        <if test="calculatedFee != null ">
+            AND calculated_fee = #{calculatedFee}
+        </if>
+
+        <if test="currencyUnitCode != null and currencyUnitCode != ''">
+            AND currency_unit_code = #{currencyUnitCode}
+        </if>
+
+        <if test="currencyUnitName != null and currencyUnitName != ''">
+            AND currency_unit_name = #{currencyUnitName}
+        </if>
+
+        <if test="confirmedFee != null ">
+            AND confirmed_fee = #{confirmedFee}
+        </if>
+
+        <if test="totalMonetaryAmount != null ">
+            AND total_monetary_amount = #{totalMonetaryAmount}
+        </if>
+
+        <if test="expectSettleVolume != null ">
+            AND expect_settle_volume = #{expectSettleVolume}
+        </if>
+
+        <if test="goodsItemGrossWeight != null ">
+            AND goodsItem_gross_weight = #{goodsItemGrossWeight}
+        </if>
+
+        <if test="goodsVolume != null ">
+            AND goods_volume = #{goodsVolume}
+        </if>
+
+        <if test="goodsAmount != null ">
+            AND goods_amount = #{goodsAmount}
+        </if>
+
+        <if test="tradeMethod != null ">
+            AND trade_method = #{tradeMethod}
+        </if>
+
+        <if test="carrierOrgCode != null and carrierOrgCode != ''">
+            AND carrier_org_code = #{carrierOrgCode}
+        </if>
+
+        <if test="carrierOrgName != null and carrierOrgName != ''">
+            AND carrier_org_name = #{carrierOrgName}
+        </if>
+
+        <if test="carrierUserCode != null and carrierUserCode != ''">
+            AND carrier_user_code = #{carrierUserCode}
+        </if>
+
+        <if test="carrierUserFullName != null and carrierUserFullName != ''">
+            AND carrier_user_full_name = #{carrierUserFullName}
+        </if>
+
+        <if test="payMethod != null ">
+            AND pay_method = #{payMethod}
+        </if>
+
+        <if test="payMethodName != null and payMethodName != ''">
+            AND pay_method_name = #{payMethodName}
+        </if>
+
+        <if test="standardGoodsLoss != null ">
+            AND standard_goods_loss = #{standardGoodsLoss}
+        </if>
+
+        <if test="freightLossMethod != null ">
+            AND freight_loss_method = #{freightLossMethod}
+        </if>
+
+        <if test="goodsLossUnitCode != null and goodsLossUnitCode != ''">
+            AND goods_loss_unit_code = #{goodsLossUnitCode}
+        </if>
+
+        <if test="goodsLossUnitName != null and goodsLossUnitName != ''">
+            AND goods_loss_unit_name = #{goodsLossUnitName}
+        </if>
+
+        <if test="goodsLossRemark != null and goodsLossRemark != ''">
+            AND goods_loss_remark = #{goodsLossRemark}
+        </if>
+
+        <if test="measureUnitCode != null and measureUnitCode != ''">
+            AND measure_unit_code = #{measureUnitCode}
+        </if>
+
+        <if test="measureUnitName != null and measureUnitName != ''">
+            AND measure_unit_name = #{measureUnitName}
+        </if>
+
+        <if test="calculatedFeeUnitCode != null and calculatedFeeUnitCode != ''">
+            AND calculated_fee_unit_code = #{calculatedFeeUnitCode}
+        </if>
+
+        <if test="calculatedFeeUnitName != null and calculatedFeeUnitName != ''">
+            AND calculated_fee_unit_name = #{calculatedFeeUnitName}
+        </if>
+
+        <if test="waybillStatus != null and waybillStatus != ''">
+            AND waybill_status = #{waybillStatus}
+        </if>
+
+        <if test="actualLoadingTime != null ">
+            AND actual_loading_time = #{actualLoadingTime}
+        </if>
+
+        <if test="actualUnloadingTime != null ">
+            AND actual_unloading_time = #{actualUnloadingTime}
+        </if>
+
+        <if test="reportNotes != null and reportNotes != ''">
+            AND report_notes = #{reportNotes}
+        </if>
+
+        <if test="reportStatus != null ">
+            AND report_status = #{reportStatus}
+        </if>
+
+        <if test="reportUserCode != null and reportUserCode != ''">
+            AND report_user_code = #{reportUserCode}
+        </if>
+
+        <if test="reportUserFullName != null and reportUserFullName != ''">
+            AND report_user_full_name = #{reportUserFullName}
+        </if>
+
+        <if test="reportTime != null ">
+            AND report_time = #{reportTime}
+        </if>
+
+        <if test="currentActionCode != null and currentActionCode != ''">
+            AND current_action_code = #{currentActionCode}
+        </if>
+
+        <if test="currentActionName != null and currentActionName != ''">
+            AND current_action_name = #{currentActionName}
+        </if>
+
+        <if test="confirmedDrivingFee != null ">
+            AND confirmed_driving_fee = #{confirmedDrivingFee}
+        </if>
+
+        <if test="confirmedDrivingFeeUnitCode != null and confirmedDrivingFeeUnitCode != ''">
+            AND confirmed_driving_fee_unit_code = #{confirmedDrivingFeeUnitCode}
+        </if>
+
+        <if test="confirmedTotalFee != null ">
+            AND confirmed_total_fee = #{confirmedTotalFee}
+        </if>
+
+        <if test="confirmedTotalFeeUnitCode != null and confirmedTotalFeeUnitCode != ''">
+            AND confirmed_total_fee_unit_code = #{confirmedTotalFeeUnitCode}
+        </if>
+
+        <if test="confirmedSettleVolume != null ">
+            AND confirmed_settle_volume = #{confirmedSettleVolume}
+        </if>
+
+        <if test="confirmedLossDeduction != null ">
+            AND confirmed_loss_deduction = #{confirmedLossDeduction}
+        </if>
+
+        <if test="billStatus != null ">
+            AND bill_status = #{billStatus}
+        </if>
+
+        <if test="billUserCode != null and billUserCode != ''">
+            AND bill_user_code = #{billUserCode}
+        </if>
+
+        <if test="billUserFullName != null and billUserFullName != ''">
+            AND bill_user_full_name = #{billUserFullName}
+        </if>
+
+        <if test="billOrgCode != null and billOrgCode != ''">
+            AND bill_org_code = #{billOrgCode}
+        </if>
+
+        <if test="billOrgName != null and billOrgName != ''">
+            AND bill_org_name = #{billOrgName}
+        </if>
+
+        <if test="payeeUserCode != null and payeeUserCode != ''">
+            AND payee_user_code = #{payeeUserCode}
+        </if>
+
+        <if test="payeeUserFullName != null and payeeUserFullName != ''">
+            AND payee_user_full_name = #{payeeUserFullName}
+        </if>
+
+        <if test="payeeBankName != null and payeeBankName != ''">
+            AND payee_bank_name = #{payeeBankName}
+        </if>
+
+        <if test="payeeBankBranchName != null and payeeBankBranchName != ''">
+            AND payee_bank_branch_name = #{payeeBankBranchName}
+        </if>
+
+        <if test="payeeBankAccountName != null and payeeBankAccountName != ''">
+            AND payee_bank_account_name = #{payeeBankAccountName}
+        </if>
+
+        <if test="payeeBankAccountNo != null and payeeBankAccountNo != ''">
+            AND payee_bank_account_no = #{payeeBankAccountNo}
+        </if>
+
+        <if test="billingFinishTime != null ">
+            AND billing_finish_time = #{billingFinishTime}
+        </if>
+
+        <if test="toAccountDate != null ">
+            AND to_account_date = #{toAccountDate}
+        </if>
+
+        <if test="customData != null and customData != ''">
+            AND custom_data = #{customData}
+        </if>
+
+        <if test="waybillTag != null and waybillTag != ''">
+            AND waybill_tag = #{waybillTag}
+        </if>
+
+        <if test="description != null and description != ''">
+            AND description = #{description}
+        </if>
+
+        <if test="remark != null and remark != ''">
+            AND remark = #{remark}
+        </if>
+
+        <if test="disabled != null ">
+            AND disabled = #{disabled}
+        </if>
+
+        <if test="deleted != null ">
+            AND deleted = #{deleted}
+        </if>
+
+        <if test="moduleCode != null and moduleCode != ''">
+            AND module_code = #{moduleCode}
+        </if>
+
+        <if test="creatorUserCode != null and creatorUserCode != ''">
+            AND creator_user_code = #{creatorUserCode}
+        </if>
+
+        <if test="creatorUsername != null and creatorUsername != ''">
+            AND creator_username = #{creatorUsername}
+        </if>
+
+        <if test="createTime != null ">
+            AND create_time = #{createTime}
+        </if>
+
+        <if test="updateUserCode != null and updateUserCode != ''">
+            AND update_user_code = #{updateUserCode}
+        </if>
+
+        <if test="updateUsername != null and updateUsername != ''">
+            AND update_username = #{updateUsername}
+        </if>
+
+        <if test="updateTime != null ">
+            AND update_time = #{updateTime}
+        </if>
+
+        <if test="ip != null and ip != ''">
+            AND ip = #{ip}
+        </if>
+
+        <if test="operatorLongitude != null ">
+            AND operator_longitude = #{operatorLongitude}
+        </if>
+
+        <if test="operatorLatitude != null ">
+            AND operator_latitude = #{operatorLatitude}
+        </if>
+
+        <if test="ownerUserCode != null and ownerUserCode != ''">
+            AND owner_user_code = #{ownerUserCode}
+        </if>
+
+        <if test="ownerOrgCode != null and ownerOrgCode != ''">
+            AND owner_org_code = #{ownerOrgCode}
+        </if>
+
+        <if test="ownerOrgName != null and ownerOrgName != ''">
+            AND owner_org_name = #{ownerOrgName}
+        </if>
+
+        <if test="synchronousId != null and synchronousId != ''">
+            AND synchronous_id = #{synchronousId}
+        </if>
+
+        </where>
+    </select>
+
+
+    <insert id="insert" parameterType="com.rltx.waybill.po.WaybillDownstreamBaseInfoEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO waybill_downstream_base_info (
+            waybill_code,
+            ori_system_no,
+            waybill_no,
+            root_logistics_code,
+            logistics_code,
+            lte_route_code,
+            lte_route_name,
+            standard_distance,
+            standard_time,
+            standard_time_unit_code,
+            driver_confirmed,
+            business_type_code,
+            cargo_type_classification_code,
+            biz_owner_user_code,
+            shipper_org_code,
+            shipper_org_name,
+            shipper_user_code,
+            shipper_user_full_name,
+            shipper_user_phone,
+            shipper_addr_province_code,
+            shipper_addr_city_code,
+            shipper_addr_county_code,
+            shipper_addr,
+            shipper_actual_user_full_name,
+            shipper_actual_user_certify_no,
+            consignment_time,
+            loading_date,
+            unloading_date,
+            consignee_org_code,
+            consignee_org_name,
+            consignee_user_code,
+            consignee_user_full_name,
+            consignee_user_phone,
+            consignee_addr_province_code,
+            consignee_addr_city_code,
+            consignee_addr_county_code,
+            consignee_addr,
+            consignee_actual_user_full_name,
+            receipts_type,
+            receipts_type_name,
+            receipts_target,
+            receipts_target_bank_account_name,
+            receipts_target_bank_account_no,
+            receipts_target_bank_name,
+            receipts_target_bank_branch,
+            unified_social_credit_identifier,
+            truck_broker_license,
+            truck_owner_license,
+            truck_license,
+            truck_model_code,
+            truck_model_name,
+            vehicle_classification_code,
+            truck_owner,
+            truck_code,
+            truck_license_no,
+            license_plate_type_code,
+            trailer_truck_code,
+            trailer_truck_license_no,
+            driving_license_no,
+            truck_length,
+            truck_power_type,
+            reg_tonnage,
+            reg_tonnage_unit_code,
+            reg_tonnage_unit_name,
+            truck_org_name,
+            driver_code,
+            driver_full_name,
+            driver_phone,
+            driver_license_no,
+            vice_driver_code,
+            vice_driver_name,
+            vice_driver_phone,
+            seller_org_code,
+            seller_org_name,
+            customer_org_code,
+            customer_org_name,
+            lte_rates_code,
+            meterage_type,
+            unit_price,
+            calculated_fee,
+            currency_unit_code,
+            currency_unit_name,
+            confirmed_fee,
+            total_monetary_amount,
+            expect_settle_volume,
+            goodsItem_gross_weight,
+            goods_volume,
+            goods_amount,
+            trade_method,
+            carrier_org_code,
+            carrier_org_name,
+            carrier_user_code,
+            carrier_user_full_name,
+            pay_method,
+            pay_method_name,
+            standard_goods_loss,
+            freight_loss_method,
+            goods_loss_unit_code,
+            goods_loss_unit_name,
+            goods_loss_remark,
+            measure_unit_code,
+            measure_unit_name,
+            calculated_fee_unit_code,
+            calculated_fee_unit_name,
+            waybill_status,
+            actual_loading_time,
+            actual_unloading_time,
+            report_notes,
+            report_status,
+            report_user_code,
+            report_user_full_name,
+            report_time,
+            current_action_code,
+            current_action_name,
+            confirmed_driving_fee,
+            confirmed_driving_fee_unit_code,
+            confirmed_total_fee,
+            confirmed_total_fee_unit_code,
+            confirmed_settle_volume,
+            confirmed_loss_deduction,
+            bill_status,
+            bill_user_code,
+            bill_user_full_name,
+            bill_org_code,
+            bill_org_name,
+            payee_user_code,
+            payee_user_full_name,
+            payee_bank_name,
+            payee_bank_branch_name,
+            payee_bank_account_name,
+            payee_bank_account_no,
+            billing_finish_time,
+            to_account_date,
+            custom_data,
+            waybill_tag,
+            description,
+            remark,
+            disabled,
+            deleted,
+            module_code,
+            creator_user_code,
+            creator_username,
+            create_time,
+            update_user_code,
+            update_username,
+            update_time,
+            ip,
+            operator_longitude,
+            operator_latitude,
+            owner_user_code,
+            owner_org_code,
+            owner_org_name,
+            synchronous_id
+        )
+        VALUES (
+            #{waybillCode},
+            #{oriSystemNo},
+            #{waybillNo},
+            #{rootLogisticsCode},
+            #{logisticsCode},
+            #{lteRouteCode},
+            #{lteRouteName},
+            #{standardDistance},
+            #{standardTime},
+            #{standardTimeUnitCode},
+            #{driverConfirmed},
+            #{businessTypeCode},
+            #{cargoTypeClassificationCode},
+            #{bizOwnerUserCode},
+            #{shipperOrgCode},
+            #{shipperOrgName},
+            #{shipperUserCode},
+            #{shipperUserFullName},
+            #{shipperUserPhone},
+            #{shipperAddrProvinceCode},
+            #{shipperAddrCityCode},
+            #{shipperAddrCountyCode},
+            #{shipperAddr},
+            #{shipperActualUserFullName},
+            #{shipperActualUserCertifyNo},
+            #{consignmentTime},
+            #{loadingDate},
+            #{unloadingDate},
+            #{consigneeOrgCode},
+            #{consigneeOrgName},
+            #{consigneeUserCode},
+            #{consigneeUserFullName},
+            #{consigneeUserPhone},
+            #{consigneeAddrProvinceCode},
+            #{consigneeAddrCityCode},
+            #{consigneeAddrCountyCode},
+            #{consigneeAddr},
+            #{consigneeActualUserFullName},
+            #{receiptsType},
+            #{receiptsTypeName},
+            #{receiptsTarget},
+            #{receiptsTargetBankAccountName},
+            #{receiptsTargetBankAccountNo},
+            #{receiptsTargetBankName},
+            #{receiptsTargetBankBranch},
+            #{unifiedSocialCreditIdentifier},
+            #{truckBrokerLicense},
+            #{truckOwnerLicense},
+            #{truckLicense},
+            #{truckModelCode},
+            #{truckModelName},
+            #{vehicleClassificationCode},
+            #{truckOwner},
+            #{truckCode},
+            #{truckLicenseNo},
+            #{licensePlateTypeCode},
+            #{trailerTruckCode},
+            #{trailerTruckLicenseNo},
+            #{drivingLicenseNo},
+            #{truckLength},
+            #{truckPowerType},
+            #{regTonnage},
+            #{regTonnageUnitCode},
+            #{regTonnageUnitName},
+            #{truckOrgName},
+            #{driverCode},
+            #{driverFullName},
+            #{driverPhone},
+            #{driverLicenseNo},
+            #{viceDriverCode},
+            #{viceDriverName},
+            #{viceDriverPhone},
+            #{sellerOrgCode},
+            #{sellerOrgName},
+            #{customerOrgCode},
+            #{customerOrgName},
+            #{lteRatesCode},
+            #{meterageType},
+            #{unitPrice},
+            #{calculatedFee},
+            #{currencyUnitCode},
+            #{currencyUnitName},
+            #{confirmedFee},
+            #{totalMonetaryAmount},
+            #{expectSettleVolume},
+            #{goodsItemGrossWeight},
+            #{goodsVolume},
+            #{goodsAmount},
+            #{tradeMethod},
+            #{carrierOrgCode},
+            #{carrierOrgName},
+            #{carrierUserCode},
+            #{carrierUserFullName},
+            #{payMethod},
+            #{payMethodName},
+            #{standardGoodsLoss},
+            #{freightLossMethod},
+            #{goodsLossUnitCode},
+            #{goodsLossUnitName},
+            #{goodsLossRemark},
+            #{measureUnitCode},
+            #{measureUnitName},
+            #{calculatedFeeUnitCode},
+            #{calculatedFeeUnitName},
+            #{waybillStatus},
+            #{actualLoadingTime},
+            #{actualUnloadingTime},
+            #{reportNotes},
+            #{reportStatus},
+            #{reportUserCode},
+            #{reportUserFullName},
+            #{reportTime},
+            #{currentActionCode},
+            #{currentActionName},
+            #{confirmedDrivingFee},
+            #{confirmedDrivingFeeUnitCode},
+            #{confirmedTotalFee},
+            #{confirmedTotalFeeUnitCode},
+            #{confirmedSettleVolume},
+            #{confirmedLossDeduction},
+            #{billStatus},
+            #{billUserCode},
+            #{billUserFullName},
+            #{billOrgCode},
+            #{billOrgName},
+            #{payeeUserCode},
+            #{payeeUserFullName},
+            #{payeeBankName},
+            #{payeeBankBranchName},
+            #{payeeBankAccountName},
+            #{payeeBankAccountNo},
+            #{billingFinishTime},
+            #{toAccountDate},
+            #{customData},
+            #{waybillTag},
+            #{description},
+            #{remark},
+            #{disabled},
+            #{deleted},
+            #{moduleCode},
+            #{creatorUserCode},
+            #{creatorUsername},
+            #{createTime},
+            #{updateUserCode},
+            #{updateUsername},
+            #{updateTime},
+            #{ip},
+            #{operatorLongitude},
+            #{operatorLatitude},
+            #{ownerUserCode},
+            #{ownerOrgCode},
+            #{ownerOrgName},
+            #{synchronousId}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.rltx.waybill.po.WaybillDownstreamBaseInfoEntity">
+        UPDATE waybill_downstream_base_info
+        <set>
+
+        <if test="waybillCode != null and waybillCode != ''">
+            waybill_code = #{waybillCode},
+        </if>
+
+        <if test="oriSystemNo != null and oriSystemNo != ''">
+            ori_system_no = #{oriSystemNo},
+        </if>
+
+        <if test="waybillNo != null and waybillNo != ''">
+            waybill_no = #{waybillNo},
+        </if>
+
+        <if test="rootLogisticsCode != null and rootLogisticsCode != ''">
+            root_logistics_code = #{rootLogisticsCode},
+        </if>
+
+        <if test="logisticsCode != null and logisticsCode != ''">
+            logistics_code = #{logisticsCode},
+        </if>
+
+        <if test="lteRouteCode != null and lteRouteCode != ''">
+            lte_route_code = #{lteRouteCode},
+        </if>
+
+        <if test="lteRouteName != null and lteRouteName != ''">
+            lte_route_name = #{lteRouteName},
+        </if>
+
+        <if test="standardDistance != null ">
+            standard_distance = #{standardDistance},
+        </if>
+
+        <if test="standardTime != null ">
+            standard_time = #{standardTime},
+        </if>
+
+        <if test="standardTimeUnitCode != null and standardTimeUnitCode != ''">
+            standard_time_unit_code = #{standardTimeUnitCode},
+        </if>
+
+        <if test="driverConfirmed != null ">
+            driver_confirmed = #{driverConfirmed},
+        </if>
+
+        <if test="businessTypeCode != null and businessTypeCode != ''">
+            business_type_code = #{businessTypeCode},
+        </if>
+
+        <if test="cargoTypeClassificationCode != null and cargoTypeClassificationCode != ''">
+            cargo_type_classification_code = #{cargoTypeClassificationCode},
+        </if>
+
+        <if test="bizOwnerUserCode != null and bizOwnerUserCode != ''">
+            biz_owner_user_code = #{bizOwnerUserCode},
+        </if>
+
+        <if test="shipperOrgCode != null and shipperOrgCode != ''">
+            shipper_org_code = #{shipperOrgCode},
+        </if>
+
+        <if test="shipperOrgName != null and shipperOrgName != ''">
+            shipper_org_name = #{shipperOrgName},
+        </if>
+
+        <if test="shipperUserCode != null and shipperUserCode != ''">
+            shipper_user_code = #{shipperUserCode},
+        </if>
+
+        <if test="shipperUserFullName != null and shipperUserFullName != ''">
+            shipper_user_full_name = #{shipperUserFullName},
+        </if>
+
+        <if test="shipperUserPhone != null and shipperUserPhone != ''">
+            shipper_user_phone = #{shipperUserPhone},
+        </if>
+
+        <if test="shipperAddrProvinceCode != null and shipperAddrProvinceCode != ''">
+            shipper_addr_province_code = #{shipperAddrProvinceCode},
+        </if>
+
+        <if test="shipperAddrCityCode != null and shipperAddrCityCode != ''">
+            shipper_addr_city_code = #{shipperAddrCityCode},
+        </if>
+
+        <if test="shipperAddrCountyCode != null and shipperAddrCountyCode != ''">
+            shipper_addr_county_code = #{shipperAddrCountyCode},
+        </if>
+
+        <if test="shipperAddr != null and shipperAddr != ''">
+            shipper_addr = #{shipperAddr},
+        </if>
+
+        <if test="shipperActualUserFullName != null and shipperActualUserFullName != ''">
+            shipper_actual_user_full_name = #{shipperActualUserFullName},
+        </if>
+
+        <if test="shipperActualUserCertifyNo != null and shipperActualUserCertifyNo != ''">
+            shipper_actual_user_certify_no = #{shipperActualUserCertifyNo},
+        </if>
+
+        <if test="consignmentTime != null ">
+            consignment_time = #{consignmentTime},
+        </if>
+
+        <if test="loadingDate != null ">
+            loading_date = #{loadingDate},
+        </if>
+
+        <if test="unloadingDate != null ">
+            unloading_date = #{unloadingDate},
+        </if>
+
+        <if test="consigneeOrgCode != null and consigneeOrgCode != ''">
+            consignee_org_code = #{consigneeOrgCode},
+        </if>
+
+        <if test="consigneeOrgName != null and consigneeOrgName != ''">
+            consignee_org_name = #{consigneeOrgName},
+        </if>
+
+        <if test="consigneeUserCode != null and consigneeUserCode != ''">
+            consignee_user_code = #{consigneeUserCode},
+        </if>
+
+        <if test="consigneeUserFullName != null and consigneeUserFullName != ''">
+            consignee_user_full_name = #{consigneeUserFullName},
+        </if>
+
+        <if test="consigneeUserPhone != null and consigneeUserPhone != ''">
+            consignee_user_phone = #{consigneeUserPhone},
+        </if>
+
+        <if test="consigneeAddrProvinceCode != null and consigneeAddrProvinceCode != ''">
+            consignee_addr_province_code = #{consigneeAddrProvinceCode},
+        </if>
+
+        <if test="consigneeAddrCityCode != null and consigneeAddrCityCode != ''">
+            consignee_addr_city_code = #{consigneeAddrCityCode},
+        </if>
+
+        <if test="consigneeAddrCountyCode != null and consigneeAddrCountyCode != ''">
+            consignee_addr_county_code = #{consigneeAddrCountyCode},
+        </if>
+
+        <if test="consigneeAddr != null and consigneeAddr != ''">
+            consignee_addr = #{consigneeAddr},
+        </if>
+
+        <if test="consigneeActualUserFullName != null and consigneeActualUserFullName != ''">
+            consignee_actual_user_full_name = #{consigneeActualUserFullName},
+        </if>
+
+        <if test="receiptsType != null ">
+            receipts_type = #{receiptsType},
+        </if>
+
+        <if test="receiptsTypeName != null and receiptsTypeName != ''">
+            receipts_type_name = #{receiptsTypeName},
+        </if>
+
+        <if test="receiptsTarget != null and receiptsTarget != ''">
+            receipts_target = #{receiptsTarget},
+        </if>
+
+        <if test="receiptsTargetBankAccountName != null and receiptsTargetBankAccountName != ''">
+            receipts_target_bank_account_name = #{receiptsTargetBankAccountName},
+        </if>
+
+        <if test="receiptsTargetBankAccountNo != null and receiptsTargetBankAccountNo != ''">
+            receipts_target_bank_account_no = #{receiptsTargetBankAccountNo},
+        </if>
+
+        <if test="receiptsTargetBankName != null and receiptsTargetBankName != ''">
+            receipts_target_bank_name = #{receiptsTargetBankName},
+        </if>
+
+        <if test="receiptsTargetBankBranch != null and receiptsTargetBankBranch != ''">
+            receipts_target_bank_branch = #{receiptsTargetBankBranch},
+        </if>
+
+        <if test="unifiedSocialCreditIdentifier != null and unifiedSocialCreditIdentifier != ''">
+            unified_social_credit_identifier = #{unifiedSocialCreditIdentifier},
+        </if>
+
+        <if test="truckBrokerLicense != null and truckBrokerLicense != ''">
+            truck_broker_license = #{truckBrokerLicense},
+        </if>
+
+        <if test="truckOwnerLicense != null and truckOwnerLicense != ''">
+            truck_owner_license = #{truckOwnerLicense},
+        </if>
+
+        <if test="truckLicense != null and truckLicense != ''">
+            truck_license = #{truckLicense},
+        </if>
+
+        <if test="truckModelCode != null and truckModelCode != ''">
+            truck_model_code = #{truckModelCode},
+        </if>
+
+        <if test="truckModelName != null and truckModelName != ''">
+            truck_model_name = #{truckModelName},
+        </if>
+
+        <if test="vehicleClassificationCode != null and vehicleClassificationCode != ''">
+            vehicle_classification_code = #{vehicleClassificationCode},
+        </if>
+
+        <if test="truckOwner != null and truckOwner != ''">
+            truck_owner = #{truckOwner},
+        </if>
+
+        <if test="truckCode != null and truckCode != ''">
+            truck_code = #{truckCode},
+        </if>
+
+        <if test="truckLicenseNo != null and truckLicenseNo != ''">
+            truck_license_no = #{truckLicenseNo},
+        </if>
+
+        <if test="licensePlateTypeCode != null and licensePlateTypeCode != ''">
+            license_plate_type_code = #{licensePlateTypeCode},
+        </if>
+
+        <if test="trailerTruckCode != null and trailerTruckCode != ''">
+            trailer_truck_code = #{trailerTruckCode},
+        </if>
+
+        <if test="trailerTruckLicenseNo != null and trailerTruckLicenseNo != ''">
+            trailer_truck_license_no = #{trailerTruckLicenseNo},
+        </if>
+
+        <if test="drivingLicenseNo != null and drivingLicenseNo != ''">
+            driving_license_no = #{drivingLicenseNo},
+        </if>
+
+        <if test="truckLength != null ">
+            truck_length = #{truckLength},
+        </if>
+
+        <if test="truckPowerType != null ">
+            truck_power_type = #{truckPowerType},
+        </if>
+
+        <if test="regTonnage != null ">
+            reg_tonnage = #{regTonnage},
+        </if>
+
+        <if test="regTonnageUnitCode != null and regTonnageUnitCode != ''">
+            reg_tonnage_unit_code = #{regTonnageUnitCode},
+        </if>
+
+        <if test="regTonnageUnitName != null and regTonnageUnitName != ''">
+            reg_tonnage_unit_name = #{regTonnageUnitName},
+        </if>
+
+        <if test="truckOrgName != null and truckOrgName != ''">
+            truck_org_name = #{truckOrgName},
+        </if>
+
+        <if test="driverCode != null and driverCode != ''">
+            driver_code = #{driverCode},
+        </if>
+
+        <if test="driverFullName != null and driverFullName != ''">
+            driver_full_name = #{driverFullName},
+        </if>
+
+        <if test="driverPhone != null and driverPhone != ''">
+            driver_phone = #{driverPhone},
+        </if>
+
+        <if test="driverLicenseNo != null and driverLicenseNo != ''">
+            driver_license_no = #{driverLicenseNo},
+        </if>
+
+        <if test="viceDriverCode != null and viceDriverCode != ''">
+            vice_driver_code = #{viceDriverCode},
+        </if>
+
+        <if test="viceDriverName != null and viceDriverName != ''">
+            vice_driver_name = #{viceDriverName},
+        </if>
+
+        <if test="viceDriverPhone != null and viceDriverPhone != ''">
+            vice_driver_phone = #{viceDriverPhone},
+        </if>
+
+        <if test="sellerOrgCode != null and sellerOrgCode != ''">
+            seller_org_code = #{sellerOrgCode},
+        </if>
+
+        <if test="sellerOrgName != null and sellerOrgName != ''">
+            seller_org_name = #{sellerOrgName},
+        </if>
+
+        <if test="customerOrgCode != null and customerOrgCode != ''">
+            customer_org_code = #{customerOrgCode},
+        </if>
+
+        <if test="customerOrgName != null and customerOrgName != ''">
+            customer_org_name = #{customerOrgName},
+        </if>
+
+        <if test="lteRatesCode != null and lteRatesCode != ''">
+            lte_rates_code = #{lteRatesCode},
+        </if>
+
+        <if test="meterageType != null ">
+            meterage_type = #{meterageType},
+        </if>
+
+        <if test="unitPrice != null ">
+            unit_price = #{unitPrice},
+        </if>
+
+        <if test="calculatedFee != null ">
+            calculated_fee = #{calculatedFee},
+        </if>
+
+        <if test="currencyUnitCode != null and currencyUnitCode != ''">
+            currency_unit_code = #{currencyUnitCode},
+        </if>
+
+        <if test="currencyUnitName != null and currencyUnitName != ''">
+            currency_unit_name = #{currencyUnitName},
+        </if>
+
+        <if test="confirmedFee != null ">
+            confirmed_fee = #{confirmedFee},
+        </if>
+
+        <if test="totalMonetaryAmount != null ">
+            total_monetary_amount = #{totalMonetaryAmount},
+        </if>
+
+        <if test="expectSettleVolume != null ">
+            expect_settle_volume = #{expectSettleVolume},
+        </if>
+
+        <if test="goodsItemGrossWeight != null ">
+            goodsItem_gross_weight = #{goodsItemGrossWeight},
+        </if>
+
+        <if test="goodsVolume != null ">
+            goods_volume = #{goodsVolume},
+        </if>
+
+        <if test="goodsAmount != null ">
+            goods_amount = #{goodsAmount},
+        </if>
+
+        <if test="tradeMethod != null ">
+            trade_method = #{tradeMethod},
+        </if>
+
+        <if test="carrierOrgCode != null and carrierOrgCode != ''">
+            carrier_org_code = #{carrierOrgCode},
+        </if>
+
+        <if test="carrierOrgName != null and carrierOrgName != ''">
+            carrier_org_name = #{carrierOrgName},
+        </if>
+
+        <if test="carrierUserCode != null and carrierUserCode != ''">
+            carrier_user_code = #{carrierUserCode},
+        </if>
+
+        <if test="carrierUserFullName != null and carrierUserFullName != ''">
+            carrier_user_full_name = #{carrierUserFullName},
+        </if>
+
+        <if test="payMethod != null ">
+            pay_method = #{payMethod},
+        </if>
+
+        <if test="payMethodName != null and payMethodName != ''">
+            pay_method_name = #{payMethodName},
+        </if>
+
+        <if test="standardGoodsLoss != null ">
+            standard_goods_loss = #{standardGoodsLoss},
+        </if>
+
+        <if test="freightLossMethod != null ">
+            freight_loss_method = #{freightLossMethod},
+        </if>
+
+        <if test="goodsLossUnitCode != null and goodsLossUnitCode != ''">
+            goods_loss_unit_code = #{goodsLossUnitCode},
+        </if>
+
+        <if test="goodsLossUnitName != null and goodsLossUnitName != ''">
+            goods_loss_unit_name = #{goodsLossUnitName},
+        </if>
+
+        <if test="goodsLossRemark != null and goodsLossRemark != ''">
+            goods_loss_remark = #{goodsLossRemark},
+        </if>
+
+        <if test="measureUnitCode != null and measureUnitCode != ''">
+            measure_unit_code = #{measureUnitCode},
+        </if>
+
+        <if test="measureUnitName != null and measureUnitName != ''">
+            measure_unit_name = #{measureUnitName},
+        </if>
+
+        <if test="calculatedFeeUnitCode != null and calculatedFeeUnitCode != ''">
+            calculated_fee_unit_code = #{calculatedFeeUnitCode},
+        </if>
+
+        <if test="calculatedFeeUnitName != null and calculatedFeeUnitName != ''">
+            calculated_fee_unit_name = #{calculatedFeeUnitName},
+        </if>
+
+        <if test="waybillStatus != null and waybillStatus != ''">
+            waybill_status = #{waybillStatus},
+        </if>
+
+        <if test="actualLoadingTime != null ">
+            actual_loading_time = #{actualLoadingTime},
+        </if>
+
+        <if test="actualUnloadingTime != null ">
+            actual_unloading_time = #{actualUnloadingTime},
+        </if>
+
+        <if test="reportNotes != null and reportNotes != ''">
+            report_notes = #{reportNotes},
+        </if>
+
+        <if test="reportStatus != null ">
+            report_status = #{reportStatus},
+        </if>
+
+        <if test="reportUserCode != null and reportUserCode != ''">
+            report_user_code = #{reportUserCode},
+        </if>
+
+        <if test="reportUserFullName != null and reportUserFullName != ''">
+            report_user_full_name = #{reportUserFullName},
+        </if>
+
+        <if test="reportTime != null ">
+            report_time = #{reportTime},
+        </if>
+
+        <if test="currentActionCode != null and currentActionCode != ''">
+            current_action_code = #{currentActionCode},
+        </if>
+
+        <if test="currentActionName != null and currentActionName != ''">
+            current_action_name = #{currentActionName},
+        </if>
+
+        <if test="confirmedDrivingFee != null ">
+            confirmed_driving_fee = #{confirmedDrivingFee},
+        </if>
+
+        <if test="confirmedDrivingFeeUnitCode != null and confirmedDrivingFeeUnitCode != ''">
+            confirmed_driving_fee_unit_code = #{confirmedDrivingFeeUnitCode},
+        </if>
+
+        <if test="confirmedTotalFee != null ">
+            confirmed_total_fee = #{confirmedTotalFee},
+        </if>
+
+        <if test="confirmedTotalFeeUnitCode != null and confirmedTotalFeeUnitCode != ''">
+            confirmed_total_fee_unit_code = #{confirmedTotalFeeUnitCode},
+        </if>
+
+        <if test="confirmedSettleVolume != null ">
+            confirmed_settle_volume = #{confirmedSettleVolume},
+        </if>
+
+        <if test="confirmedLossDeduction != null ">
+            confirmed_loss_deduction = #{confirmedLossDeduction},
+        </if>
+
+        <if test="billStatus != null ">
+            bill_status = #{billStatus},
+        </if>
+
+        <if test="billUserCode != null and billUserCode != ''">
+            bill_user_code = #{billUserCode},
+        </if>
+
+        <if test="billUserFullName != null and billUserFullName != ''">
+            bill_user_full_name = #{billUserFullName},
+        </if>
+
+        <if test="billOrgCode != null and billOrgCode != ''">
+            bill_org_code = #{billOrgCode},
+        </if>
+
+        <if test="billOrgName != null and billOrgName != ''">
+            bill_org_name = #{billOrgName},
+        </if>
+
+        <if test="payeeUserCode != null and payeeUserCode != ''">
+            payee_user_code = #{payeeUserCode},
+        </if>
+
+        <if test="payeeUserFullName != null and payeeUserFullName != ''">
+            payee_user_full_name = #{payeeUserFullName},
+        </if>
+
+        <if test="payeeBankName != null and payeeBankName != ''">
+            payee_bank_name = #{payeeBankName},
+        </if>
+
+        <if test="payeeBankBranchName != null and payeeBankBranchName != ''">
+            payee_bank_branch_name = #{payeeBankBranchName},
+        </if>
+
+        <if test="payeeBankAccountName != null and payeeBankAccountName != ''">
+            payee_bank_account_name = #{payeeBankAccountName},
+        </if>
+
+        <if test="payeeBankAccountNo != null and payeeBankAccountNo != ''">
+            payee_bank_account_no = #{payeeBankAccountNo},
+        </if>
+
+        <if test="billingFinishTime != null ">
+            billing_finish_time = #{billingFinishTime},
+        </if>
+
+        <if test="toAccountDate != null ">
+            to_account_date = #{toAccountDate},
+        </if>
+
+        <if test="customData != null and customData != ''">
+            custom_data = #{customData},
+        </if>
+
+        <if test="waybillTag != null and waybillTag != ''">
+            waybill_tag = #{waybillTag},
+        </if>
+
+        <if test="description != null and description != ''">
+            description = #{description},
+        </if>
+
+        <if test="remark != null and remark != ''">
+            remark = #{remark},
+        </if>
+
+        <if test="disabled != null ">
+            disabled = #{disabled},
+        </if>
+
+        <if test="deleted != null ">
+            deleted = #{deleted},
+        </if>
+
+        <if test="moduleCode != null and moduleCode != ''">
+            module_code = #{moduleCode},
+        </if>
+
+        <if test="creatorUserCode != null and creatorUserCode != ''">
+            creator_user_code = #{creatorUserCode},
+        </if>
+
+        <if test="creatorUsername != null and creatorUsername != ''">
+            creator_username = #{creatorUsername},
+        </if>
+
+        <if test="createTime != null ">
+            create_time = #{createTime},
+        </if>
+
+        <if test="updateUserCode != null and updateUserCode != ''">
+            update_user_code = #{updateUserCode},
+        </if>
+
+        <if test="updateUsername != null and updateUsername != ''">
+            update_username = #{updateUsername},
+        </if>
+
+        <if test="updateTime != null ">
+            update_time = #{updateTime},
+        </if>
+
+        <if test="ip != null and ip != ''">
+            ip = #{ip},
+        </if>
+
+        <if test="operatorLongitude != null ">
+            operator_longitude = #{operatorLongitude},
+        </if>
+
+        <if test="operatorLatitude != null ">
+            operator_latitude = #{operatorLatitude},
+        </if>
+
+        <if test="ownerUserCode != null and ownerUserCode != ''">
+            owner_user_code = #{ownerUserCode},
+        </if>
+
+        <if test="ownerOrgCode != null and ownerOrgCode != ''">
+            owner_org_code = #{ownerOrgCode},
+        </if>
+
+        <if test="ownerOrgName != null and ownerOrgName != ''">
+            owner_org_name = #{ownerOrgName},
+        </if>
+
+        <if test="synchronousId != null and synchronousId != ''">
+            synchronous_id = #{synchronousId},
+        </if>
+
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
+    <!-- End Auto Common  -->
+
+</mapper>
+
+

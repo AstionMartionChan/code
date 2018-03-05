@@ -1,7 +1,9 @@
 D:\Git-repository\hadoop-hdfs\src\main\java\com\hadoop\hdfs\mapreduce\HelloCountAppMap.java
 D:\Git-repository\hadoop-hdfs\src\main\java\com\hadoop\hdfs\sort\SortApp.java
+D:\Git-repository\hadoop-hdfs\src\main\java\com\hadoop\hdfs\topk\TopkApp.java
 D:\Git-repository\hadoop-hdfs\src\main\java\com\hadoop\hdfs\rpc\Biz.java
 D:\Git-repository\hadoop-hdfs\src\main\java\com\hadoop\hdfs\hdfs\HdfsConnectionDemo.java
+D:\Git-repository\hadoop-hdfs\src\main\java\com\hadoop\hdfs\join\JoinApp.java
 D:\Git-repository\hadoop-hdfs\src\main\java\com\hadoop\hdfs\mapreduce\TratticStatByArrayWritableApp.java
 D:\Git-repository\hadoop-hdfs\src\main\java\com\hadoop\hdfs\rpc\MyClient.java
 D:\Git-repository\hadoop-hdfs\src\main\java\com\hadoop\hdfs\mapreduce\HelloCountApp.java

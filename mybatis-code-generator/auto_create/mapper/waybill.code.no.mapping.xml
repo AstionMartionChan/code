@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rltx.waybill.dao.IWaybillCodeNoDao">
+
+
+    <!-- Start Auto Common -->
+
+    <select id="selectById" parameterType="long"  resultType="com.rltx.waybill.po.WaybillCodeNoEntity">
+        SELECT
+            id       AS id,
+            type     AS type,
+            org_code AS orgCode,
+            year     AS year,
+            value    AS value
+        FROM
+            waybill_code_no
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="select" parameterType="com.rltx.waybill.po.WaybillCodeNoEntity"  resultType="com.rltx.waybill.po.WaybillCodeNoEntity">
+        SELECT
+            id       AS id,
+            type     AS type,
+            org_code AS orgCode,
+            year     AS year,
+            value    AS value
+        FROM
+            waybill_code_no
+        <where>
+        <if test="id != null ">
+            AND id = #{id}
+        </if>
+
+        <if test="type != null and type != ''">
+            AND type = #{type}
+        </if>
+
+        <if test="orgCode != null and orgCode != ''">
+            AND org_code = #{orgCode}
+        </if>
+
+        <if test="year != null ">
+            AND year = #{year}
+        </if>
+
+        <if test="value != null ">
+            AND value = #{value}
+        </if>
+
+        </where>
+    </select>
+
+
+    <insert id="insert" parameterType="com.rltx.waybill.po.WaybillCodeNoEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO waybill_code_no (
+            type,
+            org_code,
+            year,
+            value
+        )
+        VALUES (
+            #{type},
+            #{orgCode},
+            #{year},
+            #{value}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.rltx.waybill.po.WaybillCodeNoEntity">
+        UPDATE waybill_code_no
+        <set>
+
+        <if test="type != null and type != ''">
+            type = #{type},
+        </if>
+
+        <if test="orgCode != null and orgCode != ''">
+            org_code = #{orgCode},
+        </if>
+
+        <if test="year != null ">
+            year = #{year},
+        </if>
+
+        <if test="value != null ">
+            value = #{value},
+        </if>
+
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
+    <!-- End Auto Common  -->
+
+</mapper>
+
+

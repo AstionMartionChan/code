@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rltx.waybill.dao.IWaybillTicketDetailDao">
+
+
+    <!-- Start Auto Common -->
+
+    <select id="selectById" parameterType="long"  resultType="com.rltx.waybill.po.WaybillTicketDetailEntity">
+        SELECT
+            id                 AS id,
+            code               AS code,
+            waybill_code       AS waybillCode,
+            distribution_no    AS distributionNo,
+            ticket_no          AS ticketNo,
+            goods_name         AS goodsName,
+            ttl_weight         AS ttlWeight,
+            ttl_weight_unit    AS ttlWeightUnit,
+            ttl_volume         AS ttlVolume,
+            ttl_volume_unit    AS ttlVolumeUnit,
+            ttl_number         AS ttlNumber,
+            ttl_number_unit    AS ttlNumberUnit,
+            wdc_claim          AS wdcClaim,
+            wdh_claim          AS wdhClaim,
+            whd_claim          AS whdClaim,
+            xps_claim          AS xpsClaim,
+            other_claim        AS otherClaim,
+            claim_description  AS claimDescription,
+            status             AS status,
+            custom_data        AS customData,
+            ticket_tag         AS ticketTag,
+            description        AS description,
+            remark             AS remark,
+            disabled           AS disabled,
+            deleted            AS deleted,
+            module_code        AS moduleCode,
+            creator_user_code  AS creatorUserCode,
+            creator_username   AS creatorUsername,
+            create_time        AS createTime,
+            update_user_code   AS updateUserCode,
+            update_username    AS updateUsername,
+            update_time        AS updateTime,
+            ip                 AS ip,
+            operator_longitude AS operatorLongitude,
+            operator_latitude  AS operatorLatitude,
+            owner_user_code    AS ownerUserCode,
+            owner_org_code     AS ownerOrgCode,
+            owner_org_name     AS ownerOrgName,
+            synchronous_id     AS synchronousId
+        FROM
+            waybill_ticket_detail
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="select" parameterType="com.rltx.waybill.po.WaybillTicketDetailEntity"  resultType="com.rltx.waybill.po.WaybillTicketDetailEntity">
+        SELECT
+            id                 AS id,
+            code               AS code,
+            waybill_code       AS waybillCode,
+            distribution_no    AS distributionNo,
+            ticket_no          AS ticketNo,
+            goods_name         AS goodsName,
+            ttl_weight         AS ttlWeight,
+            ttl_weight_unit    AS ttlWeightUnit,
+            ttl_volume         AS ttlVolume,
+            ttl_volume_unit    AS ttlVolumeUnit,
+            ttl_number         AS ttlNumber,
+            ttl_number_unit    AS ttlNumberUnit,
+            wdc_claim          AS wdcClaim,
+            wdh_claim          AS wdhClaim,
+            whd_claim          AS whdClaim,
+            xps_claim          AS xpsClaim,
+            other_claim        AS otherClaim,
+            claim_description  AS claimDescription,
+            status             AS status,
+            custom_data        AS customData,
+            ticket_tag         AS ticketTag,
+            description        AS description,
+            remark             AS remark,
+            disabled           AS disabled,
+            deleted            AS deleted,
+            module_code        AS moduleCode,
+            creator_user_code  AS creatorUserCode,
+            creator_username   AS creatorUsername,
+            create_time        AS createTime,
+            update_user_code   AS updateUserCode,
+            update_username    AS updateUsername,
+            update_time        AS updateTime,
+            ip                 AS ip,
+            operator_longitude AS operatorLongitude,
+            operator_latitude  AS operatorLatitude,
+            owner_user_code    AS ownerUserCode,
+            owner_org_code     AS ownerOrgCode,
+            owner_org_name     AS ownerOrgName,
+            synchronous_id     AS synchronousId
+        FROM
+            waybill_ticket_detail
+        <where>
+        <if test="id != null ">
+            AND id = #{id}
+        </if>
+
+        <if test="code != null and code != ''">
+            AND code = #{code}
+        </if>
+
+        <if test="waybillCode != null and waybillCode != ''">
+            AND waybill_code = #{waybillCode}
+        </if>
+
+        <if test="distributionNo != null and distributionNo != ''">
+            AND distribution_no = #{distributionNo}
+        </if>
+
+        <if test="ticketNo != null and ticketNo != ''">
+            AND ticket_no = #{ticketNo}
+        </if>
+
+        <if test="goodsName != null and goodsName != ''">
+            AND goods_name = #{goodsName}
+        </if>
+
+        <if test="ttlWeight != null ">
+            AND ttl_weight = #{ttlWeight}
+        </if>
+
+        <if test="ttlWeightUnit != null ">
+            AND ttl_weight_unit = #{ttlWeightUnit}
+        </if>
+
+        <if test="ttlVolume != null ">
+            AND ttl_volume = #{ttlVolume}
+        </if>
+
+        <if test="ttlVolumeUnit != null ">
+            AND ttl_volume_unit = #{ttlVolumeUnit}
+        </if>
+
+        <if test="ttlNumber != null ">
+            AND ttl_number = #{ttlNumber}
+        </if>
+
+        <if test="ttlNumberUnit != null ">
+            AND ttl_number_unit = #{ttlNumberUnit}
+        </if>
+
+        <if test="wdcClaim != null ">
+            AND wdc_claim = #{wdcClaim}
+        </if>
+
+        <if test="wdhClaim != null ">
+            AND wdh_claim = #{wdhClaim}
+        </if>
+
+        <if test="whdClaim != null ">
+            AND whd_claim = #{whdClaim}
+        </if>
+
+        <if test="xpsClaim != null ">
+            AND xps_claim = #{xpsClaim}
+        </if>
+
+        <if test="otherClaim != null ">
+            AND other_claim = #{otherClaim}
+        </if>
+
+        <if test="claimDescription != null and claimDescription != ''">
+            AND claim_description = #{claimDescription}
+        </if>
+
+        <if test="status != null ">
+            AND status = #{status}
+        </if>
+
+        <if test="customData != null and customData != ''">
+            AND custom_data = #{customData}
+        </if>
+
+        <if test="ticketTag != null and ticketTag != ''">
+            AND ticket_tag = #{ticketTag}
+        </if>
+
+        <if test="description != null and description != ''">
+            AND description = #{description}
+        </if>
+
+        <if test="remark != null and remark != ''">
+            AND remark = #{remark}
+        </if>
+
+        <if test="disabled != null ">
+            AND disabled = #{disabled}
+        </if>
+
+        <if test="deleted != null ">
+            AND deleted = #{deleted}
+        </if>
+
+        <if test="moduleCode != null and moduleCode != ''">
+            AND module_code = #{moduleCode}
+        </if>
+
+        <if test="creatorUserCode != null and creatorUserCode != ''">
+            AND creator_user_code = #{creatorUserCode}
+        </if>
+
+        <if test="creatorUsername != null and creatorUsername != ''">
+            AND creator_username = #{creatorUsername}
+        </if>
+
+        <if test="createTime != null ">
+            AND create_time = #{createTime}
+        </if>
+
+        <if test="updateUserCode != null and updateUserCode != ''">
+            AND update_user_code = #{updateUserCode}
+        </if>
+
+        <if test="updateUsername != null and updateUsername != ''">
+            AND update_username = #{updateUsername}
+        </if>
+
+        <if test="updateTime != null ">
+            AND update_time = #{updateTime}
+        </if>
+
+        <if test="ip != null and ip != ''">
+            AND ip = #{ip}
+        </if>
+
+        <if test="operatorLongitude != null ">
+            AND operator_longitude = #{operatorLongitude}
+        </if>
+
+        <if test="operatorLatitude != null ">
+            AND operator_latitude = #{operatorLatitude}
+        </if>
+
+        <if test="ownerUserCode != null and ownerUserCode != ''">
+            AND owner_user_code = #{ownerUserCode}
+        </if>
+
+        <if test="ownerOrgCode != null and ownerOrgCode != ''">
+            AND owner_org_code = #{ownerOrgCode}
+        </if>
+
+        <if test="ownerOrgName != null and ownerOrgName != ''">
+            AND owner_org_name = #{ownerOrgName}
+        </if>
+
+        <if test="synchronousId != null and synchronousId != ''">
+            AND synchronous_id = #{synchronousId}
+        </if>
+
+        </where>
+    </select>
+
+
+    <insert id="insert" parameterType="com.rltx.waybill.po.WaybillTicketDetailEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO waybill_ticket_detail (
+            code,
+            waybill_code,
+            distribution_no,
+            ticket_no,
+            goods_name,
+            ttl_weight,
+            ttl_weight_unit,
+            ttl_volume,
+            ttl_volume_unit,
+            ttl_number,
+            ttl_number_unit,
+            wdc_claim,
+            wdh_claim,
+            whd_claim,
+            xps_claim,
+            other_claim,
+            claim_description,
+            status,
+            custom_data,
+            ticket_tag,
+            description,
+            remark,
+            disabled,
+            deleted,
+            module_code,
+            creator_user_code,
+            creator_username,
+            create_time,
+            update_user_code,
+            update_username,
+            update_time,
+            ip,
+            operator_longitude,
+            operator_latitude,
+            owner_user_code,
+            owner_org_code,
+            owner_org_name,
+            synchronous_id
+        )
+        VALUES (
+            #{code},
+            #{waybillCode},
+            #{distributionNo},
+            #{ticketNo},
+            #{goodsName},
+            #{ttlWeight},
+            #{ttlWeightUnit},
+            #{ttlVolume},
+            #{ttlVolumeUnit},
+            #{ttlNumber},
+            #{ttlNumberUnit},
+            #{wdcClaim},
+            #{wdhClaim},
+            #{whdClaim},
+            #{xpsClaim},
+            #{otherClaim},
+            #{claimDescription},
+            #{status},
+            #{customData},
+            #{ticketTag},
+            #{description},
+            #{remark},
+            #{disabled},
+            #{deleted},
+            #{moduleCode},
+            #{creatorUserCode},
+            #{creatorUsername},
+            #{createTime},
+            #{updateUserCode},
+            #{updateUsername},
+            #{updateTime},
+            #{ip},
+            #{operatorLongitude},
+            #{operatorLatitude},
+            #{ownerUserCode},
+            #{ownerOrgCode},
+            #{ownerOrgName},
+            #{synchronousId}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.rltx.waybill.po.WaybillTicketDetailEntity">
+        UPDATE waybill_ticket_detail
+        <set>
+
+        <if test="code != null and code != ''">
+            code = #{code},
+        </if>
+
+        <if test="waybillCode != null and waybillCode != ''">
+            waybill_code = #{waybillCode},
+        </if>
+
+        <if test="distributionNo != null and distributionNo != ''">
+            distribution_no = #{distributionNo},
+        </if>
+
+        <if test="ticketNo != null and ticketNo != ''">
+            ticket_no = #{ticketNo},
+        </if>
+
+        <if test="goodsName != null and goodsName != ''">
+            goods_name = #{goodsName},
+        </if>
+
+        <if test="ttlWeight != null ">
+            ttl_weight = #{ttlWeight},
+        </if>
+
+        <if test="ttlWeightUnit != null ">
+            ttl_weight_unit = #{ttlWeightUnit},
+        </if>
+
+        <if test="ttlVolume != null ">
+            ttl_volume = #{ttlVolume},
+        </if>
+
+        <if test="ttlVolumeUnit != null ">
+            ttl_volume_unit = #{ttlVolumeUnit},
+        </if>
+
+        <if test="ttlNumber != null ">
+            ttl_number = #{ttlNumber},
+        </if>
+
+        <if test="ttlNumberUnit != null ">
+            ttl_number_unit = #{ttlNumberUnit},
+        </if>
+
+        <if test="wdcClaim != null ">
+            wdc_claim = #{wdcClaim},
+        </if>
+
+        <if test="wdhClaim != null ">
+            wdh_claim = #{wdhClaim},
+        </if>
+
+        <if test="whdClaim != null ">
+            whd_claim = #{whdClaim},
+        </if>
+
+        <if test="xpsClaim != null ">
+            xps_claim = #{xpsClaim},
+        </if>
+
+        <if test="otherClaim != null ">
+            other_claim = #{otherClaim},
+        </if>
+
+        <if test="claimDescription != null and claimDescription != ''">
+            claim_description = #{claimDescription},
+        </if>
+
+        <if test="status != null ">
+            status = #{status},
+        </if>
+
+        <if test="customData != null and customData != ''">
+            custom_data = #{customData},
+        </if>
+
+        <if test="ticketTag != null and ticketTag != ''">
+            ticket_tag = #{ticketTag},
+        </if>
+
+        <if test="description != null and description != ''">
+            description = #{description},
+        </if>
+
+        <if test="remark != null and remark != ''">
+            remark = #{remark},
+        </if>
+
+        <if test="disabled != null ">
+            disabled = #{disabled},
+        </if>
+
+        <if test="deleted != null ">
+            deleted = #{deleted},
+        </if>
+
+        <if test="moduleCode != null and moduleCode != ''">
+            module_code = #{moduleCode},
+        </if>
+
+        <if test="creatorUserCode != null and creatorUserCode != ''">
+            creator_user_code = #{creatorUserCode},
+        </if>
+
+        <if test="creatorUsername != null and creatorUsername != ''">
+            creator_username = #{creatorUsername},
+        </if>
+
+        <if test="createTime != null ">
+            create_time = #{createTime},
+        </if>
+
+        <if test="updateUserCode != null and updateUserCode != ''">
+            update_user_code = #{updateUserCode},
+        </if>
+
+        <if test="updateUsername != null and updateUsername != ''">
+            update_username = #{updateUsername},
+        </if>
+
+        <if test="updateTime != null ">
+            update_time = #{updateTime},
+        </if>
+
+        <if test="ip != null and ip != ''">
+            ip = #{ip},
+        </if>
+
+        <if test="operatorLongitude != null ">
+            operator_longitude = #{operatorLongitude},
+        </if>
+
+        <if test="operatorLatitude != null ">
+            operator_latitude = #{operatorLatitude},
+        </if>
+
+        <if test="ownerUserCode != null and ownerUserCode != ''">
+            owner_user_code = #{ownerUserCode},
+        </if>
+
+        <if test="ownerOrgCode != null and ownerOrgCode != ''">
+            owner_org_code = #{ownerOrgCode},
+        </if>
+
+        <if test="ownerOrgName != null and ownerOrgName != ''">
+            owner_org_name = #{ownerOrgName},
+        </if>
+
+        <if test="synchronousId != null and synchronousId != ''">
+            synchronous_id = #{synchronousId},
+        </if>
+
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
+    <!-- End Auto Common  -->
+
+</mapper>
+
+
