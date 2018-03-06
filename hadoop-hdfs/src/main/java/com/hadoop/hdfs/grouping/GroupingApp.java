@@ -60,7 +60,7 @@ public class GroupingApp {
             CustomUserTimeWritable customUserTimeWritable1 = (CustomUserTimeWritable) a;
             CustomUserTimeWritable customUserTimeWritable2 = (CustomUserTimeWritable) b;
 
-            return customUserTimeWritable1.compareTo(customUserTimeWritable2);
+            return customUserTimeWritable1.getUser().compareTo(customUserTimeWritable2.getUser());
         }
     }
 
@@ -130,7 +130,7 @@ public class GroupingApp {
         public int compareTo(CustomUserTimeWritable next) {
             return this.user.equals(next.getUser()) ?
                     this.time.compareTo(next.getTime()) :
-                    -1;
+                    this.user.compareTo(next.getUser());
         }
 
         @Override
