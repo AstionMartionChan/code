@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-lazy-init="true"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+			http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.1.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	<import resource="classpath*:framework/applicationContext-server.xml" />
+
+
+    <context:component-scan base-package="com.rltx.truck.broker.*">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+	</context:component-scan>
+
+	<beans profile="production">
+		<context:property-placeholder ignore-unresolvable="true" order="1"  location="classpath*:/properties/production/systemConfig.properties"/>
+		<util:properties id="sysConfig" location="classpath:/properties/production/systemConfig.properties"/>
+	</beans>
+
+	<beans profile="staging">
+		<context:property-placeholder ignore-unresolvable="true" order="1"  location="classpath*:/properties/staging/systemConfig.properties"/>
+		<util:properties id="sysConfig" location="classpath:/properties/staging/systemConfig.properties"/>
+	</beans>
+
+	<beans profile="test">
+		<context:property-placeholder ignore-unresolvable="true" order="1" location="classpath:/properties/test/systemConfig.properties"/>
+		<util:properties id="sysConfig" location="classpath:/properties/test/systemConfig.properties"/>
+	</beans>
+
+	<beans profile="development">
+		<context:property-placeholder ignore-unresolvable="true" order="1" location="classpath:/properties/development/systemConfig.properties"/>
+		<util:properties id="sysConfig" location="classpath:/properties/development/systemConfig.properties"/>
+	</beans>
+
+	<beans profile="localhost">
+		<context:property-placeholder ignore-unresolvable="true" order="0" location="classpath:/properties/systemConfig.properties"/>
+		<util:properties id="sysConfig" location="classpath:/properties/systemConfig.properties"/>
+	</beans>
+
+
+</beans>

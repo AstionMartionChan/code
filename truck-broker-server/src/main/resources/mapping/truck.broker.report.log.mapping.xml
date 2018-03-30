@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rltx.truck.broker.dao.ITruckBrokerReportLogDao">
+
+
+
+    <insert id="save" parameterType="com.rltx.truck.broker.po.TruckBrokerReportLogEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO truck_broker_report_log (
+            waybill_id,
+            report_message,
+            response_message,
+            remark,
+            disabled,
+            deleted,
+            app_code,
+            creator,
+            creator_username,
+            create_time,
+            update_user,
+            update_username,
+            update_time,
+            ip,
+            operator_longitude,
+            operator_latitude,
+            owner_user_id,
+            owner_org_id,
+            owner_org_name,
+            synchronous_id
+        )
+        VALUES (
+            #{waybillId},
+            #{reportMessage},
+            #{responseMessage},
+            #{remark},
+            #{disabled},
+            #{deleted},
+            #{appCode},
+            #{creator},
+            #{creatorUsername},
+            #{createTime},
+            #{updateUser},
+            #{updateUsername},
+            #{updateTime},
+            #{ip},
+            #{operatorLongitude},
+            #{operatorLatitude},
+            #{ownerUserId},
+            #{ownerOrgId},
+            #{ownerOrgName},
+            #{synchronousId}
+        )
+    </insert>
+
+
+</mapper>
+
+

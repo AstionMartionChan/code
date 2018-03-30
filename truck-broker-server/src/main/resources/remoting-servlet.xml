@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-lazy-init="true"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+			http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.1.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+    <!-- 自动扫描且只扫描@Controller -->
+    <context:component-scan base-package="com.rltx.truck.broker.controller.**">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+
+    <bean name="/dummyService" class="com.wl.framework.remoting.exporter.FastJsonHttpInvokerServiceExporter">
+        <property name="service" ref="dummyController" />
+        <property name="serviceInterface" value="com.rltx.truck.broker.service.IDummyService" />
+    </bean>
+
+    <bean name="/reportService" class="com.wl.framework.remoting.exporter.FastJsonHttpInvokerServiceExporter">
+        <property name="service" ref="reportController" />
+        <property name="serviceInterface" value="com.rltx.truck.broker.service.IReportService" />
+    </bean>
+
+</beans>

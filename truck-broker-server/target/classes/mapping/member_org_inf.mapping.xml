@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rltx.truck.broker.dao.IOrgInfDao">
+
+    <select id="getOrgInf" parameterType="java.lang.Long" resultType="com.rltx.truck.broker.po.OrgInfEntity">
+        SELECT
+            org_id AS orgId,
+            sender_code AS senderCode,
+            sender_password AS senderPassword
+        FROM
+            member_org_inf
+        WHERE
+            org_id = #{orgId}
+    </select>
+
+</mapper>
+
+
