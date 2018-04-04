@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace=".dao.ITSkuInfoDao">
+
+
+    <!-- Start Auto Common -->
+
+    <select id="selectById" parameterType="long"  resultType="com.rltx.ipatio.po.TSkuInfoEntity">
+        SELECT
+            id             AS id,
+            title          AS title,
+            image_url      AS imageUrl,
+            price          AS price,
+            specifications AS specifications
+        FROM
+            t_sku_info
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="select" parameterType="com.rltx.ipatio.po.TSkuInfoEntity"  resultType="com.rltx.ipatio.po.TSkuInfoEntity">
+        SELECT
+            id             AS id,
+            title          AS title,
+            image_url      AS imageUrl,
+            price          AS price,
+            specifications AS specifications
+        FROM
+            t_sku_info
+        <where>
+        <if test="id != null and id != ''">
+            AND id = #{id}
+        </if>
+
+        <if test="title != null and title != ''">
+            AND title = #{title}
+        </if>
+
+        <if test="imageUrl != null and imageUrl != ''">
+            AND image_url = #{imageUrl}
+        </if>
+
+        <if test="price != null and price != ''">
+            AND price = #{price}
+        </if>
+
+        <if test="specifications != null and specifications != ''">
+            AND specifications = #{specifications}
+        </if>
+
+        </where>
+    </select>
+
+
+    <insert id="insert" parameterType="com.rltx.ipatio.po.TSkuInfoEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_sku_info (
+            title,
+            image_url,
+            price,
+            specifications
+        )
+        VALUES (
+            #{title},
+            #{imageUrl},
+            #{price},
+            #{specifications}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.rltx.ipatio.po.TSkuInfoEntity">
+        UPDATE t_sku_info
+        <set>
+
+        <if test="title != null and title != ''">
+            title = #{title},
+        </if>
+
+        <if test="imageUrl != null and imageUrl != ''">
+            image_url = #{imageUrl},
+        </if>
+
+        <if test="price != null and price != ''">
+            price = #{price},
+        </if>
+
+        <if test="specifications != null and specifications != ''">
+            specifications = #{specifications},
+        </if>
+
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
+    <!-- End Auto Common  -->
+
+</mapper>
+
+

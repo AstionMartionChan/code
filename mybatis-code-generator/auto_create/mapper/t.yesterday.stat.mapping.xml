@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace=".dao.ITYesterdayStatDao">
+
+
+    <!-- Start Auto Common -->
+
+    <select id="selectById" parameterType="long"  resultType="com.rltx.ipatio.po.TYesterdayStatEntity">
+        SELECT
+            id          AS id,
+            url         AS url,
+            userId      AS userId,
+            account     AS account,
+            create_time AS createTime
+        FROM
+            t_yesterday_stat
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="select" parameterType="com.rltx.ipatio.po.TYesterdayStatEntity"  resultType="com.rltx.ipatio.po.TYesterdayStatEntity">
+        SELECT
+            id          AS id,
+            url         AS url,
+            userId      AS userId,
+            account     AS account,
+            create_time AS createTime
+        FROM
+            t_yesterday_stat
+        <where>
+        <if test="id != null and id != ''">
+            AND id = #{id}
+        </if>
+
+        <if test="url != null and url != ''">
+            AND url = #{url}
+        </if>
+
+        <if test="userId != null and userId != ''">
+            AND userId = #{userId}
+        </if>
+
+        <if test="account != null and account != ''">
+            AND account = #{account}
+        </if>
+
+        <if test="createTime != null and createTime != ''">
+            AND create_time = #{createTime}
+        </if>
+
+        </where>
+    </select>
+
+
+    <insert id="insert" parameterType="com.rltx.ipatio.po.TYesterdayStatEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_yesterday_stat (
+            url,
+            userId,
+            account,
+            create_time
+        )
+        VALUES (
+            #{url},
+            #{userId},
+            #{account},
+            #{createTime}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.rltx.ipatio.po.TYesterdayStatEntity">
+        UPDATE t_yesterday_stat
+        <set>
+
+        <if test="url != null and url != ''">
+            url = #{url},
+        </if>
+
+        <if test="userId != null and userId != ''">
+            userId = #{userId},
+        </if>
+
+        <if test="account != null and account != ''">
+            account = #{account},
+        </if>
+
+        <if test="createTime != null and createTime != ''">
+            create_time = #{createTime},
+        </if>
+
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
+    <!-- End Auto Common  -->
+
+</mapper>
+
+
