@@ -17,6 +17,16 @@ public class Page {
     // 解析之后的参数
     private Map<String, Object> params = new HashMap<>();
 
+    private Object jdSkuInfo;
+
+    public Object getJdSkuInfo() {
+        return jdSkuInfo;
+    }
+
+    public void setJdSkuInfo(Object jdSkuInfo) {
+        this.jdSkuInfo = jdSkuInfo;
+    }
+
     public void addParams(String key, Object value) {
         this.params.put(key, value);
     }

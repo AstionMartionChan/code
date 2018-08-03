@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace=".dao.ISessionRandomExtractDao">
+
+
+    <!-- Start Auto Common -->
+
+    <select id="selectById" parameterType="long"  resultType="com.cfy.po.SessionRandomExtractEntity">
+        SELECT
+            id              AS id,
+            task_id         AS taskId,
+            session_id      AS sessionId,
+            start_time      AS startTime,
+            search_keywords AS searchKeywords,
+            catagory_ids    AS catagoryIds
+        FROM
+            session_random_extract
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="select" parameterType="com.cfy.po.SessionRandomExtractEntity"  resultType="com.cfy.po.SessionRandomExtractEntity">
+        SELECT
+            id              AS id,
+            task_id         AS taskId,
+            session_id      AS sessionId,
+            start_time      AS startTime,
+            search_keywords AS searchKeywords,
+            catagory_ids    AS catagoryIds
+        FROM
+            session_random_extract
+        <where>
+        <if test="id != null ">
+            AND id = #{id}
+        </if>
+
+        <if test="taskId != null ">
+            AND task_id = #{taskId}
+        </if>
+
+        <if test="sessionId != null and sessionId != ''">
+            AND session_id = #{sessionId}
+        </if>
+
+        <if test="startTime != null and startTime != ''">
+            AND start_time = #{startTime}
+        </if>
+
+        <if test="searchKeywords != null and searchKeywords != ''">
+            AND search_keywords = #{searchKeywords}
+        </if>
+
+        <if test="catagoryIds != null and catagoryIds != ''">
+            AND catagory_ids = #{catagoryIds}
+        </if>
+
+        </where>
+    </select>
+
+
+    <insert id="insert" parameterType="com.cfy.po.SessionRandomExtractEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO session_random_extract (
+            task_id,
+            session_id,
+            start_time,
+            search_keywords,
+            catagory_ids
+        )
+        VALUES (
+            #{taskId},
+            #{sessionId},
+            #{startTime},
+            #{searchKeywords},
+            #{catagoryIds}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.cfy.po.SessionRandomExtractEntity">
+        UPDATE session_random_extract
+        <set>
+
+        <if test="taskId != null ">
+            task_id = #{taskId},
+        </if>
+
+        <if test="sessionId != null and sessionId != ''">
+            session_id = #{sessionId},
+        </if>
+
+        <if test="startTime != null and startTime != ''">
+            start_time = #{startTime},
+        </if>
+
+        <if test="searchKeywords != null and searchKeywords != ''">
+            search_keywords = #{searchKeywords},
+        </if>
+
+        <if test="catagoryIds != null and catagoryIds != ''">
+            catagory_ids = #{catagoryIds},
+        </if>
+
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
+    <!-- End Auto Common  -->
+
+</mapper>
+
+

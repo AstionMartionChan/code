@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace=".dao.IAreaTop3ProductDao">
+
+
+    <!-- Start Auto Common -->
+
+    <select id="selectById" parameterType="long"  resultType="com.cfy.po.AreaTop3ProductEntity">
+        SELECT
+            id             AS id,
+            task_id        AS taskId,
+            area           AS area,
+            area_level     AS areaLevel,
+            product_id     AS productId,
+            city_names     AS cityNames,
+            click_count    AS clickCount,
+            product_name   AS productName,
+            product_status AS productStatus
+        FROM
+            area_top3_product
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="select" parameterType="com.cfy.po.AreaTop3ProductEntity"  resultType="com.cfy.po.AreaTop3ProductEntity">
+        SELECT
+            id             AS id,
+            task_id        AS taskId,
+            area           AS area,
+            area_level     AS areaLevel,
+            product_id     AS productId,
+            city_names     AS cityNames,
+            click_count    AS clickCount,
+            product_name   AS productName,
+            product_status AS productStatus
+        FROM
+            area_top3_product
+        <where>
+        <if test="id != null ">
+            AND id = #{id}
+        </if>
+
+        <if test="taskId != null ">
+            AND task_id = #{taskId}
+        </if>
+
+        <if test="area != null and area != ''">
+            AND area = #{area}
+        </if>
+
+        <if test="areaLevel != null and areaLevel != ''">
+            AND area_level = #{areaLevel}
+        </if>
+
+        <if test="productId != null ">
+            AND product_id = #{productId}
+        </if>
+
+        <if test="cityNames != null and cityNames != ''">
+            AND city_names = #{cityNames}
+        </if>
+
+        <if test="clickCount != null ">
+            AND click_count = #{clickCount}
+        </if>
+
+        <if test="productName != null and productName != ''">
+            AND product_name = #{productName}
+        </if>
+
+        <if test="productStatus != null and productStatus != ''">
+            AND product_status = #{productStatus}
+        </if>
+
+        </where>
+    </select>
+
+
+    <insert id="insert" parameterType="com.cfy.po.AreaTop3ProductEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO area_top3_product (
+            task_id,
+            area,
+            area_level,
+            product_id,
+            city_names,
+            click_count,
+            product_name,
+            product_status
+        )
+        VALUES (
+            #{taskId},
+            #{area},
+            #{areaLevel},
+            #{productId},
+            #{cityNames},
+            #{clickCount},
+            #{productName},
+            #{productStatus}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.cfy.po.AreaTop3ProductEntity">
+        UPDATE area_top3_product
+        <set>
+
+        <if test="taskId != null ">
+            task_id = #{taskId},
+        </if>
+
+        <if test="area != null and area != ''">
+            area = #{area},
+        </if>
+
+        <if test="areaLevel != null and areaLevel != ''">
+            area_level = #{areaLevel},
+        </if>
+
+        <if test="productId != null ">
+            product_id = #{productId},
+        </if>
+
+        <if test="cityNames != null and cityNames != ''">
+            city_names = #{cityNames},
+        </if>
+
+        <if test="clickCount != null ">
+            click_count = #{clickCount},
+        </if>
+
+        <if test="productName != null and productName != ''">
+            product_name = #{productName},
+        </if>
+
+        <if test="productStatus != null and productStatus != ''">
+            product_status = #{productStatus},
+        </if>
+
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
+    <!-- End Auto Common  -->
+
+</mapper>
+
+

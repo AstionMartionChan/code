@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace=".dao.ISessionDetailDao">
+
+
+    <!-- Start Auto Common -->
+
+    <select id="selectById" parameterType="long"  resultType="com.cfy.po.SessionDetailEntity">
+        SELECT
+            id                 AS id,
+            task_id            AS taskId,
+            user_id            AS userId,
+            session_id         AS sessionId,
+            page_id            AS pageId,
+            action_time        AS actionTime,
+            search_keyword     AS searchKeyword,
+            click_category_id  AS clickCategoryId,
+            click_product_id   AS clickProductId,
+            order_category_ids AS orderCategoryIds,
+            order_product_ids  AS orderProductIds,
+            pay_category_ids   AS payCategoryIds,
+            pay_product_ids    AS payProductIds
+        FROM
+            session_detail
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="select" parameterType="com.cfy.po.SessionDetailEntity"  resultType="com.cfy.po.SessionDetailEntity">
+        SELECT
+            id                 AS id,
+            task_id            AS taskId,
+            user_id            AS userId,
+            session_id         AS sessionId,
+            page_id            AS pageId,
+            action_time        AS actionTime,
+            search_keyword     AS searchKeyword,
+            click_category_id  AS clickCategoryId,
+            click_product_id   AS clickProductId,
+            order_category_ids AS orderCategoryIds,
+            order_product_ids  AS orderProductIds,
+            pay_category_ids   AS payCategoryIds,
+            pay_product_ids    AS payProductIds
+        FROM
+            session_detail
+        <where>
+        <if test="id != null ">
+            AND id = #{id}
+        </if>
+
+        <if test="taskId != null ">
+            AND task_id = #{taskId}
+        </if>
+
+        <if test="userId != null ">
+            AND user_id = #{userId}
+        </if>
+
+        <if test="sessionId != null and sessionId != ''">
+            AND session_id = #{sessionId}
+        </if>
+
+        <if test="pageId != null ">
+            AND page_id = #{pageId}
+        </if>
+
+        <if test="actionTime != null and actionTime != ''">
+            AND action_time = #{actionTime}
+        </if>
+
+        <if test="searchKeyword != null and searchKeyword != ''">
+            AND search_keyword = #{searchKeyword}
+        </if>
+
+        <if test="clickCategoryId != null ">
+            AND click_category_id = #{clickCategoryId}
+        </if>
+
+        <if test="clickProductId != null ">
+            AND click_product_id = #{clickProductId}
+        </if>
+
+        <if test="orderCategoryIds != null and orderCategoryIds != ''">
+            AND order_category_ids = #{orderCategoryIds}
+        </if>
+
+        <if test="orderProductIds != null and orderProductIds != ''">
+            AND order_product_ids = #{orderProductIds}
+        </if>
+
+        <if test="payCategoryIds != null and payCategoryIds != ''">
+            AND pay_category_ids = #{payCategoryIds}
+        </if>
+
+        <if test="payProductIds != null and payProductIds != ''">
+            AND pay_product_ids = #{payProductIds}
+        </if>
+
+        </where>
+    </select>
+
+
+    <insert id="insert" parameterType="com.cfy.po.SessionDetailEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO session_detail (
+            task_id,
+            user_id,
+            session_id,
+            page_id,
+            action_time,
+            search_keyword,
+            click_category_id,
+            click_product_id,
+            order_category_ids,
+            order_product_ids,
+            pay_category_ids,
+            pay_product_ids
+        )
+        VALUES (
+            #{taskId},
+            #{userId},
+            #{sessionId},
+            #{pageId},
+            #{actionTime},
+            #{searchKeyword},
+            #{clickCategoryId},
+            #{clickProductId},
+            #{orderCategoryIds},
+            #{orderProductIds},
+            #{payCategoryIds},
+            #{payProductIds}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.cfy.po.SessionDetailEntity">
+        UPDATE session_detail
+        <set>
+
+        <if test="taskId != null ">
+            task_id = #{taskId},
+        </if>
+
+        <if test="userId != null ">
+            user_id = #{userId},
+        </if>
+
+        <if test="sessionId != null and sessionId != ''">
+            session_id = #{sessionId},
+        </if>
+
+        <if test="pageId != null ">
+            page_id = #{pageId},
+        </if>
+
+        <if test="actionTime != null and actionTime != ''">
+            action_time = #{actionTime},
+        </if>
+
+        <if test="searchKeyword != null and searchKeyword != ''">
+            search_keyword = #{searchKeyword},
+        </if>
+
+        <if test="clickCategoryId != null ">
+            click_category_id = #{clickCategoryId},
+        </if>
+
+        <if test="clickProductId != null ">
+            click_product_id = #{clickProductId},
+        </if>
+
+        <if test="orderCategoryIds != null and orderCategoryIds != ''">
+            order_category_ids = #{orderCategoryIds},
+        </if>
+
+        <if test="orderProductIds != null and orderProductIds != ''">
+            order_product_ids = #{orderProductIds},
+        </if>
+
+        <if test="payCategoryIds != null and payCategoryIds != ''">
+            pay_category_ids = #{payCategoryIds},
+        </if>
+
+        <if test="payProductIds != null and payProductIds != ''">
+            pay_product_ids = #{payProductIds},
+        </if>
+
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
+    <!-- End Auto Common  -->
+
+</mapper>
+
+

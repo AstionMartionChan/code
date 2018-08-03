@@ -1,0 +1,18 @@
+server:
+  port: 8081
+  context-path: /spider-web
+#logging:
+#  config: classpath:logback.xml
+#  level: debug
+spring:
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/views/
+#      suffix: .jsp
+  velocity:
+    charset: UTF-8
+    properties:
+      input:
+        encoding: UTF-8
+      output:
+        encoding: UTF-8

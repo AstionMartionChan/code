@@ -51,4 +51,8 @@ public class RedisUtil {
     public static Long llen(String key) {
         return jedis.llen(key);
     }
+
+    public static void rpush(String key, String value){
+        jedis.rpush(key, value);
+    }
 }

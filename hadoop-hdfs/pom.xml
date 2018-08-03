@@ -15,6 +15,7 @@
       <scope>test</scope>
     </dependency>
 
+      <!-- hadoop -->
       <dependency>
           <groupId>org.apache.hadoop</groupId>
           <artifactId>hadoop-common</artifactId>
@@ -51,9 +52,81 @@
           <version>1.2.41</version>
       </dependency>
 
+
+      <!-- hbase -->
+      <dependency>
+          <groupId>org.apache.hbase</groupId>
+          <artifactId>hbase-client</artifactId>
+          <version>1.1.5</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.apache.hbase</groupId>
+          <artifactId>hbase-common</artifactId>
+          <version>1.1.5</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.apache.hbase</groupId>
+          <artifactId>hbase-server</artifactId>
+          <version>1.1.5</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.apache.hbase</groupId>
+          <artifactId>hbase-shell</artifactId>
+          <version>1.1.5</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.apache.hbase</groupId>
+          <artifactId>hbase-examples</artifactId>
+          <version>1.1.5</version>
+      </dependency>
+
+
+      <!-- storm -->
+      <dependency>
+          <groupId>org.apache.storm</groupId>
+          <artifactId>storm-core</artifactId>
+          <version>0.9.3</version>
+      </dependency>
+
+      <dependency>
+          <groupId>com.lmax</groupId>
+          <artifactId>disruptor</artifactId>
+          <version>3.2.0</version>
+      </dependency>
+
+      <dependency>
+          <groupId>commons-io</groupId>
+          <artifactId>commons-io</artifactId>
+          <version>2.4</version>
+      </dependency>
+
+      <!-- mysql -->
+      <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+          <version>5.1.42</version>
+      </dependency>
+
+      <!-- kafka -->
+      <dependency>
+          <groupId>org.apache.kafka</groupId>
+          <artifactId>kafka_2.11</artifactId>
+          <version>0.8.2.2</version>
+      </dependency>
+
+      <!-- elasticsearch -->
+      <dependency>
+          <groupId>org.elasticsearch</groupId>
+          <artifactId>elasticsearch</artifactId>
+          <version>1.4.4</version>
+      </dependency>
   </dependencies>
   <build>
-    <finalName>DataCleanAppJob</finalName>
+    <finalName>TermCountTopology</finalName>
           <plugins>
               <plugin>
                   <groupId>org.apache.maven.plugins</groupId>
@@ -72,7 +145,7 @@
                               <addClasspath>true</addClasspath>
                               <useUniqueVersions>false</useUniqueVersions>
                               <classpathPrefix>lib/</classpathPrefix>
-                              <mainClass>com.hadoop.hdfs.datastat.DataCleanApp</mainClass>
+                              <mainClass>com.hadoop.storm.topology.TermCountTopology</mainClass>
                           </manifest>
                       </archive>
                   </configuration>

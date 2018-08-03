@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="storm-kafka:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="storm-kafka.war">
+      <element id="artifact" artifact-name="storm-kafka:war exploded" />
+    </root>
+  </artifact>
+</component>

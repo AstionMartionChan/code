@@ -1,0 +1,6 @@
+com\itcast\utils\EsUtil.class
+com\itcast\Application.class
+com\itcast\utils\HBaseUtil.class
+com\itcast\bean\JDSkuInfo.class
+com\itcast\utils\RedisUtil.class
+com\itcast\utils\ReflectUtil.class
