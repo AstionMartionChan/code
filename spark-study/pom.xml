@@ -110,7 +110,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.cfy.streaming.UpdateStateByKeyWordCount</mainClass>
+                            <mainClass>com.cfy.wordcount.WordCountTest</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
