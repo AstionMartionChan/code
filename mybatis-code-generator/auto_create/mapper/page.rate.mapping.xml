@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace=".dao.IPageRateDao">
+
+
+    <!-- Start Auto Common -->
+
+    <select id="selectById" parameterType="long"  resultType="com.cfy.po.PageRateEntity">
+        SELECT
+            id      AS id,
+            task_id AS taskId,
+            rate    AS rate
+        FROM
+            page_rate
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="select" parameterType="com.cfy.po.PageRateEntity"  resultType="com.cfy.po.PageRateEntity">
+        SELECT
+            id      AS id,
+            task_id AS taskId,
+            rate    AS rate
+        FROM
+            page_rate
+        <where>
+        <if test="id != null ">
+            AND id = #{id}
+        </if>
+
+        <if test="taskId != null ">
+            AND task_id = #{taskId}
+        </if>
+
+        <if test="rate != null and rate != ''">
+            AND rate = #{rate}
+        </if>
+
+        </where>
+    </select>
+
+
+    <insert id="insert" parameterType="com.cfy.po.PageRateEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO page_rate (
+            task_id,
+            rate
+        )
+        VALUES (
+            #{taskId},
+            #{rate}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.cfy.po.PageRateEntity">
+        UPDATE page_rate
+        <set>
+
+        <if test="taskId != null ">
+            task_id = #{taskId},
+        </if>
+
+        <if test="rate != null and rate != ''">
+            rate = #{rate},
+        </if>
+
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
+    <!-- End Auto Common  -->
+
+</mapper>
+
+

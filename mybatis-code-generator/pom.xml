@@ -52,7 +52,7 @@
                             <addClasspath>true</addClasspath>
                             <useUniqueVersions>false</useUniqueVersions>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.cfy.application.Generator</mainClass>
+                            <!--<mainClass>com.cfy.application.Generator</mainClass>-->
                         </manifest>
                     </archive>
                 </configuration>

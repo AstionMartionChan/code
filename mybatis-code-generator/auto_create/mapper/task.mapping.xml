@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace=".dao.ITaskDao">
+
+
+    <!-- Start Auto Common -->
+
+    <select id="selectById" parameterType="long"  resultType="com.cfy.po.TaskEntity">
+        SELECT
+            task_id     AS taskId,
+            task_name   AS taskName,
+            create_time AS createTime,
+            start_time  AS startTime,
+            finish_time AS finishTime,
+            task_type   AS taskType,
+            task_status AS taskStatus,
+            task_param  AS taskParam
+        FROM
+            task
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="select" parameterType="com.cfy.po.TaskEntity"  resultType="com.cfy.po.TaskEntity">
+        SELECT
+            task_id     AS taskId,
+            task_name   AS taskName,
+            create_time AS createTime,
+            start_time  AS startTime,
+            finish_time AS finishTime,
+            task_type   AS taskType,
+            task_status AS taskStatus,
+            task_param  AS taskParam
+        FROM
+            task
+        <where>
+        <if test="taskId != null ">
+            AND task_id = #{taskId}
+        </if>
+
+        <if test="taskName != null and taskName != ''">
+            AND task_name = #{taskName}
+        </if>
+
+        <if test="createTime != null and createTime != ''">
+            AND create_time = #{createTime}
+        </if>
+
+        <if test="startTime != null and startTime != ''">
+            AND start_time = #{startTime}
+        </if>
+
+        <if test="finishTime != null and finishTime != ''">
+            AND finish_time = #{finishTime}
+        </if>
+
+        <if test="taskType != null and taskType != ''">
+            AND task_type = #{taskType}
+        </if>
+
+        <if test="taskStatus != null and taskStatus != ''">
+            AND task_status = #{taskStatus}
+        </if>
+
+        <if test="taskParam != null and taskParam != ''">
+            AND task_param = #{taskParam}
+        </if>
+
+        </where>
+    </select>
+
+
+    <insert id="insert" parameterType="com.cfy.po.TaskEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO task (
+            task_name,
+            create_time,
+            start_time,
+            finish_time,
+            task_type,
+            task_status,
+            task_param
+        )
+        VALUES (
+            #{taskName},
+            #{createTime},
+            #{startTime},
+            #{finishTime},
+            #{taskType},
+            #{taskStatus},
+            #{taskParam}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.cfy.po.TaskEntity">
+        UPDATE task
+        <set>
+
+        <if test="taskName != null and taskName != ''">
+            task_name = #{taskName},
+        </if>
+
+        <if test="createTime != null and createTime != ''">
+            create_time = #{createTime},
+        </if>
+
+        <if test="startTime != null and startTime != ''">
+            start_time = #{startTime},
+        </if>
+
+        <if test="finishTime != null and finishTime != ''">
+            finish_time = #{finishTime},
+        </if>
+
+        <if test="taskType != null and taskType != ''">
+            task_type = #{taskType},
+        </if>
+
+        <if test="taskStatus != null and taskStatus != ''">
+            task_status = #{taskStatus},
+        </if>
+
+        <if test="taskParam != null and taskParam != ''">
+            task_param = #{taskParam},
+        </if>
+
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
+    <!-- End Auto Common  -->
+
+</mapper>
+
+

@@ -33,7 +33,7 @@ public class HtmlCleanerProccessHandlerImpl implements ProccessHandler {
         Map<String, Object> result = new HashMap<>();
 
         // 获取商品详情url
-        Map<String, Object> skuUrlList = ProccessUtil.proccessElement(content, "//*[@id=\"plist\"]/ul/li/div/div[4]/a/@href");
+        Map<String, Object> skuUrlList = ProccessUtil.proccessElement(content, "//li[@class='gl-item']/div[@class='gl-i-wrap j-sku-item']/div[@class='p-img']/a/@href");
         // 获取下一页url
         Map<String, Object> nextPageUrl = ProccessUtil.proccessElement(content, "//*[@id=\"J_topPage\"]/a[2]/@href");
 

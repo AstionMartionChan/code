@@ -1,0 +1,12 @@
+com\itcast\Application.class
+com\itcast\controller\SkuSearchController.class
+com\itcast\service\IEsService.class
+com\itcast\utils\ReflectUtil.class
+com\itcast\bean\JDSkuDetailInfo.class
+com\itcast\service\IHBaseService.class
+com\itcast\service\impl\HBaseServiceImpl.class
+com\itcast\constants\EsConstant.class
+com\itcast\service\impl\EsServiceImpl.class
+com\itcast\utils\HBaseUtil.class
+com\itcast\utils\FreeMarkerUtil.class
+com\itcast\bean\JDSkuSearchInfo.class

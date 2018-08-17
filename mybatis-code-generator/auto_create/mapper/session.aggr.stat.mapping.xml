@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace=".dao.ISessionAggrStatDao">
+
+
+    <!-- Start Auto Common -->
+
+    <select id="selectById" parameterType="long"  resultType="com.cfy.po.SessionAggrStatEntity">
+        SELECT
+            task_id       AS taskId,
+            session_count AS sessionCount,
+            1s_3s         AS 1s3s,
+            4s_6s         AS 4s6s,
+            7s_9s         AS 7s9s,
+            10s_30s       AS 10s30s,
+            30s_60s       AS 30s60s,
+            1m_3m         AS 1m3m,
+            3m_10m        AS 3m10m,
+            10m_30m       AS 10m30m,
+            30m           AS 30m,
+            1_3           AS 13,
+            4_6           AS 46,
+            7_9           AS 79,
+            10_30         AS 1030,
+            30_60         AS 3060,
+            60            AS 60
+        FROM
+            session_aggr_stat
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="select" parameterType="com.cfy.po.SessionAggrStatEntity"  resultType="com.cfy.po.SessionAggrStatEntity">
+        SELECT
+            task_id       AS taskId,
+            session_count AS sessionCount,
+            1s_3s         AS 1s3s,
+            4s_6s         AS 4s6s,
+            7s_9s         AS 7s9s,
+            10s_30s       AS 10s30s,
+            30s_60s       AS 30s60s,
+            1m_3m         AS 1m3m,
+            3m_10m        AS 3m10m,
+            10m_30m       AS 10m30m,
+            30m           AS 30m,
+            1_3           AS 13,
+            4_6           AS 46,
+            7_9           AS 79,
+            10_30         AS 1030,
+            30_60         AS 3060,
+            60            AS 60
+        FROM
+            session_aggr_stat
+        <where>
+        <if test="taskId != null ">
+            AND task_id = #{taskId}
+        </if>
+
+        <if test="sessionCount != null ">
+            AND session_count = #{sessionCount}
+        </if>
+
+        <if test="1s3s != null ">
+            AND 1s_3s = #{1s3s}
+        </if>
+
+        <if test="4s6s != null ">
+            AND 4s_6s = #{4s6s}
+        </if>
+
+        <if test="7s9s != null ">
+            AND 7s_9s = #{7s9s}
+        </if>
+
+        <if test="10s30s != null ">
+            AND 10s_30s = #{10s30s}
+        </if>
+
+        <if test="30s60s != null ">
+            AND 30s_60s = #{30s60s}
+        </if>
+
+        <if test="1m3m != null ">
+            AND 1m_3m = #{1m3m}
+        </if>
+
+        <if test="3m10m != null ">
+            AND 3m_10m = #{3m10m}
+        </if>
+
+        <if test="10m30m != null ">
+            AND 10m_30m = #{10m30m}
+        </if>
+
+        <if test="30m != null ">
+            AND 30m = #{30m}
+        </if>
+
+        <if test="13 != null ">
+            AND 1_3 = #{13}
+        </if>
+
+        <if test="46 != null ">
+            AND 4_6 = #{46}
+        </if>
+
+        <if test="79 != null ">
+            AND 7_9 = #{79}
+        </if>
+
+        <if test="1030 != null ">
+            AND 10_30 = #{1030}
+        </if>
+
+        <if test="3060 != null ">
+            AND 30_60 = #{3060}
+        </if>
+
+        <if test="60 != null ">
+            AND 60 = #{60}
+        </if>
+
+        </where>
+    </select>
+
+
+    <insert id="insert" parameterType="com.cfy.po.SessionAggrStatEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO session_aggr_stat (
+            session_count,
+            1s_3s,
+            4s_6s,
+            7s_9s,
+            10s_30s,
+            30s_60s,
+            1m_3m,
+            3m_10m,
+            10m_30m,
+            30m,
+            1_3,
+            4_6,
+            7_9,
+            10_30,
+            30_60,
+            60
+        )
+        VALUES (
+            #{sessionCount},
+            #{1s3s},
+            #{4s6s},
+            #{7s9s},
+            #{10s30s},
+            #{30s60s},
+            #{1m3m},
+            #{3m10m},
+            #{10m30m},
+            #{30m},
+            #{13},
+            #{46},
+            #{79},
+            #{1030},
+            #{3060},
+            #{60}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.cfy.po.SessionAggrStatEntity">
+        UPDATE session_aggr_stat
+        <set>
+
+        <if test="sessionCount != null ">
+            session_count = #{sessionCount},
+        </if>
+
+        <if test="1s3s != null ">
+            1s_3s = #{1s3s},
+        </if>
+
+        <if test="4s6s != null ">
+            4s_6s = #{4s6s},
+        </if>
+
+        <if test="7s9s != null ">
+            7s_9s = #{7s9s},
+        </if>
+
+        <if test="10s30s != null ">
+            10s_30s = #{10s30s},
+        </if>
+
+        <if test="30s60s != null ">
+            30s_60s = #{30s60s},
+        </if>
+
+        <if test="1m3m != null ">
+            1m_3m = #{1m3m},
+        </if>
+
+        <if test="3m10m != null ">
+            3m_10m = #{3m10m},
+        </if>
+
+        <if test="10m30m != null ">
+            10m_30m = #{10m30m},
+        </if>
+
+        <if test="30m != null ">
+            30m = #{30m},
+        </if>
+
+        <if test="13 != null ">
+            1_3 = #{13},
+        </if>
+
+        <if test="46 != null ">
+            4_6 = #{46},
+        </if>
+
+        <if test="79 != null ">
+            7_9 = #{79},
+        </if>
+
+        <if test="1030 != null ">
+            10_30 = #{1030},
+        </if>
+
+        <if test="3060 != null ">
+            30_60 = #{3060},
+        </if>
+
+        <if test="60 != null ">
+            60 = #{60},
+        </if>
+
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
+    <!-- End Auto Common  -->
+
+</mapper>
+
+
