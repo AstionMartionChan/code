@@ -16,9 +16,11 @@ import kafka.message.MessageAndMetadata;
 public class ConsumerKafkaStreamProcesser implements Runnable {
 
     private KafkaStream<String, String> stream;
+    private Integer threadNum;
 
-    public ConsumerKafkaStreamProcesser(KafkaStream<String, String> stream) {
+    public ConsumerKafkaStreamProcesser(KafkaStream<String, String> stream, Integer threadNum) {
         this.stream = stream;
+        this.threadNum = threadNum;
     }
 
     @Override
@@ -28,7 +30,7 @@ public class ConsumerKafkaStreamProcesser implements Runnable {
         while (iterator.hasNext()){
 
             MessageAndMetadata<String, String> value = iterator.next();
-            System.out.println("partition: " + value.partition() + " offset: " + value.offset() + " value: " + value.message());
+            System.out.println("threadNum: " + this.threadNum + " partition: " + value.partition() + " offset: " + value.offset() + " value: " + value.message());
         }
     }
 }

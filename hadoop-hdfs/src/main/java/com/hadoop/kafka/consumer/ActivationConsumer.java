@@ -60,8 +60,10 @@ public class ActivationConsumer {
         // 创建连接池
         this.executorPool = Executors.newFixedThreadPool(this.numThreads);
 
+        Integer threadNum = 0;
         for (KafkaStream<String, String> stream : kafkaStreams){
-            this.executorPool.submit(new ConsumerKafkaStreamProcesser(stream));
+            this.executorPool.submit(new ConsumerKafkaStreamProcesser(stream, threadNum));
+            threadNum++;
         }
     }
 

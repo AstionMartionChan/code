@@ -21,15 +21,13 @@ public class MyPartition implements Partitioner {
     @Override
     public int partition(Object key, int numPartitions) {
         String str = key.toString();
-        if (str.contains("1")){
-            System.out.println("1");
+        if (str.contains("0")){
             return 0;
-        } else if (str.contains("2")){
-            System.out.println("2");
+        } else if (str.contains("1")){
             return 1;
-        } else {
-            System.out.println("3");
+        } else if (str.contains("2")){
             return 2;
         }
+        return 0;
     }
 }
