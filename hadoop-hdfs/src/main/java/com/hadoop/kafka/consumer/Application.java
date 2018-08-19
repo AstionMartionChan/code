@@ -20,8 +20,8 @@ public class Application {
         Properties prop = new Properties();
         prop.load(Application.class.getClassLoader().getResourceAsStream("system.properties"));
 
-        ActivationConsumer consumer = new ActivationConsumer(prop);
+        ActivationConsumer activation = new ActivationConsumer(prop, new ActivationMessageParse());
 
-        consumer.consumer();
+        activation.consumer();
     }
 }

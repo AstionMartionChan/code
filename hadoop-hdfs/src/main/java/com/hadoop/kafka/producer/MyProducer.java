@@ -34,17 +34,15 @@ public class MyProducer {
         Integer num = 0;
 
         while (true){
-            KeyedMessage<String, String> keyedMessage1 = new KeyedMessage<String, String>(TOPIC, String.valueOf(random.nextInt(3)), num + "a");
-            KeyedMessage<String, String> keyedMessage2 = new KeyedMessage<String, String>(TOPIC, String.valueOf(random.nextInt(3)), num + "b");
-            KeyedMessage<String, String> keyedMessage3 = new KeyedMessage<String, String>(TOPIC, String.valueOf(random.nextInt(3)), num + "c");
+            KeyedMessage<String, String> keyedMessage1 = new KeyedMessage<String, String>(TOPIC, "{\"name\":\"cfy\",\"age\":25,\"properties\":{\"tokenId\":\"ji29012jidsal9f\",\"deviceId\":\"qwiods9jnvmb\"}}");
+            KeyedMessage<String, String> keyedMessage2 = new KeyedMessage<String, String>(TOPIC, "{\"name\":\"lym\",\"age\":26,\"properties\":{\"tokenId\":\"yuwqnjodis9jio\",\"deviceId\":\"09jl0sdi9sdas\"}}");
             list.add(keyedMessage1);
             list.add(keyedMessage2);
-            list.add(keyedMessage3);
             producer.send(list);
             num++;
 
             try {
-                Thread.sleep(2000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

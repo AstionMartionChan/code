@@ -34,12 +34,15 @@ public class ActivationConsumer {
 
     private ExecutorService executorPool;
 
+    private KafkaMessageParseable kafkaMessageParseable;
 
-    public ActivationConsumer(Properties prop) {
+
+    public ActivationConsumer(Properties prop, KafkaMessageParseable kafkaMessageParseable) {
         this.consumer = Consumer.createJavaConsumerConnector(new ConsumerConfig(prop));
         this.topic = prop.getProperty(KafkaConstant.TOPIC);
         // consumer消费数量与partition数量对应
         this.numThreads = Integer.parseInt(prop.getProperty(KafkaConstant.NUM_PARTITION));
+        this.kafkaMessageParseable = kafkaMessageParseable;
     }
 
     public void consumer() {
@@ -62,7 +65,7 @@ public class ActivationConsumer {
 
         Integer threadNum = 0;
         for (KafkaStream<String, String> stream : kafkaStreams){
-            this.executorPool.submit(new ConsumerKafkaStreamProcesser(stream, threadNum));
+            this.executorPool.submit(new ConsumerKafkaStreamProcesser(stream, kafkaMessageParseable, threadNum));
             threadNum++;
         }
     }
