@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Random;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,7 +21,7 @@ import java.util.Properties;
 
 public class MyProducer {
 
-    private static final String TOPIC = "leochan_partition";
+    private static final String TOPIC = "activation";
 
     public static void main(String[] args) throws IOException {
         Properties prop = new Properties();
@@ -28,17 +29,26 @@ public class MyProducer {
 
         Producer producer = new Producer<String, String>(new ProducerConfig(prop));
         List<KeyedMessage<String, String>> list = new ArrayList<>();
-        KeyedMessage<String, String> keyedMessage1 = new KeyedMessage<String, String>(TOPIC, "key1", "cfy");
-        KeyedMessage<String, String> keyedMessage2 = new KeyedMessage<String, String>(TOPIC, "key1", "lym");
-        KeyedMessage<String, String> keyedMessage3 = new KeyedMessage<String, String>(TOPIC, "key2", "chq");
-        KeyedMessage<String, String> keyedMessage4 = new KeyedMessage<String, String>(TOPIC, "key3", "zem");
-        list.add(keyedMessage1);
-        list.add(keyedMessage2);
-        list.add(keyedMessage3);
-        list.add(keyedMessage4);
 
-        producer.send(list);
-        producer.close();
+        Random random = new Random();
+        Integer num = 0;
+
+        while (true){
+            KeyedMessage<String, String> keyedMessage1 = new KeyedMessage<String, String>(TOPIC, "{\"name\":\"cfy\",\"age\":25,\"properties\":{\"tokenId\":\"ji29012jidsal9f\",\"deviceId\":\"qwiods9jnvmb\"}}");
+            KeyedMessage<String, String> keyedMessage2 = new KeyedMessage<String, String>(TOPIC, "{\"name\":\"lym\",\"age\":26,\"properties\":{\"tokenId\":\"yuwqnjodis9jio\",\"deviceId\":\"09jl0sdi9sdas\"}}");
+            list.add(keyedMessage1);
+            list.add(keyedMessage2);
+            producer.send(list);
+            num++;
+
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+
     }
 
 }

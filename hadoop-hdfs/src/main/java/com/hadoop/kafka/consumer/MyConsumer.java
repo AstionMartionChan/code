@@ -6,6 +6,8 @@ import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import kafka.javaapi.consumer.ConsumerConnector;
 import kafka.message.MessageAndMetadata;
+import kafka.serializer.StringDecoder;
+import kafka.utils.VerifiableProperties;
 
 import java.io.IOException;
 import java.util.*;
@@ -21,7 +23,7 @@ import java.util.*;
 
 public class MyConsumer {
 
-    private static final String TOPIC = "uv";
+    private static final String TOPIC = "activation";
 
     public static void main(String[] args) throws IOException {
         Properties prop = new Properties();
@@ -30,11 +32,13 @@ public class MyConsumer {
 
         Map<String, Integer> topicMap = new HashMap<>();
         topicMap.put(TOPIC, 2);
-        Map<String, List<KafkaStream<byte[], byte[]>>> messageStreams = consumer.createMessageStreams(topicMap);
+        StringDecoder keyDecoder = new StringDecoder(new VerifiableProperties());
+        StringDecoder valueDecoder = new StringDecoder(new VerifiableProperties());
+        Map<String, List<KafkaStream<String, String>>> messageStreams = consumer.createMessageStreams(topicMap, keyDecoder, valueDecoder);
 
-        List<KafkaStream<byte[], byte[]>> kafkaStreams = messageStreams.get(TOPIC);
+        List<KafkaStream<String, String>> kafkaStreams = messageStreams.get(TOPIC);
 
-        for (KafkaStream<byte[], byte[]> kafkaStream : kafkaStreams){
+        for (KafkaStream<String, String> kafkaStream : kafkaStreams){
             new Thread(new Worker(kafkaStream)).start();
         }
 
@@ -42,21 +46,21 @@ public class MyConsumer {
 
     static class Worker implements Runnable {
 
-        private KafkaStream<byte[], byte[]> kafkaStream;
+        private KafkaStream<String, String> kafkaStream;
 
-        Worker (KafkaStream<byte[], byte[]> kafkaStream){
+        Worker (KafkaStream<String, String> kafkaStream){
             this.kafkaStream = kafkaStream;
         }
 
         @Override
         public void run() {
-            ConsumerIterator<byte[], byte[]> iterator = kafkaStream.iterator();
+            ConsumerIterator<String, String> iterator = kafkaStream.iterator();
             while (iterator.hasNext()){
-                MessageAndMetadata<byte[], byte[]> next = iterator.next();
-                /*System.out.println("key: " + next.key()==null?"":new String(next.key()) + " " +
+                MessageAndMetadata<String, String> next = iterator.next();
+                System.out.println("key: " + next.key()==null?"":new String(next.key()) + " " +
                         "msg: " + next.message()==null?"":new String(next.message()) + " " +
                         "partition: " + next.partition() + " " +
-                        "offset: " + next.offset());*/
+                        "offset: " + next.offset());
                 System.out.println("----------------------------");
             }
         }
