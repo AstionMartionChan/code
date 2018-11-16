@@ -3,10 +3,10 @@ package com.cfy.utils
 import org.apache.kafka.common.TopicPartition
 import org.apache.spark.SparkConf
 import com.cfy.constants.ConfigurationKey._
-import org.apache.spark.streaming.Time
+import com.cfy.log.Logging
 import org.apache.spark.streaming.kafka010.OffsetRange
 
-object KafkaOffsetManager {
+object KafkaOffsetManager extends Logging{
 
   def getPartitionOffset(sparkConf: SparkConf, kafkaParams: Map[String, AnyRef]) = {
     check(sparkConf, kafkaParams)
@@ -26,11 +26,27 @@ object KafkaOffsetManager {
               `topic` in (${topics.mkString("'","','","'")})
          AND
               `group` = '${group}'
+         AND
+              `batch_time` =
+              (
+                SELECT
+                    `batch_time`
+                FROM
+                    ${tableName}
+                WHERE
+                    `topic` = '${topics.head}'
+                AND
+                    `group` = '${group}'
+                ORDER BY
+                    `batch_time` DESC
+                LIMIT 1
+              )
       """
 
+    logger.info(s"sql: ${sql}")
     var topicPartitionOffsets = Map[TopicPartition, Long]()
     JdbcHandler.select(sql) { rs =>
-      (rs.string(2), rs.int(3), rs.int(4))
+      (rs.string(1), rs.int(2), rs.int(3))
     }.map(t => topicPartitionOffsets += (new TopicPartition(t._1, t._2) -> t._3))
 
     (topics, topicPartitionOffsets)
@@ -39,10 +55,10 @@ object KafkaOffsetManager {
 
   def saveOffsetToMysql(sparkConf: SparkConf,
                         offsetRanges: Array[OffsetRange],
-                        batchTime: Time,
+                        batchTime: String,
                         group: String) = {
     val tableName = sparkConf.get(KAFKA_OFFSET_MYSQL_TABLE).toString
-    val batchParams = offsetRanges.toList.map(o => Seq(group, o.topic, o.partition, o.untilOffset, batchTime.milliseconds)).toSeq
+    val batchParams = offsetRanges.toList.map(o => Seq(group, o.topic, o.partition, o.untilOffset, batchTime)).toSeq
     val sql =
       s"""
          INSERT INTO ${tableName} (
@@ -50,7 +66,7 @@ object KafkaOffsetManager {
             `topic`,
             `partition`,
             `offset`,
-            `create_time`
+            `batch_time`
          ) VALUES (
             ?,
             ?,
@@ -63,7 +79,7 @@ object KafkaOffsetManager {
   }
 
 
-  private def check(implicit sparkConf: SparkConf, kafkaParams: Map[String, AnyRef] ): Unit = {
+  private def check(sparkConf: SparkConf, kafkaParams: Map[String, AnyRef] ): Unit = {
     require(sparkConf.contains(KAFKA_OFFSET_MYSQL_TABLE), s"config ${KAFKA_OFFSET_MYSQL_TABLE} is missing")
     require(kafkaParams.contains(KAFKA_TOPIC), s"${KAFKA_TOPIC} is missing")
     require(kafkaParams.contains(GROUP), s"${GROUP} is missing")

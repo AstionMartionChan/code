@@ -7,6 +7,13 @@ object ConfigurationKey {
   val POINT = "."
   val UNDERLINE = "_"
 
+  val YMDHMS = "yyyy-MM-dd HH:mm:ss"
+
+  val INT = "int"
+  val DOUBLE = "double"
+  val STRING = "string"
+
+
   val JDBC_DRIVER = "jdbc.driver"
   val JDBC_URL = "jdbc.url"
   val JDBC_USERNAME = "jdbc.username"
