@@ -1,6 +1,7 @@
 package com.cfy
 
-import com.jayway.jsonpath.JsonPath
+import com.alibaba.fastjson.{JSON, JSONPath}
+
 import scala.collection.JavaConverters._
 
 object JsonPathTest {
@@ -13,12 +14,27 @@ object JsonPathTest {
 //    list2.foreach(println(_))
     val value = "{\"name\": \"cfy\", \"age\": 25, \"sex\": \"男\", \"properties\":{\"price\": 8888888888.88}}"
 
-    val jsonPathList = JsonPath.parse(json).read[java.util.List[String]]("$.relation[*].jsonPath").asScala.toList
-    val result = jsonPathList.map(jsonPath => {
-      JsonPath.parse(value).read[Any]("$." + jsonPath)
-    })
+//    val jsonPathList = JsonPath.parse(json).read[java.util.List[String]]("$.relation[*].jsonPath").asScala.toList
+//
+//
+//
+//    val result = jsonPathList.map(jsonPath => {
+//      JsonPath.parse(value).read[Any]("$." + jsonPath)
+//    })
+//
+//    result.foreach(println(_))
 
-    result.foreach(println(_))
+
+
+
+
+
+    val jsonObj = JSON.parseObject(value)
+    val name = JSONPath.eval(jsonObj, "$.name")
+    val a = JSONPath.contains(jsonObj, "$.name")
+    val b = JSONPath.contains(jsonObj, "$.ada")
+
+    println(a)
   }
 
 }

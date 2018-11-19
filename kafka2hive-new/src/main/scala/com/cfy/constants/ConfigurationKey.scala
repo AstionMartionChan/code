@@ -12,6 +12,7 @@ object ConfigurationKey {
   val INT = "int"
   val DOUBLE = "double"
   val STRING = "string"
+  val NULL = "null"
 
 
   val JDBC_DRIVER = "jdbc.driver"
