@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+  <property>
+    <name>hive.metastore.uris</name>
+    <!--<value>thrift://172.16.32.82:9083</value>-->
+    <!--<value>thrift://hwwg-bigdata-hadoopnn-prod-1:9083</value>-->
+    <!--<value>thrift://172.17.4.44:9083</value>-->
+    <value>thrift://172.16.32.8:9083</value>
+  </property>
+</configuration>

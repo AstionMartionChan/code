@@ -32,7 +32,7 @@ object JdbcHandler {
   }
 
 
-  def select[T](sql: String)(f:WrappedResultSet => T) = {
+  def select[T](sql: String)(f: WrappedResultSet => T) = {
     init
     DB readOnly { implicit session =>
       SQL(sql).map(f).list.apply

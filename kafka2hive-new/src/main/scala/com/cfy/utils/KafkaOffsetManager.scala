@@ -10,7 +10,7 @@ object KafkaOffsetManager extends Logging{
 
   def getPartitionOffset(sparkConf: SparkConf, kafkaParams: Map[String, AnyRef]) = {
     check(sparkConf, kafkaParams)
-    val topics = kafkaParams.get(KAFKA_TOPIC).get.toString.split(COMMA).toList
+    val topics = kafkaParams.get(KAFKA_TOPICS).get.toString.split(COMMA).toList
     val group = kafkaParams.get(GROUP).get.toString
     val tableName = sparkConf.get(KAFKA_OFFSET_MYSQL_TABLE).toString
 
@@ -81,7 +81,7 @@ object KafkaOffsetManager extends Logging{
 
   private def check(sparkConf: SparkConf, kafkaParams: Map[String, AnyRef] ): Unit = {
     require(sparkConf.contains(KAFKA_OFFSET_MYSQL_TABLE), s"config ${KAFKA_OFFSET_MYSQL_TABLE} is missing")
-    require(kafkaParams.contains(KAFKA_TOPIC), s"${KAFKA_TOPIC} is missing")
+    require(kafkaParams.contains(KAFKA_TOPICS), s"${KAFKA_TOPICS} is missing")
     require(kafkaParams.contains(GROUP), s"${GROUP} is missing")
   }
 
