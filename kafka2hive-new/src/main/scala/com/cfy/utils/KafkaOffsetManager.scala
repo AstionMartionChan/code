@@ -12,44 +12,36 @@ object KafkaOffsetManager extends Logging{
     check(sparkConf, kafkaParams)
     val topics = kafkaParams.get(KAFKA_TOPICS).get.toString.split(COMMA).toList
     val group = kafkaParams.get(GROUP).get.toString
-    val tableName = sparkConf.get(KAFKA_OFFSET_MYSQL_TABLE).toString
+    val offsetStorage = sparkConf.get(KAFKA_OFFSET_STORAGE).toString
 
-    val sql =
-      s"""
-         SELECT
-              `topic`,
-              `partition`,
-              `offset`
-         FROM
-              ${tableName}
-         WHERE
-              `topic` in (${topics.mkString("'","','","'")})
-         AND
-              `group` = '${group}'
-         AND
-              `batch_time` =
-              (
-                SELECT
-                    `batch_time`
-                FROM
-                    ${tableName}
-                WHERE
-                    `topic` = '${topics.head}'
-                AND
-                    `group` = '${group}'
-                ORDER BY
-                    `batch_time` DESC
-                LIMIT 1
-              )
-      """
+    offsetStorage match {
+      case MYSQL => {
+        require(sparkConf.contains(KAFKA_OFFSET_MYSQL_TABLE), s"config ${KAFKA_OFFSET_MYSQL_TABLE} is missing")
+        val tableName = sparkConf.get(KAFKA_OFFSET_MYSQL_TABLE).toString
+        topics.map(topic => {
+          val sql = getSelectSql(tableName, topic, group)
 
-    logger.info(s"sql: ${sql}")
-    var topicPartitionOffsets = Map[TopicPartition, Long]()
-    JdbcHandler.select(sql) { rs =>
-      (rs.string(1), rs.int(2), rs.int(3))
-    }.map(t => topicPartitionOffsets += (new TopicPartition(t._1, t._2) -> t._3))
+          if (logger.isDebugEnabled){
+            logger.info(s"sql: ${sql}")
+          }
 
-    (topics, topicPartitionOffsets)
+          val topicPartitionOffsets = JdbcHandler.select(sql) { rs =>
+            (rs.string(1), rs.int(2), rs.long(3))
+          }.map(t => (new TopicPartition(t._1, t._2) -> t._3)).toMap
+
+          (topic -> topicPartitionOffsets)
+        }).toMap
+      }
+//      case ZK =>
+      case _ => throw new UnsupportedOperationException(s"${offsetStorage.toString}")
+    }
+
+
+
+
+
+
+
   }
 
 
@@ -80,9 +72,40 @@ object KafkaOffsetManager extends Logging{
 
 
   private def check(sparkConf: SparkConf, kafkaParams: Map[String, AnyRef] ): Unit = {
-    require(sparkConf.contains(KAFKA_OFFSET_MYSQL_TABLE), s"config ${KAFKA_OFFSET_MYSQL_TABLE} is missing")
     require(kafkaParams.contains(KAFKA_TOPICS), s"${KAFKA_TOPICS} is missing")
     require(kafkaParams.contains(GROUP), s"${GROUP} is missing")
+    require(sparkConf.contains(KAFKA_OFFSET_STORAGE), s"${KAFKA_OFFSET_STORAGE} is missing")
   }
 
+
+
+  private def getSelectSql(tableName: String, topic: String, group: String) = {
+    s"""
+      SELECT
+          `topic`,
+          `partition`,
+          `offset`
+      FROM
+          ${tableName}
+      WHERE
+          `topic` = '${topic}'
+      AND
+          `group` = '${group}'
+      AND
+          `batch_time` =
+          (
+            SELECT
+                `batch_time`
+            FROM
+                ${tableName}
+            WHERE
+                `topic` = '${topic}'
+            AND
+                `group` = '${group}'
+            ORDER BY
+                `batch_time` DESC
+            LIMIT 1
+          )
+    """
+  }
 }

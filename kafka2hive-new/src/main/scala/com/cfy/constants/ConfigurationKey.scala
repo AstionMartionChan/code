@@ -34,6 +34,9 @@ object ConfigurationKey {
   val KAFKA_BOOTSTRAP_SERVERS = "kafka.bootstrap.servers"
   val KAFKA_OFFSET_RESET = "kafka.offset.reset"
   val KAFKA_OFFSET_STORAGE = "kafka.offset.storage"
+  val ZK_CONNECT = "zk.connect"
+  val MYSQL = "mysql"
+  val ZK = "zk"
 
 
   val MYSQL_STORAGE_TABLENAME = "mysql.storage.tablename"

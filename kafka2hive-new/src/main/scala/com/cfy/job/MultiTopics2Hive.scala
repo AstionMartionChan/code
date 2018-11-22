@@ -95,6 +95,7 @@ object MultiTopics2Hive extends BaseStatistical with Logging with Serializable {
       .set("spark.streaming.duration", "30000")
       .set("kafka.offset.mysql.table", "t_kafka2hive_offset")
       .set("hive.exec.dynamic.partition.mode", "nonstrict")
+         .set(KAFKA_OFFSET_STORAGE, "mysql")
 
     val ssc = new StreamingContext(sparkConf, Duration(sparkConf.get(SPARK_STREAMING_DURATION, "5000").toLong))
     // 获取基本配置

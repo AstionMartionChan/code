@@ -20,8 +20,6 @@ trait BaseStatistical {
   case class Kafka2HiveConfig(topic: String, hiveTableName: String,
                               fieldRelationMap: mutable.LinkedHashMap[String, (String, String)], partition: Map[String, String], where: String)
 
-  case class Partition()
-
   /**
     * 解析json转换为row
     * @param record
@@ -106,7 +104,7 @@ trait BaseStatistical {
   }
 
 
-  def getConfigAndSchema(configs: List[(String, String, String)],
+  final def getConfigAndSchema(configs: List[(String, String, String)],
                         toStructFields: List[Kafka2HiveConfig] => List[StructField]) = {
 
     val kafka2HiveConfigs = configs.map(config => {
