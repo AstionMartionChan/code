@@ -22,6 +22,30 @@
       <name>Scala-Tools Maven2 Repository</name>
       <url>http://scala-tools.org/repo-releases</url>
     </repository>
+    <repository>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <url>http://repo1.maven.org/maven2/</url>
+    </repository>
+    <repository>
+      <id>kingnetdc</id>
+      <name>kingnet data center repository</name>
+      <url>http://192.168.78.67:8981/nexus/content/groups/public</url>
+    </repository>
+    <repository>
+      <id>Spark repository</id>
+      <url>http://www.sparkjava.com/nexus/content/repositories/spark/</url>
+    </repository>
+    <repository>
+      <id>kingnetdc-public</id>
+      <url>http://192.168.78.128:8081/repository/maven-public/</url>
+    </repository>
+
   </repositories>
 
   <pluginRepositories>
@@ -110,6 +134,18 @@
       <artifactId>curator-framework</artifactId>
       <version>${curator.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.kingnetdc</groupId>
+      <artifactId>watermelon</artifactId>
+      <version>1.0.2</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.hbase</groupId>
+          <artifactId>hbase-spark</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
   </dependencies>
 
   <build>

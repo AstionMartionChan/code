@@ -141,7 +141,7 @@ object SingleTopic2Hive extends BaseStatistical with Logging with Serializable {
       sparkSession.sql(sql)
 
       // 保存offset
-      KafkaOffsetManager.saveOffsetToMysql(sparkConf, offsetRanges, new DateTime(batchTime.milliseconds).toString(YMDHMS), kafkaParams.get(GROUP).get.toString)
+      KafkaOffsetManager.saveOffsets(sparkConf, offsetRanges, new DateTime(batchTime.milliseconds).toString(YMDHMS), kafkaParams.get(GROUP).get.toString)
     })
 
 
