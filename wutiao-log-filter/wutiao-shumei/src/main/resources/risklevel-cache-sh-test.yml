@@ -1,0 +1,34 @@
+keyPrefix: ""                                           
+retryNum: 1                                             
+retryIdle: 1000                                         
+needHash: false
+getWriteBack: true                                     
+getWriteBackTime: 86400
+items:
+    -
+        cacheLevel: 1                                   
+        cacheType: memory                               
+        props:
+            capacity: 10000                             
+    -
+        cacheLevel: 2
+        cacheType: redis
+        props:
+            host: 172.27.1.40
+            port: 6379
+            password:
+    -
+        cacheLevel: 3
+        cacheType: mysql-datasource
+        props:
+            dbUrl: jdbc:mysql://172.27.2.72:3306/wutiao?useSSL=false
+            username: datac
+            password: g3Z2zHF6uTxK6#rnlZ7
+            table: wutiao_shumei_risklevel_cache
+            keyColumnName: id                          
+            valueColumnName: risklevel                 
+            batchSize: 1000                             
+            writeBack : true
+            keyPartition: 50  
+            poolNum: 20                                                      
+            autoCreateTable: false

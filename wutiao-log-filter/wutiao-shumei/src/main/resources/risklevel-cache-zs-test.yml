@@ -1,0 +1,33 @@
+keyPrefix: ""                                           
+retryNum: 1                                             
+retryIdle: 1000                                         
+needHash: false
+getWriteBack: true                                     
+getWriteBackTime: 86400
+items:
+    -
+        cacheLevel: 1                                   
+        cacheType: memory                               
+        props:
+            capacity: 10000                             
+    -
+        cacheLevel: 2
+        cacheType: redis-cluster
+        props:
+            connect: 192.168.110.87:6379,192.168.110.93:6379,192.168.110.94:6379,172.17.2.54:6379,172.17.4.22:6379,172.17.4.23:6379
+            password:
+    -
+        cacheLevel: 3
+        cacheType: mysql-datasource
+        props:
+            dbUrl: jdbc:mysql://172.17.2.91:3306/wutiao?useSSL=false
+            username: root1                             
+            password: yunying.kingnet
+            table: wutiao_shumei_risklevel_cache
+            keyColumnName: id                          
+            valueColumnName: risklevel                 
+            batchSize: 1000                             
+            writeBack : true
+            keyPartition: 50  
+            poolNum: 20                                                      
+            autoCreateTable: false
