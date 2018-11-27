@@ -1,0 +1,13 @@
+
+keyPrefix: ""
+retryNum: 1
+retryIdle: 1000
+needHash: true                                         # 是否需要hash，默认是true
+items:
+    -
+        cacheLevel: 2
+        cacheType: redis
+        props:
+            host: localhost
+            port: 6379
+            password:                                  # 如果没有密码，可以为空

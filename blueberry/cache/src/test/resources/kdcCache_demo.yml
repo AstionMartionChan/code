@@ -1,0 +1,55 @@
+
+keyPrefix: ""                                           # 默认前缀为空，根据需求配置不同的前缀
+retryNum: 1                                             # 默认为1，可选值 1/2/3
+retryIdle: 1000                                         # 重试间隔，默认是1000毫秒，类型是int
+needHash: false                                         # 是否需要hash，默认是true
+getWriteBack: false                                     # 在获取的时候是否在前面的get中回写数据
+getWriteBackTime: 86400                                 # 回写值的过期时间，只有在开启回写的时候生效
+items:
+    -
+        cacheLevel: 1                                   # 会按照 cacheLevel 进行排序
+        cacheType: memory                               # 支持的缓存类型
+        props:
+            capacity: 1000                              # 内存的空间大小
+    -
+        cacheLevel: 2
+        cacheType: redis
+        props:
+            host: localhost                             # redis 主机
+            port: 6379                                  # redis 端口，如果不配置会是默认端口
+            password:                             # 如果没有密码，可以为空
+    -
+        cacheLevel: 3
+        cacheType: redis-cluster
+        props:
+            connect: 192.168.77.25:6381,192.168.77.26:6381,192.168.77.27:6381,192.168.77.28:6381,192.168.77.29:6381,192.168.77.11:6381
+            password:                             # 如果没有密码，可以为空
+    -
+        cacheLevel: 4
+        cacheType: mysql
+        props:
+            dbUrl: jdbc:mysql://localhost:3306/kingnet?useSSL=false
+            username: root                              # 数据库访问用户名
+            password: 123456                            # 数据库访问密码
+            table: mysql_cache                          # 数据表，如果不存在，会自动创建，前提有自动创建权限
+            keyColumnName: key                          # 可选 默认为key
+            valueColumnName: value                      # 可选 默认为value
+            batchSize: 1000                             # 可选 默认为1000
+            writeBack : true                            # 可选 默认为false
+            keyPartition: 20                            # 可选 默认为20
+            autoCreateTable: true                       # 可选 默认为true
+    -
+        cacheLevel: 5
+        cacheType: mysql-datasource
+        props:
+            dbUrl: jdbc:mysql://localhost:3306/kingnet?useSSL=false
+            username: root                              # 数据库访问用户名
+            password: 123456                            # 数据库访问密码
+            table: mysql_cache_datasource               # 数据表，如果不存在，会自动创建，前提有自动创建权限
+            keyColumnName: key                          # 可选 默认为key
+            valueColumnName: value                      # 可选 默认为value
+            batchSize: 1000                             # 可选 默认为1000
+            writeBack : true                            # 可选 默认为false
+            keyPartition: 20                            # 可选 默认为20
+            poolNum: 20                                 # 可选 默认为20
+            autoCreateTable: true                       # 可选 默认为true
