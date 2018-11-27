@@ -8,7 +8,7 @@ import org.apache.spark.streaming.kafka010.OffsetRange
 
 object KafkaOffsetManager extends Logging{
 
-  def getPartitionOffset(sparkConf: SparkConf, kafkaParams: Map[String, AnyRef]) = {
+  def getOffsets(sparkConf: SparkConf, kafkaParams: Map[String, AnyRef]) = {
     check(sparkConf, kafkaParams)
     val topics = kafkaParams.get(KAFKA_TOPICS).get.toString.split(COMMA).toList
     val group = kafkaParams.get(GROUP).get.toString
@@ -32,42 +32,44 @@ object KafkaOffsetManager extends Logging{
           (topic -> topicPartitionOffsets)
         }).toMap
       }
-//      case ZK =>
+      case ZK => {
+        require(sparkConf.contains(ZK_CONNECT), s"config ${ZK_CONNECT} is missing")
+        topics.map(topic => {
+          val client = ZkClient.getInstance(sparkConf.get(ZK_CONNECT))
+          val topicPartitionOffsets = CommonUtil.safeRelease(client)(_.getOffsets(topic, group))
+
+          (topic -> topicPartitionOffsets)
+        }).toMap
+      }
       case _ => throw new UnsupportedOperationException(s"${offsetStorage.toString}")
     }
-
-
-
-
-
-
-
   }
 
 
-  def saveOffsetToMysql(sparkConf: SparkConf,
+  def saveOffsets(sparkConf: SparkConf,
                         offsetRanges: Array[OffsetRange],
                         batchTime: String,
                         group: String) = {
-    val tableName = sparkConf.get(KAFKA_OFFSET_MYSQL_TABLE).toString
-    val batchParams = offsetRanges.toList.map(o => Seq(group, o.topic, o.partition, o.untilOffset, batchTime)).toSeq
-    val sql =
-      s"""
-         INSERT INTO ${tableName} (
-            `group`,
-            `topic`,
-            `partition`,
-            `offset`,
-            `batch_time`
-         ) VALUES (
-            ?,
-            ?,
-            ?,
-            ?,
-            ?
-         )
-       """
-    JdbcHandler.insertOrUpdate(sql, batchParams)
+
+    val offsetStorage = sparkConf.get(KAFKA_OFFSET_STORAGE).toString
+
+    offsetStorage match {
+      case MYSQL => {
+        val tableName = sparkConf.get(KAFKA_OFFSET_MYSQL_TABLE).toString
+        val batchParams = offsetRanges.toList.map(o => Seq(group, o.topic, o.partition, o.untilOffset, batchTime)).toSeq
+        val sql = getInsertSql(tableName)
+
+        JdbcHandler.insertOrUpdate(sql, batchParams)
+      }
+      case ZK => {
+        require(sparkConf.contains(ZK_CONNECT), s"config ${ZK_CONNECT} is missing")
+        offsetRanges.toList.map(offset => {
+          val client = ZkClient.getInstance(sparkConf.get(ZK_CONNECT))
+          CommonUtil.safeRelease(client)(_.commitOffsets(offset.topic, group, offset.partition, offset.untilOffset))
+        })
+      }
+      case _ => throw new UnsupportedOperationException(s"${offsetStorage.toString}")
+    }
   }
 
 
@@ -77,7 +79,23 @@ object KafkaOffsetManager extends Logging{
     require(sparkConf.contains(KAFKA_OFFSET_STORAGE), s"${KAFKA_OFFSET_STORAGE} is missing")
   }
 
-
+  private def getInsertSql(tableName: String) = {
+    s"""
+     INSERT INTO ${tableName} (
+        `group`,
+        `topic`,
+        `partition`,
+        `offset`,
+        `batch_time`
+     ) VALUES (
+        ?,
+        ?,
+        ?,
+        ?,
+        ?
+     )
+    """
+  }
 
   private def getSelectSql(tableName: String, topic: String, group: String) = {
     s"""

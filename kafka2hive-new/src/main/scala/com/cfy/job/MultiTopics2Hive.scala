@@ -9,12 +9,15 @@ import org.apache.spark.SparkConf
 import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.types._
 import org.apache.spark.streaming.{Duration, StreamingContext}
-import org.apache.spark.streaming.kafka010.{HasOffsetRanges, OffsetRange}
+import org.apache.spark.streaming.kafka010.{HasOffsetRanges, KafkaRDD, OffsetRange}
 import org.joda.time.DateTime
 import java.util.{LinkedHashMap => JLinkedHashMap, List => JList}
 import java.math.{BigDecimal => JBigDecimal}
 
 import com.alibaba.fastjson.{JSON, JSONPath}
+import org.apache.spark.rdd.UnionRDD
+
+import scala.collection.mutable.ListBuffer
 
 
 object MultiTopics2Hive extends BaseStatistical with Logging with Serializable {
@@ -95,7 +98,8 @@ object MultiTopics2Hive extends BaseStatistical with Logging with Serializable {
       .set("spark.streaming.duration", "30000")
       .set("kafka.offset.mysql.table", "t_kafka2hive_offset")
       .set("hive.exec.dynamic.partition.mode", "nonstrict")
-         .set(KAFKA_OFFSET_STORAGE, "mysql")
+      .set(KAFKA_OFFSET_STORAGE, "zk")
+      .set(ZK_CONNECT, "localhost:2181")
 
     val ssc = new StreamingContext(sparkConf, Duration(sparkConf.get(SPARK_STREAMING_DURATION, "5000").toLong))
     // 获取基本配置
@@ -113,14 +117,15 @@ object MultiTopics2Hive extends BaseStatistical with Logging with Serializable {
       rdd
     })
 
-    val sparkSession = SparkSession.builder().config(sparkConf).enableHiveSupport().getOrCreate()
+    val sparkSession = SparkSession.builder().config(sparkConf).getOrCreate()
     import sparkSession.implicits._
 
     jsonStream.foreachRDD((rdd, batchTime) => {
       val configsAndSchema = bc.value
-      val rowRDD = rdd.map(record => {
-        // 解析json转换成row
-        convertToRow(record, configsAndSchema)
+
+      val rowRDD =  rdd.map(record => {
+          // 解析json转换成row
+          convertToRow(record, configsAndSchema)
       })
 
       // 生成临时表
@@ -136,12 +141,11 @@ object MultiTopics2Hive extends BaseStatistical with Logging with Serializable {
       configsAndSchema._1.foreach(config => {
         val sql = generateSQL(config)
         logger.info(sql)
-        sparkSession.sql(sql)
+//        sparkSession.sql(sql)
       })
 
-
       // 保存offset
-      KafkaOffsetManager.saveOffsetToMysql(sparkConf, offsetRanges, new DateTime(batchTime.milliseconds).toString(YMDHMS), kafkaParams.get(GROUP).get.toString)
+      KafkaOffsetManager.saveOffsets(sparkConf, offsetRanges, new DateTime(batchTime.milliseconds).toString(YMDHMS), kafkaParams.get(GROUP).get.toString)
     })
 
 

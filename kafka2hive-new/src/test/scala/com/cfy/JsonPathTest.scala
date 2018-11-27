@@ -24,8 +24,9 @@ object JsonPathTest {
 //
 //    result.foreach(println(_))
 
+    val ab = List[(String, String)] (("a", "1"), ("b", "2"))
 
-
+    val z = ab.toMap[String, String]
 
 
 
