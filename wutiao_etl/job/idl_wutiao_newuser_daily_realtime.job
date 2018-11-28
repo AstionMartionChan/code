@@ -1,0 +1,6 @@
+# idl_wutiao_newuser_daily_realtime
+
+type=command
+retries=3
+retry.backoff=300000
+command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/idl/idl_wutiao_newuser_daily_realtime.py -d ${params.workDate}

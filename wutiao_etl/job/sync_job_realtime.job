@@ -1,0 +1,5 @@
+# sync_job_realtime
+type=command
+dependencies=odl_wutiao_sync_wutiao_user
+
+command=echo 'ok'

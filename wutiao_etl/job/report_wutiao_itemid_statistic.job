@@ -1,0 +1,7 @@
+# report_wutiao_itemid_statistic
+
+type=command
+retries=3
+retry.backoff=300000
+dependencies=idl_wutiao_itemid_wb
+command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/report/report_wutiao_itemid_statistic.py -d ${params.workDate}

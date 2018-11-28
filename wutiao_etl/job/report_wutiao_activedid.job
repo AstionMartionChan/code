@@ -1,0 +1,7 @@
+# report_wutiao_activedid
+
+type=command
+retries=3
+retry.backoff=300000
+dependencies=report_wutiao_activeuser
+command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/report/report_wutiao_activedid.py -d ${params.workDate}

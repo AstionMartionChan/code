@@ -1,0 +1,7 @@
+#report_wutiao_user_fbwb
+
+type=command
+retries=5
+retry.backoff=300000
+dependencies=idl_wutiao_mediauser_sync,idl_wutiao_user
+command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/report/report_wutiao_user_fbwb.py -d ${params.workDate}

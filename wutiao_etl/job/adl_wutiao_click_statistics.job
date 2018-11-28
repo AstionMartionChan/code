@@ -1,0 +1,7 @@
+# adl_wutiao_click_statistics
+
+type=command
+retries=3
+retry.backoff=300000
+dependencies=idl_wutiao_user
+command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/adl/adl_wutiao_click_statistics.py -d ${params.workDate}

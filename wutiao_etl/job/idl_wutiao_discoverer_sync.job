@@ -1,0 +1,7 @@
+# idl_wutiao_discoverer_sync
+
+type=command
+retries=3
+retry.backoff=300000
+dependencies=odl_wutiao_sync_wutiao_user
+command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/idl/idl_wutiao_discoverer_sync.py -d ${params.workDate}

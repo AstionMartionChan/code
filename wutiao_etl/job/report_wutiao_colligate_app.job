@@ -1,0 +1,7 @@
+# report_wutiao_colligate_app
+
+type=command
+retries=3
+retry.backoff=300000
+dependencies=report_wutiao_activeuser,report_wutiao_retention,report_wutiao_total_assets,report_wutiao_activedid
+command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/report/report_wutiao_colligate_app.py -d ${params.workDate}

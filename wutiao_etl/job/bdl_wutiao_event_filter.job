@@ -1,0 +1,6 @@
+# bdl_wutiao_event
+type=command
+retries=3
+retry.backoff=300000
+dependencies=bdl_wutiao_event,idl_wutiao_filter
+command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/bdl/bdl_wutiao_event_filter.py -d ${params.workDate}

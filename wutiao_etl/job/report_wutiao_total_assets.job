@@ -1,0 +1,7 @@
+#report_wutiao_user_income
+
+type=command
+retries=5
+retry.backoff=300000
+dependencies=idl_wutiao_user
+command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/report/report_wutiao_total_assets.py -d ${params.workDate}
