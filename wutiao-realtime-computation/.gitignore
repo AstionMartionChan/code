@@ -1,0 +1,53 @@
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# maven target directories
+target/
+out/
+# bin/
+
+# other build-generated files
+dependency-reduced-pom.xml
+scalastyle-output.xml
+
+# IntelliJ
+.idea
+*.iml
+
+# Eclipse
+.project
+.classpath
+.settings
+
+# KDE
+.directory
+
+# OSX
+.DS_Store
+
+# Hawt.io 2 console
+d.ts/
+node_modules/
+libs/
+defs.d.ts
+
+.tern-project
+
+*.log
+
+# Dia diagrams
+*.dia~
+
+npm-debug.log
+
+# Python
+*.egg
+**/*.egg-info/**
+
+build.xml
+dependency-reduced-pom.xml

@@ -1,0 +1,12 @@
+metricsMySql:
+  url: jdbc:mysql://192.168.77.10:3306/kingnet?useSSL=false
+  user: root
+  password: MySQL1@3456
+metricsInfluxDB:
+  host: http://127.0.0.1:8086
+  username: spark
+  password: spark123
+  database: sparksource
+kafka:
+  bootstrap.servers: 172.27.6.137:9092,172.27.6.70:9092,172.27.6.101:9092,172.27.6.60:9092,172.27.6.124:9092
+  zookeeper.connect: 172.27.6.137:2181,172.27.6.70:2181,172.27.6.101:2181,172.27.6.60:2181,172.27.6.124:2181

@@ -1,0 +1,19 @@
+keyPrefix: ""
+retryNum: 1
+retryIdle: 1000
+needHash: false
+items:
+    -
+        cacheLevel: 1
+        cacheType: mysql
+        props:
+            dbUrl: jdbc:mysql://172.27.2.72:3306/wutiao?useSSL=false
+            username: datac
+            password: g3Z2zHF6uTxK6#rnlZ7
+            table: wutiao_item_cache
+            keyColumnName: item_id
+            valueColumnName: value
+            batchSize: 10000
+            writeBack : true
+            keyPartition: 20
+            autoCreateTable: false

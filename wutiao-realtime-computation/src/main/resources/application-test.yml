@@ -1,0 +1,12 @@
+metricsMySql:
+  url: jdbc:mysql://172.17.2.91:3306/wutiao?useSSL=false
+  user: root
+  password: 123456
+metricsInfluxDB:
+  host: http://172.17.4.31:8086
+  username: root
+  password: root
+  database: dana_realtime
+kafka:
+  bootstrap.servers: 172.17.4.5:9092,172.17.4.6:9092,172.17.4.7:9092,172.17.4.8:9092,172.17.4.9:9092
+  zookeeper.connect: 172.17.4.5:2181,172.17.4.6:2181,172.17.4.7:2181,172.17.4.8:2181,172.17.4.9:2181
