@@ -29,12 +29,15 @@ object MyUtils extends Logging{
 
     // 如果部分topic有存储offset，部分topic没有存储，则分别创建两个DStream合并返回
     if (notStorageTopics.size == 0){
+      logger.info(s"create direct stream with offset ${filtedTopicPartitionOffsets.values.reduce(_ ++ _)}")
+
       KafkaUtils.createDirectStream[K, V](ssc,
         PreferConsistent, ConsumerStrategies.Assign[K, V](
           filtedTopicPartitionOffsets.values.flatMap(_.keys), kafkaParams, filtedTopicPartitionOffsets.values.reduce(_ ++ _)
         )
       )
     } else if (notStorageTopics.size > 0 && filtedTopicPartitionOffsets.values.nonEmpty) {
+      //TODO UnionRDD取record有遗漏，暂时不支持
 //      KafkaUtils.createDirectStream[K, V](ssc,
 //        PreferConsistent, ConsumerStrategies.Assign[K, V](
 //          filtedTopicPartitionOffsets.values.flatMap(_.keys), kafkaParams, filtedTopicPartitionOffsets.values.reduce(_ ++ _)
@@ -46,6 +49,7 @@ object MyUtils extends Logging{
 
       throw new UnsupportedOperationException("some topic not storage from mysql")
     } else {
+      logger.info(s"create direct stream with topic ${notStorageTopics.toList}")
       KafkaUtils.createDirectStream[K, V](ssc,
         PreferConsistent, ConsumerStrategies.Subscribe[K, V](notStorageTopics.toList, kafkaParams))
     }

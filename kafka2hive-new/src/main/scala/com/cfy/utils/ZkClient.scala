@@ -1,5 +1,6 @@
 package com.cfy.utils
 
+import com.cfy.utils.SafaRelease.Closeable
 import org.apache.curator.framework.{CuratorFramework, CuratorFrameworkFactory}
 import org.apache.curator.retry.ExponentialBackoffRetry
 import org.apache.kafka.common.TopicPartition
@@ -15,7 +16,7 @@ import scala.collection.JavaConverters._
   */
 
 
-class ZkClient (private val client: CuratorFramework) extends AutoCloseable {
+class ZkClient (private val client: CuratorFramework) {
 
 
   def getOffsets(topic: String, group: String) : Map[TopicPartition, Long] = {
@@ -43,7 +44,7 @@ class ZkClient (private val client: CuratorFramework) extends AutoCloseable {
     }
   }
 
-  override def close(): Unit = {
+  def close() = {
     if (client != null){
       client.close
     }

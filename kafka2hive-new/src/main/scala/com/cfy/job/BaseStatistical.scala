@@ -1,19 +1,17 @@
 package com.cfy.job
 
 import com.alibaba.fastjson.{JSON, JSONPath}
-import com.cfy.config.ConfigurationManager
 import com.cfy.constants.ConfigurationKey._
 import com.cfy.utils.JdbcHandler
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.spark.sql.types._
-import java.util.{LinkedHashMap => JLinkedHashMap, List => JList, Map => JMap}
+import java.util.{Properties, List => JList}
 
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.spark.sql.Row
 
 import scala.collection.JavaConverters._
 import scala.collection.mutable
-import scala.collection.mutable.ListBuffer
 
 trait BaseStatistical {
 
@@ -40,14 +38,14 @@ trait BaseStatistical {
     * 获取kafka配置
     * @return
     */
-  def getKafkaParmas = {
+  def getKafkaParmas(prop: Properties) = {
     Map (
-      "topics" -> ConfigurationManager.getString(KAFKA_TOPICS).get,
-      "bootstrap.servers" -> ConfigurationManager.getString(KAFKA_BOOTSTRAP_SERVERS).get,
+      "topics" -> prop.getProperty(KAFKA_TOPICS),
+      "bootstrap.servers" -> prop.getProperty(KAFKA_BOOTSTRAP_SERVERS),
       "key.deserializer" -> classOf[StringDeserializer],
       "value.deserializer" -> classOf[StringDeserializer],
-      "group.id" -> ConfigurationManager.getString(KAFKA_CONSUMER_GROUP).get,
-      "auto.offset.reset" -> ConfigurationManager.getString(KAFKA_OFFSET_RESET).getOrElse("latest"),
+      "group.id" -> prop.getProperty(KAFKA_CONSUMER_GROUP),
+      "auto.offset.reset" -> prop.getOrDefault(KAFKA_OFFSET_RESET, "latest"),
       "enable.auto.commit" -> (false: java.lang.Boolean)
     )
   }
@@ -99,7 +97,7 @@ trait BaseStatistical {
   def addDefaultStructFields(structFields: List[StructField]) = {
     structFields.toList :::
     StructField(KAFKA_TOPIC, StringType) ::
-    StructField(KAFKA_UNIQUE_ID, StringType) ::
+//    StructField(KAFKA_UNIQUE_ID, StringType) ::
     Nil
   }
 
@@ -117,7 +115,8 @@ trait BaseStatistical {
       val fieldList = JSONPath.eval(jsonObj, "$.relation.hiveField").asInstanceOf[JList[String]]
       val typeList = JSONPath.eval(jsonObj, "$.relation.hiveType").asInstanceOf[JList[String]]
       val jsonPathList = JSONPath.eval(jsonObj, "$.relation.jsonPath").asInstanceOf[JList[String]]
-      val partition = JSONPath.eval(jsonObj, "$.partition").asInstanceOf[JMap[String, String]].asScala.toMap
+      val partitionNameList = JSONPath.eval(jsonObj, "$.partition.name").asInstanceOf[JList[String]].asScala.toList
+      val partitionExpressionList = JSONPath.eval(jsonObj, "$.partition.expression").asInstanceOf[JList[String]].asScala.toList
       val where = JSONPath.eval(jsonObj, "$.where").asInstanceOf[String]
 
       if (fieldList.size == typeList.size){
@@ -126,6 +125,8 @@ trait BaseStatistical {
         for (index <- 0 until fieldList.size) {
           fieldRelationMap += (fieldList.get(index) -> (typeList.get(index), jsonPathList.get(index)))
         }
+
+        val partition = partitionNameList.zip(partitionExpressionList).toMap[String, String]
 
         new Kafka2HiveConfig(topic, hiveTableName, fieldRelationMap, partition, where)
       } else {

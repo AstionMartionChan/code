@@ -36,7 +36,7 @@ object KafkaOffsetManager extends Logging{
         require(sparkConf.contains(ZK_CONNECT), s"config ${ZK_CONNECT} is missing")
         topics.map(topic => {
           val client = ZkClient.getInstance(sparkConf.get(ZK_CONNECT))
-          val topicPartitionOffsets = CommonUtil.safeRelease(client)(_.getOffsets(topic, group))
+          val topicPartitionOffsets = SafaRelease.using(client)(_.getOffsets(topic, group))
 
           (topic -> topicPartitionOffsets)
         }).toMap
@@ -64,8 +64,9 @@ object KafkaOffsetManager extends Logging{
       case ZK => {
         require(sparkConf.contains(ZK_CONNECT), s"config ${ZK_CONNECT} is missing")
         offsetRanges.toList.map(offset => {
+          //TODO 资源消耗较大，后期改为client内部迭代存储
           val client = ZkClient.getInstance(sparkConf.get(ZK_CONNECT))
-          CommonUtil.safeRelease(client)(_.commitOffsets(offset.topic, group, offset.partition, offset.untilOffset))
+          SafaRelease.using(client)(_.commitOffsets(offset.topic, group, offset.partition, offset.untilOffset))
         })
       }
       case _ => throw new UnsupportedOperationException(s"${offsetStorage.toString}")

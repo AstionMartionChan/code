@@ -11,17 +11,19 @@ import com.cfy.log.Logging
   */
 
 
-object CommonUtil extends Logging{
+object SafaRelease extends Logging{
 
-  type Closeable = {def close()}
+  type Closeable = {def close(): Unit}
 
-  def safeRelease[R <: Closeable, A](resource: R)(f: R => A): A = {
+  def using[R <: Closeable, A](resource: R)(f: R => A): A = {
     try {
       f(resource)
     } catch {
       case e: Exception => throw new Exception("safe release fail ", e)
     } finally {
-      resource.close()
+      if (resource != null){
+        resource.close()
+      }
     }
   }
 

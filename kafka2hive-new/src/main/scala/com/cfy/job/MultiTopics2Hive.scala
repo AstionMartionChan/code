@@ -1,7 +1,6 @@
 package com.cfy.job
 
 import com.cfy.constants.ConfigurationKey._
-import com.cfy.job.SingleTopic2Hive.caseDataType
 import com.cfy.log.Logging
 import com.cfy.utils.{KafkaOffsetManager, MyUtils}
 import org.apache.kafka.clients.consumer.ConsumerRecord
@@ -9,15 +8,15 @@ import org.apache.spark.SparkConf
 import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.types._
 import org.apache.spark.streaming.{Duration, StreamingContext}
-import org.apache.spark.streaming.kafka010.{HasOffsetRanges, KafkaRDD, OffsetRange}
+import org.apache.spark.streaming.kafka010.{HasOffsetRanges, OffsetRange}
 import org.joda.time.DateTime
-import java.util.{LinkedHashMap => JLinkedHashMap, List => JList}
 import java.math.{BigDecimal => JBigDecimal}
 
+import scala.collection.JavaConverters._
 import com.alibaba.fastjson.{JSON, JSONPath}
-import org.apache.spark.rdd.UnionRDD
+import com.cfy.config.ConfigurationManager
+import org.apache.commons.lang.StringUtils
 
-import scala.collection.mutable.ListBuffer
 
 
 object MultiTopics2Hive extends BaseStatistical with Logging with Serializable {
@@ -60,26 +59,36 @@ object MultiTopics2Hive extends BaseStatistical with Logging with Serializable {
         schema.map(sf => {
           val splitedField = sf.name.toString.split(OF)
           if(splitedField.length > 1 && topic.equals(splitedField(0)) && config.fieldRelationMap.contains(splitedField(1))){
-            val fullJsonPath = "$." + config.fieldRelationMap.get(splitedField(1)).get._2
-            val jsonObj = JSON.parseObject(record.value())
-            if (JSONPath.contains(jsonObj, fullJsonPath)){
-              val value = JSONPath.eval(jsonObj, fullJsonPath)
-              val decimalType = DataTypes.createDecimalType(23,8)
-              sf.dataType match {
-                case StringType => value.toString
-                case IntegerType => value.toString.toInt
-                case LongType => value.toString.toLong
-                case decimalType => new JBigDecimal(value.toString)
-                case BooleanType => value.toString.toBoolean
-                case _ => value
+            val jsonPath = config.fieldRelationMap.get(splitedField(1)).get._2
+            jsonPath match {
+              case KAFKA_UNIQUE_ID => s"${record.topic}_${record.partition}_${record.offset}"
+              case _ => {
+                val fullJsonPath = "$." + jsonPath
+                val jsonObj = JSON.parseObject(record.value())
+                if (JSONPath.contains(jsonObj, fullJsonPath)){
+                  val value = JSONPath.eval(jsonObj, fullJsonPath)
+                  if (StringUtils.isNotBlank(value.toString)){
+                    val decimalType = DataTypes.createDecimalType(23,8)
+                    sf.dataType match {
+                      case StringType => value.toString
+                      case IntegerType => value.toString.toInt
+                      case LongType => value.toString.toLong
+                      case decimalType => new JBigDecimal(value.toString)
+                      case BooleanType => value.toString.toBoolean
+                      case _ => value
+                    }
+                  } else {
+                    null
+                  }
+                } else {
+                  null
+                }
               }
-            } else {
-              null
             }
           } else {
             sf.name match {
               case KAFKA_TOPIC => record.topic
-              case KAFKA_UNIQUE_ID => s"${record.topic}_${record.partition}_${record.offset}"
+//              case KAFKA_UNIQUE_ID => s"${record.topic}_${record.partition}_${record.offset}"
               case _ => null
             }
           }
@@ -92,19 +101,28 @@ object MultiTopics2Hive extends BaseStatistical with Logging with Serializable {
   }
 
   def main(args: Array[String]): Unit = {
+
+    if (args.length < 1) {
+      throw new IllegalArgumentException("configuration path is missing")
+    }
+    val prop = ConfigurationManager.load(args(0))
+
     val sparkConf = new SparkConf()
-      .setMaster("local[*]")
-      .setAppName("MultiTopics2Hive")
-      .set("spark.streaming.duration", "30000")
-      .set("kafka.offset.mysql.table", "t_kafka2hive_offset")
       .set("hive.exec.dynamic.partition.mode", "nonstrict")
-      .set(KAFKA_OFFSET_STORAGE, "zk")
-      .set(ZK_CONNECT, "localhost:2181")
+
+//    sparkConf.setAll(prop.asScala.toMap[String, String])
+//      .setMaster("local[*]")
+//      .setAppName("MultiTopics2Hive")
+//      .set("spark.streaming.duration", "30000")
+//      .set("kafka.offset.mysql.table", "t_kafka2hive_offset")
+//      .set("hive.exec.dynamic.partition.mode", "nonstrict")
+//      .set(KAFKA_OFFSET_STORAGE, "zk")
+//      .set(ZK_CONNECT, "172.16.32.112:2181,172.16.32.140:2181,172.16.32.52:2181")
 
     val ssc = new StreamingContext(sparkConf, Duration(sparkConf.get(SPARK_STREAMING_DURATION, "5000").toLong))
     // 获取基本配置
-    val kafkaParams = getKafkaParmas
-    val configs = getHiveRelationConfig(kafkaParams.get(KAFKA_TOPICS).get.toString.split(",").toList)
+    val kafkaParams = getKafkaParmas(prop)
+    val configs = getHiveRelationConfig(kafkaParams.get(KAFKA_TOPICS).get.toString.split(COMMA).toList)
 
     // 获取config 和 schema
     val configsAndSchema = getConfigAndSchema(configs, toStructFields)
@@ -117,31 +135,30 @@ object MultiTopics2Hive extends BaseStatistical with Logging with Serializable {
       rdd
     })
 
-    val sparkSession = SparkSession.builder().config(sparkConf).getOrCreate()
+    val sparkSession = SparkSession.builder().config(sparkConf).enableHiveSupport().getOrCreate()
     import sparkSession.implicits._
 
     jsonStream.foreachRDD((rdd, batchTime) => {
       val configsAndSchema = bc.value
 
       val rowRDD =  rdd.map(record => {
-          // 解析json转换成row
-          convertToRow(record, configsAndSchema)
+        // 解析json转换成row
+        convertToRow(record, configsAndSchema)
       })
 
       // 生成临时表
       val df = sparkSession.createDataFrame(rowRDD, configsAndSchema._2)
       df.createOrReplaceTempView(SPARK_TEMP_TABLE_NAME)
 
-//      if (logger.isDebugEnabled){
+      if (logger.isDebugEnabled){
         df.printSchema()
         df.show()
-//      }
+      }
 
       // 拼接sql 并执行
       configsAndSchema._1.foreach(config => {
         val sql = generateSQL(config)
-        logger.info(sql)
-//        sparkSession.sql(sql)
+        sparkSession.sql(sql)
       })
 
       // 保存offset
