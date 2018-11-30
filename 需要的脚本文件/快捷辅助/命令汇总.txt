@@ -1,0 +1,104 @@
+----------------------------VPN------------------------------------
+帐号：chenfy
+密码：yV2ETI-MfdFo
+配置文件说明：
+
+gs-test 公司内部连接联通线路测试
+chinatelecom-tcp 公网电信用户连接，在发生使用电信udp会经常掉线的情况下
+chinatelecom-udp 公网电信用户推荐连接
+chinaunicom-tcp 公网联通用户连接，在发生使用联通udp会经常掉线的情况下
+chinaunicom-udp 公网联通用户推荐连接
+
+
+OPENVPN客户端下载地址(windows): http://oo.kingnet.com/openvpn/package/openvpn-2.1.7-gui-1.0.3-install.exe 
+
+MAC用户请下载: http://oo.kingnet.com/openvpn/package/openvpn_config.zip 自行进行配置 
+
+
+---------------------------HOST-------------------------------------
+
+0.0.0.0 account.jetbrains.com
+172.16.32.82    hwdev-blockdata-data-platform-1
+172.16.32.200   hwdev-blockdata-data-platform-2
+172.16.32.44    hwdev-blockdata-data-platform-3
+172.16.32.56    hwdev-blockdata-data-platform-4
+172.16.32.180   hwdev-blockdata-job-client-1
+172.16.32.218	hwdev-blockdata-job-client-2
+
+192.168.78.254 hwwg-bigdata-hadooprm-prod-1
+192.168.78.254 hwwg-bigdata-hadooprm-prod-2
+
+172.27.0.132                    hwwg-blockdata-apollo-1
+172.27.0.180                    hwwg-blockdata-apollo-2
+172.27.3.211                    hwwg-blockdata-apollo-3
+172.27.3.131                    hwwg-blockdata-apollo-eureka-1
+172.27.2.230                    hwwg-blockdata-apollo-eureka-2
+172.27.2.202                    hwwg-blockdata-apollo-eureka-3
+
+172.16.32.137 meta.dev.kyhub.cn
+103.245.222.133 assets-cdn.github.com 
+23.235.47.133 assets-cdn.github.com 
+203.208.39.104 assets-cdn.github.com
+192.168.78.254 presto.sh.kingnetdc.com
+
+192.168.78.254 pmas.sh.kingnetdc.com
+
+
+---------------------------地址-------------------------------------
+http://oa.kingnet.com/ 		OA
+https://wiki.kyhub.cn/pages/viewpage.action?pageId=1810779 		WIKI
+http://shcjg.kyhub.cn/index.html#/analysis		藏经阁
+http://apollo.kyhub.cn/		apollo配置中心
+http://shdana.kingnet.com/index.html#/kpi-report-list?oneId=1171&twoId=11840 达纳报表
+http://pmas.sh.kingnetdc.com/sql.php?server=5&db=dataplatform&table=sys_user&pos=0 	phpAdmin配置中心
+http://azkaban.sh.kingnetdc.com/history?page=7&size=16
+
+
+etl  etl@fdcf54#4
+
+datac
+g3Z2zHF6uTxK6#rnlZ7
+
+---------------------------开发测试环境------------------------------
+172.16.32.82	hwdev-blockdata-data-platform-1	
+172.16.32.200	hwdev-blockdata-data-platform-2
+172.16.32.44	hwdev-blockdata-data-platform-3
+172.16.32.56	hwdev-blockdata-data-platform-4
+172.16.32.180	hwdev-blockdata-job-client-1	
+172.16.32.218	hwdev-blockdata-job-client-2
+
+172.16.32.21	（kafka 开发）
+172.16.32.170	（mysql 开发）
+
+172.16.32.24	（kafka 测试）	
+172.16.32.156	（mysql 测试）
+
+---------------------------产线环境---------------------------------
+172.27.2.18		hwwg-blockdata-job-client-1
+172.27.3.112	hwwg-blockdata-job-client-2
+
+172.27.0.82     hwwg-blockdata-data-server-1
+
+数据服务
+mysql -h172.27.3.114 -ublock_data -pfpNj.ubB9/012 -P3306
+
+离线统计
+mysql -h172.27.0.255 -udatac -pg3Z2zHF6uTxK6#rnlZ7 -P3306
+
+实时统计
+mysql -h172.27.2.72 -udatac -pg3Z2zHF6uTxK6#rnlZ7 -P3306
+
+influxdb
+influx -host 172.27.6.44 -port 8086 -username sparkstreaming -password sparkstreaming-influxdb
+
+kafka
+./bin/kafka-topics.sh --zookeeper 172.16.32.24:2181 --create --topic wtcomment --partitions 1 --replication-factor 1
+
+./bin/kafka-console-producer.sh --topic wtcomment --broker-list 172.16.32.21:9092,172.16.32.21:9093,172.16.32.21:9094
+
+./bin/kafka-console-consumer.sh --bootstrap-server 172.16.32.21:9092,172.16.32.21:9093,172.16.32.21:9094 --topic wtwblist
+
+
+-----------------------------uid-------------------------------
+cfy:2159826
+lym:2850114

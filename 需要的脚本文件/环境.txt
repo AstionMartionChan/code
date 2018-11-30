@@ -1,0 +1,7 @@
+dana 
+http://shdana.kingnet.com/index.html#/kpi-report-list?oneId=1171&twoId=11836
+
+php admin
+http://pmas.sh.kingnetdc.com/sql.php?server=5&db=dataplatform&table=sys_user&pos=0
+
+192.168.78.254 pmas.sh.kingnetdc.com

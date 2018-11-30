@@ -1,0 +1,22 @@
+陈赋赟您好！
+
+您的OPENVPN帐号已经创建！
+
+帐号：chenfy
+密码：yV2ETI-MfdFo
+配置文件说明：
+
+gs-test 公司内部连接联通线路测试
+chinatelecom-tcp 公网电信用户连接，在发生使用电信udp会经常掉线的情况下
+chinatelecom-udp 公网电信用户推荐连接
+chinaunicom-tcp 公网联通用户连接，在发生使用联通udp会经常掉线的情况下
+chinaunicom-udp 公网联通用户推荐连接
+
+
+OPENVPN客户端下载地址(windows): http://oo.kingnet.com/openvpn/package/openvpn-2.1.7-gui-1.0.3-install.exe 
+
+MAC用户请下载: http://oo.kingnet.com/openvpn/package/openvpn_config.zip 自行进行配置 
+
+有问题请联系徐建红（xujh@kingnet.com）！
+
+本邮件为自动发送，请勿回复！

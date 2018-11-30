@@ -1,0 +1,21 @@
+---------产线环境----------------
+172.27.2.18		hwwg-blockdata-job-client-1
+172.27.3.112	hwwg-blockdata-job-client-2
+172.27.3.114  block_data fpNj.ubB9/012
+
+
+
+---------开发测试环境-----------
+172.16.32.82	hwdev-blockdata-data-platform-1	
+172.16.32.200	hwdev-blockdata-data-platform-2
+172.16.32.44	hwdev-blockdata-data-platform-3
+172.16.32.56	hwdev-blockdata-data-platform-4
+172.16.32.180	hwdev-blockdata-job-client-1	
+172.16.32.218	hwdev-blockdata-job-client-2
+
+172.16.32.21	（kafka 开发）
+172.16.32.170	（mysql 开发）
+
+	
+172.16.32.24	（kafka 测试）	
+172.16.32.156	（mysql 测试）
