@@ -1,8 +1,0 @@
-/idea/
-.idea/*
-/venv/
-*.iml
-*.xml
-*.pyc
-/dist/
-/*egg-info/
