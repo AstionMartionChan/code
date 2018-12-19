@@ -1,7 +1,0 @@
-# idl_wutiao_useritemid_sync
-
-type=command
-retries=3
-retry.backoff=300000
-dependencies=odl_wutiao_sync_wutiao_user,odl_wutiao_sync_audit_system
-command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/idl/idl_wutiao_useritemid_sync.py -d ${params.workDate}

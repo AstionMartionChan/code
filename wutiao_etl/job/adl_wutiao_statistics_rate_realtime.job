@@ -1,7 +1,0 @@
-# adl_wutiao_statistics_rate_realtime
-
-type=command
-retries=3
-retry.backoff=300000
-dependencies=idl_wutiao_user
-command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/realtime/adl_wutiao_statistics_rate_realtime.py -d ${params.workDate}

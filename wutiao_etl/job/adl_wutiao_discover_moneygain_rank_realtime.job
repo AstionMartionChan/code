@@ -1,7 +1,0 @@
-# adl_wutiao_discover_moneygain_rank_realtime
-
-type=command
-retries=3
-retry.backoff=300000
-dependencies=adl_wutiao_money_realtime
-command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/realtime/adl_wutiao_discover_moneygain_rank_realtime.py -d ${params.workDate}

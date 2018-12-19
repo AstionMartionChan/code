@@ -1,7 +1,0 @@
-# export_contribute_verify
-
-type=command
-retries=3
-retry.backoff=300000
-dependencies=adl_wutiao_contribute_verify_realtime
-command=/usr/bin/python3.6 /opt/app/offline-computation/bin/spark-app-launcher.py /opt/app/offline-computation/bin/start_userInfo.sh

@@ -1,7 +1,0 @@
-# odl_wutiao_sync_audit_system
-
-type=command
-retries=3
-retry.backoff=300000
-dependencies=
-command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/odl/odl_wutiao_sync_audit_system.py -d ${params.workDate}

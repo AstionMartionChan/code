@@ -1,6 +1,0 @@
-# odl_wutiao_dana_conf_update
-
-type=command
-retries=3
-retry.backoff=300000
-command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/odl/odl_wutiao_dana_conf_update.py

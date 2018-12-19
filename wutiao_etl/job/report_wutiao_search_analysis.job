@@ -1,7 +1,0 @@
-# report_wutiao_search_analysis
-
-type=command
-retries=3
-retry.backoff=300000
-dependencies=adl_wutiao_click_statistics,bdl_wutiao_event
-command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/report/report_wutiao_search_analysis.py -d ${params.workDate}

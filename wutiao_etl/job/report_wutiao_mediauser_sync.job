@@ -1,7 +1,0 @@
-# report_wutiao_mediauser_sync
-
-type=command
-retries=3
-retry.backoff=300000
-dependencies=idl_wutiao_useritemid_sync,idl_wutiao_mediauser_sync
-command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/report/report_wutiao_mediauser_sync.py -d ${params.workDate}

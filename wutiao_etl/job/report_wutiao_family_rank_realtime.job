@@ -1,5 +1,0 @@
-type=command
-retries=1
-retry.backoff=120000
-dependencies=adl_wutiao_family_contribute_realtime
-command=/usr/bin/python3.6 /opt/app/offline-computation/bin/spark-app-launcher.py /opt/app/offline-computation/bin/family-rank.sh

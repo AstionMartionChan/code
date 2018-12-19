@@ -1,7 +1,0 @@
-# report_wutiao_adv_didclick
-
-type=command
-retries=3
-retry.backoff=300000
-dependencies=idl_wutiao_user
-command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/report/report_wutiao_adv_didclick.py -d ${params.workDate}

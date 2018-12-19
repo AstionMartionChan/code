@@ -1,7 +1,0 @@
-#report_wutiao_wb_distribute
-
-type=command
-retries=5
-retry.backoff=300000
-dependencies=idl_wutiao_user
-command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/report/report_wutiao_wb_distribute.py -d ${params.workDate}

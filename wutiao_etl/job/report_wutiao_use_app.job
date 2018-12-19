@@ -1,7 +1,0 @@
-# report_wutiao_use_app
-
-type=command
-retries=3
-retry.backoff=300000
-dependencies=bdl_wutiao_event_filter,idl_wutiao_user,report_wutiao_use
-command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/report/report_wutiao_use_app.py -d ${params.workDate}

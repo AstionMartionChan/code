@@ -1,7 +1,0 @@
-# idl_wutiao_itemid_wb
-
-type=command
-retries=5
-retry.backoff=300000
-dependencies=bdl_wutiao_event_filter,idl_wutiao_useritemid_sync
-command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/idl/idl_wutiao_itemid_wb.py -d ${params.workDate}

@@ -1,7 +1,0 @@
-# report_wutiao_activerpt_prod
-
-type=command
-retries=3
-retry.backoff=300000
-dependencies=bdl_wutiao_event_filter
-command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/report/report_wutiao_activerpt_prod.py -d ${params.workDate}

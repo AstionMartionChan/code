@@ -1,6 +1,0 @@
-# adl_wutiao_itemid_realtime
-
-type=command
-retries=3
-retry.backoff=300000
-command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/realtime/adl_wutiao_itemid_realtime.py -d ${params.workDate}

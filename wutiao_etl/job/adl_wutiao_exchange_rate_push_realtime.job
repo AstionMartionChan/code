@@ -1,5 +1,0 @@
-type=command
-retries=3
-retry.backoff=300000
-dependencies=adl_wutiao_exchange_rate_realtime
-command=/usr/bin/python3.6 /opt/app/kdcetl-wutiao/realtime/adl_wutiao_exchange_rate_push_realtime.py -d ${params.workDate}
