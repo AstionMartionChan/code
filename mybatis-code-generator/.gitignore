@@ -1,0 +1,8 @@
+.idea
+mainRunner
+target
+build.sbt.*
+src/main/resources/*.xml
+mock/
+.DS_Store
+auto_create

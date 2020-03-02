@@ -3,6 +3,7 @@ package com.cfy.application;
 import com.cfy.observer.Observable;
 import com.cfy.observer.impl.DaoFileWriter;
 import com.cfy.observer.impl.EntityFileWriter;
+import com.cfy.observer.impl.FlinkSQLFileWriter;
 import com.cfy.observer.impl.MapperFileWriter;
 import com.cfy.trait.Converter;
 import com.cfy.trait.DBReader;
@@ -43,14 +44,17 @@ public class Generator {
         converter.addProcess(new DefaultProcessMapper());
         converter.addProcess(new DefaultProcessRemark());
         converter.addProcess(new DefaultProcessPackage());
+        converter.addProcess(new DefaultProcessColumnType());
+        converter.addProcess(new DefaultProcessFlinkUDFName());
         Map<String, Object> processedTableInfoMap = converter.converterToMap(tableInfoMap);
 
 
         // 写文件
         Observable observable = new Observable();
-        DaoFileWriter daoFileWriter = new DaoFileWriter(observable);
-        EntityFileWriter entityFileWriter = new EntityFileWriter(observable);
-        MapperFileWriter mapperFileWriter = new MapperFileWriter(observable);
+        new DaoFileWriter(observable);
+        new EntityFileWriter(observable);
+        new MapperFileWriter(observable);
+        new FlinkSQLFileWriter(observable);
 
         for (Map.Entry<String, Object> entry : processedTableInfoMap.entrySet()){
             List<Map<String, String>> listData = (List<Map<String, String>>)entry.getValue();
